@@ -26,25 +26,39 @@
       <p style="margin: 0; color: var(--text-secondary);">Point-and-click traversal interface of the KernMetric Growth Intelligence operating system.</p>
     </div>
 
-    <!-- Explorer Grid Interface -->
-    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 320px 1fr; align-items: start;">
-      
-      <!-- Left Column: Search & Entity List for Selection -->
-      <div class="flex flex-col gap-md">
-        <div class="card" style="padding: var(--space-sm);">
-          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Select Focus Entity</h4>
-          <div class="flex flex-col gap-sm" id="selector-list" style="max-height: 420px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-            <!-- Populate list of companies & paradoxes to seed explorer -->
-            <div style="color: var(--text-muted);">Loading entities...</div>
+    <!-- Explorer Grid Interface: Desktop-Only Selector & Panel -->
+    <div class="desktop-only">
+      <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 320px 1fr; align-items: start; margin-bottom: var(--space-xl);">
+        
+        <!-- Left Column: Search & Entity List for Selection -->
+        <div class="flex flex-col gap-md">
+          <div class="card" style="padding: var(--space-sm);">
+            <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Select Focus Entity</h4>
+            <div class="flex flex-col gap-sm" id="selector-list" style="max-height: 420px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+              <!-- Populate list of companies & paradoxes to seed explorer -->
+              <div style="color: var(--text-muted);">Loading entities...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Entity Focus Card & Connections Grid -->
+        <div class="card" style="padding: var(--space-lg);" id="explorer-view-panel">
+          <div style="text-align: center; color: var(--text-muted); padding: var(--space-xl) 0;">
+            Select an entity from the list to start traversing the Knowledge Graph.
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Right Column: Interactive Entity Focus Card & Connections Grid -->
-      <div class="card" style="padding: var(--space-lg);" id="explorer-view-panel">
-        <div style="text-align: center; color: var(--text-muted); padding: var(--space-xl) 0;">
-          Select an entity from the list to start traversing the Knowledge Graph.
-        </div>
+    <!-- Explorer Grid Interface: Mobile-Only Linear Hierarchy view -->
+    <div class="mobile-only" style="margin-bottom: var(--space-xl);">
+      <div style="margin-bottom: var(--space-md);">
+        <p class="monospace text-xs text-muted-color" style="text-transform: uppercase; margin-bottom: 2px;">Database Traversal // Mobile Hierarchy</p>
+        <p class="text-sm" style="color: var(--text-secondary); margin: 0;">Click on a paradox below to inspect connected diagnostic audits and publications.</p>
+      </div>
+      <div class="flex flex-col gap-md" id="mobile-kg-list">
+        <!-- Populate dynamic nested list via scripts/knowledge-graph.js -->
+        <div style="color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">Traversing relational database...</div>
       </div>
     </div>
 
