@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2026-07-09",
+  "relationships": [
+    {
+      "source": "company_beam",
+      "target": "paradox_routine_friction",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_beam",
+      "target": "paradox_recovery_attribution",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_thesis",
+      "target": "paradox_executive_function",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_thesis",
+      "target": "paradox_personalization_decay",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_iqbar",
+      "target": "paradox_margin_subsidy",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_gainful",
+      "target": "paradox_routine_friction",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_gainful",
+      "target": "paradox_personalization_decay",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_everyday_dose",
+      "target": "paradox_ritual_fragmentation",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_promix",
+      "target": "paradox_margin_subsidy",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_naked_nutrition",
+      "target": "paradox_attribution_dilution",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_create",
+      "target": "paradox_margin_subsidy",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "company_perelel",
+      "target": "paradox_routine_friction",
+      "relationship": "diagnosed_with"
+    },
+    {
+      "source": "paradox_routine_friction",
+      "target": "research_habit_loops",
+      "relationship": "supported_by"
+    },
+    {
+      "source": "paradox_routine_friction",
+      "target": "research_subscription_economics",
+      "relationship": "supported_by"
+    },
+    {
+      "source": "paradox_executive_function",
+      "target": "research_constraint_theory",
+      "relationship": "supported_by"
+    },
+    {
+      "source": "paradox_margin_subsidy",
+      "target": "research_pricing_elasticity",
+      "relationship": "supported_by"
+    },
+    {
+      "source": "paradox_attribution_dilution",
+      "target": "research_attribution_modeling",
+      "relationship": "supported_by"
+    },
+    {
+      "source": "paradox_recovery_attribution",
+      "target": "research_subscription_economics",
+      "relationship": "supported_by"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies — KernMetric</title>
+  <meta name="description" content="Browse our library of Growth MRIs, mapping structural constraints across subscription and ecommerce brands.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/diagnostics.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Diagnostics Library Layout -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); min-height: 80vh;">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Growth Intelligence Library</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Case Studies</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Browse our library of Growth MRIs and cohort results across subscription and ecommerce brands.</p>
+    </div>
+
+    <!-- Multi-column Layout: Sidebar Filters Left & Grid Results Right -->
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 260px 1fr; align-items: start;">
+      
+      <!-- Left Sidebar Filters -->
+      <div class="flex flex-col gap-md" style="position: sticky; top: 80px;">
+        <!-- Text Search -->
+        <div class="card" style="padding: var(--space-sm);">
+          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Search Case Studies</h4>
+          <input type="text" id="lib-search-input" placeholder="Type brand or constraint..." style="width: 100%; padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); outline: none; font-size: 0.85rem; font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary);">
+        </div>
+
+        <!-- Taxonomy Filters -->
+        <div class="card" style="padding: var(--space-sm);">
+          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Filter by Domain</h4>
+          <div class="flex flex-col gap-sm" id="taxonomy-filter-list" style="max-height: 200px; overflow-y: auto;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Business Model Filters -->
+        <div class="card" style="padding: var(--space-sm);">
+          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Shopify Tier</h4>
+          <div class="flex flex-col gap-sm">
+            <label class="flex items-center gap-sm text-sm cursor-pointer"><input type="checkbox" class="tier-filter" value="Shopify Plus"> Shopify Plus</label>
+            <label class="flex items-center gap-sm text-sm cursor-pointer"><input type="checkbox" class="tier-filter" value="Shopify"> Shopify Standard</label>
+          </div>
+        </div>
+
+        <!-- Reset Button -->
+        <button id="reset-filters-btn" class="btn btn-secondary btn-sm w-full">Clear Filters</button>
+      </div>
+
+      <!-- Right Grid Results -->
+      <div>
+        <div class="flex justify-between items-center" style="margin-bottom: var(--space-md); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
+          <div>Showing <span id="results-count" style="color: var(--text-primary); font-weight: 500;">0</span> diagnostic reports</div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-md" id="library-results-grid">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Traversal Flow: Growth MRI -> Diagnostics -> Atlas -> Knowledge Graph -->
+    <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xl); margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">Growth Intelligence Engine</span>
+      <h3 style="margin-top: 4px; font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin-bottom: var(--space-sm);">Explore the Diagnostic Platform</h3>
+      <p class="text-sm" style="color: var(--text-secondary); max-width: 600px; margin-bottom: var(--space-md);">
+        Traverse the diagnostic datasets in logical sequence, shifting from the core MRI framework to empirical case files, visual system mapping, and our relational database graph.
+      </p>
+      
+      <div class="grid grid-cols-4 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--space-md);">
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='growth-mri.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">01 / PROCESS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Growth MRI™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Learn the 7-step systems diagnostic protocol.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer; border-color: var(--primary);" onclick="window.location.href='case-studies.html'">
+          <div class="monospace text-xs text-primary-color" style="margin-bottom: 4px;">02 / STUDIES</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Case Studies</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Browse dynamic case studies and cohort results.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='atlas.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">03 / VISUALIZATION</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Constraint Atlas™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Trace connections between brands and system limits.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='knowledge-graph.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">04 / TRAVERSALS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Knowledge Graph</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Browse database relationships node-by-node.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

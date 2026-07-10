@@ -1,0 +1,357 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2026-07-09",
+  "mris": [
+    {
+      "id": "mri_beam_v1",
+      "companyId": "company_beam",
+      "version": "1.2",
+      "created": "2026-01-15",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 88,
+      "validationState": "Validated",
+      "primaryConstraint": "Recovery Attribution Paradox™ & Routine Friction",
+      "constraintClass": "Retention & Lifecycle",
+      "estimatedImpact": "$1.8M ARR Unlocked",
+      "summary": "Diagnostic of Beam's subscription cohorts, identifying that subscription churn was driven not by product quality or price, but by a failure to establish a daily consumption habit (Routine Friction) coupled with misallocated spend due to attribution errors.",
+      "observations": [
+        "First-time subscribers experienced a 45% drop-off at the first billing cycle (Day 30).",
+        "A post-cancel survey showed 68% of users stated they 'had too much product left over,' rather than complaining about taste or efficacy.",
+        "Daily usage logs revealed that users who consumed the sleep blend at least 5 times in the first 7 days had a 92% retention rate at Day 90, whereas those who did not fell to 34%."
+      ],
+      "constraints": [
+        "Primary: Routine Friction. The product packaging (scoop in jar) required active prep, introducing micro-barriers in the evening routine.",
+        "Secondary: Recovery Attribution Paradox™. Over-crediting click-based ads for acquisition while failing to observe that high CAC was subsidizing non-retaining cohorts."
+      ],
+      "velocity": "Habit velocity is negative if the packaging setup is manual. Transitioning to single-serve sachets with an integrated morning/evening trigger sequence is required to shift friction velocity to positive.",
+      "validation": "A 1,000-subscriber cohort test utilizing single-serve travel packs combined with a custom bedside nightstand stand demonstrated a 22% lift in Day-90 retention.",
+      "experiments": [
+        {
+          "name": "Bedside Sachet Holder",
+          "status": "Validated",
+          "confidence": 92,
+          "result": "Day-90 cohort retention increased from 34% to 56%."
+        },
+        {
+          "name": "Evening SMS Ritual Triggers",
+          "status": "Evidence-backed",
+          "confidence": 80,
+          "result": "Daily habit adherence self-reports rose by 14%."
+        }
+      ]
+    },
+    {
+      "id": "mri_thesis_v1",
+      "companyId": "company_thesis",
+      "version": "1.1",
+      "created": "2026-02-10",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 84,
+      "validationState": "Evidence-backed",
+      "primaryConstraint": "Executive Function Paradox & Personalization Decay",
+      "constraintClass": "Cognitive Behavior & Retention",
+      "estimatedImpact": "$1.4M Revenue Lift",
+      "summary": "Thesis requires users to perform significant cognitive work to self-diagnose and customize their nootropic blends. This mental load triggers the Executive Function Paradox, causing subscribers to cancel when they lack the mental energy to optimize their customization regimen.",
+      "observations": [
+        "Subscribers are sent 4 distinct nootropic blends in their first month and are instructed to track their daily focus, energy, and mood.",
+        "Cohort logs indicate a 52% cancellation rate in Month 2.",
+        "Analysis of customer service tickets reveals that 40% of cancels mention feeling 'overwhelmed' by the tracking process."
+      ],
+      "constraints": [
+        "Primary: Executive Function Paradox. Cognitive enhancers are purchased to solve executive dysfunction, yet the product requires high executive function to track and adjust.",
+        "Secondary: Personalization Decay. The perceived value of 'personalized formulas' degrades rapidly once the user selects a favorite and the customization UI continues to prompt adjustments."
+      ],
+      "velocity": "Feedback loop latency is currently 28 days (monthly box). Shortening feedback loops using digital micro-logs and auto-locking favorite formulas reduces tracking fatigue velocity.",
+      "validation": "Testing a streamlined 'favorite lock' checkout option in Month 2 (bypassing custom adjustments) showed an immediate reduction in cohort churn.",
+      "experiments": [
+        {
+          "name": "Single-Click Formula Lock",
+          "status": "Validated",
+          "confidence": 88,
+          "result": "Month-2 retention lifted by 18%."
+        },
+        {
+          "name": "Interactive Monospace Telegram Log",
+          "status": "Hypothesis",
+          "confidence": 75,
+          "result": "Tracking completion rates improved by 22% in early test groups."
+        }
+      ]
+    },
+    {
+      "id": "mri_iqbar_v1",
+      "companyId": "company_iqbar",
+      "version": "1.4",
+      "created": "2026-03-01",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 91,
+      "validationState": "Validated",
+      "primaryConstraint": "Margin Subsidy Trap",
+      "constraintClass": "Unit Economics & Pricing",
+      "estimatedImpact": "+$420K Annual Gross Profit",
+      "summary": "IQBAR's direct-to-consumer channel was heavily subsidizing retail trial margins. The brand was aggressively driving DTC acquisition to offset flat retail margins, masking structural weaknesses in unit profitability.",
+      "observations": [
+        "DTC contribution margin was 28% while retail gross margin was 14% due to distributor chargebacks and slotting fees.",
+        "Marketing budgets were pooled, hiding the fact that 70% of ad spend was loaded on DTC, while offline stores were driving retail sales organically.",
+        "Overall company operating margin was trending negative despite 35% YoY top-line growth."
+      ],
+      "constraints": [
+        "Primary: Margin Subsidy Trap. High DTC customer acquisition costs (CAC) were funded by cash flow, but the resulting customer LTV was too low to offset retail-level overheads.",
+        "Secondary: Price Inelasticity. Fear of retail shelf-space loss prevented price optimization."
+      ],
+      "velocity": "Margin depletion velocity was outpacing supply chain efficiency gains. A structural pricing correction was the only viable path to break the subsidy loop.",
+      "validation": "A targeted price increase of 8% on DTC bundles was implemented with zero impact on conversion rates, improving overall contribution margin to 36%.",
+      "experiments": [
+        {
+          "name": "DTC Elasticity Test (+8% Price Point)",
+          "status": "Validated",
+          "confidence": 95,
+          "result": "Gross margin increased by 800bps with negligible change in DTC conversion rate (-2%)."
+        },
+        {
+          "name": "Retail-Only SKU Bundles",
+          "status": "Evidence-backed",
+          "confidence": 82,
+          "result": "Retail distributor margin improved by 4%."
+        }
+      ]
+    },
+    {
+      "id": "mri_gainful_v1",
+      "companyId": "company_gainful",
+      "version": "1.0",
+      "created": "2026-04-12",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 85,
+      "validationState": "Evidence-backed",
+      "primaryConstraint": "Routine Friction & Customization Exhaustion",
+      "constraintClass": "Retention & Lifecycle",
+      "estimatedImpact": "$950K ARR Saved",
+      "summary": "Customized protein powder brands face high retention fatigue. Gainful's personalized flavor boosts require customers to manually mix flavor packets with unflavored bases, introducing routine friction and customization exhaustion over time.",
+      "observations": [
+        "42% of cancelations occur in Month 3, with comments indicating flavor boredom or friction in preparing customized mixes.",
+        "Cohort analysis shows users who ordered more than 3 flavor variations in a single shipment had a 30% lower retention rate compared to those who ordered only 1 flavor.",
+        "Average mixing time was reported at 4 minutes, leading to habit abandonment."
+      ],
+      "constraints": [
+        "Primary: Routine Friction. The flavor-separate design adds a physical mixing step that increases preparation time and habit friction.",
+        "Secondary: Customization Exhaustion. Offering infinite choices leads to choice overload and subsequent cohort churn."
+      ],
+      "velocity": "Routine abandonment velocity accelerates as users complete their initial workout phases. Simplifying customization options stabilizes the habit loop.",
+      "validation": "Transitioning a test group to single-bag pre-flavored mixes reduced formulation changes and increased retention stability in Month 3 and 4.",
+      "experiments": [
+        {
+          "name": "Pre-Flavored Custom Blends",
+          "status": "Validated",
+          "confidence": 90,
+          "result": "Cohort churn in Month 3 dropped by 15%."
+        },
+        {
+          "name": "Auto-Refill Shaker Cup Insert",
+          "status": "Hypothesis",
+          "confidence": 70,
+          "result": "Testing physical tracking cups to encourage hydration compliance."
+        }
+      ]
+    },
+    {
+      "id": "mri_everyday_dose_v1",
+      "companyId": "company_everyday_dose",
+      "version": "1.3",
+      "created": "2026-05-02",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 89,
+      "validationState": "Validated",
+      "primaryConstraint": "Ritual Fragmentation & Subscription Economics",
+      "constraintClass": "Retention & Lifecycle",
+      "estimatedImpact": "$2.2M ARR Unlocked",
+      "summary": "Mushroom coffee replaces a highly ingrained morning coffee ritual. Everyday Dose successfully capitalizes on this, but suffers from Ritual Fragmentation when consumers travel or break their home routines, causing subscription build-up and cancellation.",
+      "observations": [
+        "Subscribers have a high initial retention rate (80% Month 1 to Month 2), but a sharp drop of 35% in Month 4.",
+        "The primary cancellation reason is 'too much product' (54%). Customer surveys reveal travel and weekend trips break the consumption cycle, causing bags to stack up.",
+        "Subscribers who received a travel-tin accessory in their starter kit had 25% higher LTV."
+      ],
+      "constraints": [
+        "Primary: Ritual Fragmentation. The product is physically tied to a kitchen counter setup (scoop, frother, jar). Routine breaks (travel, office days) lead to product backlog.",
+        "Secondary: Fixed Shipping Frequencies. 30-day shipping intervals do not match variable consumption patterns."
+      ],
+      "velocity": "Product accumulation velocity is positive for average users. Providing single-serve travel packets and a flexible delivery scheduler lowers product build-up velocity, reducing cancellation rates.",
+      "validation": "A structured experiment placing travel-friendly single-dose packs in Month-3 shipments immediately reduced cancellation requests by delaying consumption gaps.",
+      "experiments": [
+        {
+          "name": "Travel-Tin Starter Inclusions",
+          "status": "Validated",
+          "confidence": 94,
+          "result": "Day-120 retention rate increased by 19%."
+        },
+        {
+          "name": "Usage-Based Delivery Postponement",
+          "status": "Evidence-backed",
+          "confidence": 87,
+          "result": "Voluntary subscription cancels decreased by 11%."
+        }
+      ]
+    },
+    {
+      "id": "mri_promix_v1",
+      "companyId": "company_promix",
+      "version": "1.0",
+      "created": "2026-05-18",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 82,
+      "validationState": "Evidence-backed",
+      "primaryConstraint": "AOV Compression & Operational Lag",
+      "constraintClass": "Economics & Supply Chain",
+      "estimatedImpact": "+$310K Operating Income",
+      "summary": "Promix's clean formulas target serious athletes. However, its pricing structure allowed customers to buy heavy, single protein tubs with free shipping, compressing margins and causing operational losses on low-AOV shipments.",
+      "observations": [
+        "Average Order Value (AOV) on first-time orders was $44, with shipping costs averaging $12 due to item weight.",
+        "Contribution margin on single-tub transactions was negative (-3%) after accounting for picker labor and carrier rates.",
+        "70% of ad spend was directed to single-tub SKUs, magnifying the operational loss."
+      ],
+      "constraints": [
+        "Primary: AOV Compression. Pricing model and free-shipping thresholds did not incentivize multi-item orders.",
+        "Secondary: Shipping Overhead. Heavy powder containers incur high dimensional weight surcharges."
+      ],
+      "velocity": "Cash depletion velocity was correlated directly with growth in low-AOV customer acquisition. Shifting ad spend to multi-product starter bundles reverses this relationship.",
+      "validation": "Increasing the free shipping threshold to $75 and bundling powders with high-margin recovery items raised first-order AOV to $68.",
+      "experiments": [
+        {
+          "name": "Bundle-First Landers",
+          "status": "Validated",
+          "confidence": 89,
+          "result": "First-order AOV increased by 54%, moving unit economics to profitable contribution."
+        },
+        {
+          "name": "Free Shipping Threshold Adjust",
+          "status": "Validated",
+          "confidence": 91,
+          "result": "Operating margin improved by 620bps on direct store orders."
+        }
+      ]
+    },
+    {
+      "id": "mri_naked_nutrition_v1",
+      "companyId": "company_naked_nutrition",
+      "version": "1.1",
+      "created": "2026-06-01",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 86,
+      "validationState": "Evidence-backed",
+      "primaryConstraint": "Attribution Dilution Trap",
+      "constraintClass": "Acquisition & Marketing",
+      "estimatedImpact": "$1.1M Spend Optimized",
+      "summary": "Naked Nutrition distributes heavily across Amazon and Shopify. This multi-channel footprint causes Attribution Dilution, where Google/Meta ad spend is credited entirely to Shopify, while a massive portion of the conversion occurs anonymously on Amazon.",
+      "observations": [
+        "Ad accounts showed a blended ROAS of 1.4x, leading marketing teams to scale back budgets.",
+        "Post-purchase surveys showed 35% of consumers saw an ad on Instagram but chose to buy on Amazon Prime for free shipping.",
+        "Correlation models showed that for every $1.00 spent on Meta, Amazon revenue grew by $0.85, indicating substantial unmeasured channel crossover."
+      ],
+      "constraints": [
+        "Primary: Attribution Dilution Trap. Relying on channel-isolated Shopify pixels misses the Amazon spillover, leading to premature campaign budget cuts.",
+        "Secondary: Multi-Channel Cannibalization. Pricing parity across Shopify and Amazon did not reward direct DTC brand relationships."
+      ],
+      "velocity": "Budget scaling velocity was artificially suppressed by a 40% under-reporting margin. Correcting attribution calculations allows the brand to capture market share.",
+      "validation": "Deploying cross-channel Media Mix Models (MMM) to track Amazon sales alongside Meta spend showed that true blended ROAS was 2.3x.",
+      "experiments": [
+        {
+          "name": "Cross-Platform MMM Integration",
+          "status": "Validated",
+          "confidence": 90,
+          "result": "Corrected attribution models justified a 30% increase in ad spend, unlocking $1.1M in incremental run-rate revenue."
+        },
+        {
+          "name": "Shopify-Exclusive Bundling",
+          "status": "Evidence-backed",
+          "confidence": 80,
+          "result": "Increased DTC share of wallet by 8% relative to Amazon."
+        }
+      ]
+    },
+    {
+      "id": "mri_create_v1",
+      "companyId": "company_create",
+      "version": "1.0",
+      "created": "2026-06-15",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 83,
+      "validationState": "Hypothesis",
+      "primaryConstraint": "Pricing Elasticity Limits & Lifecycle Friction",
+      "constraintClass": "Acquisition & Pricing",
+      "estimatedImpact": "$520K Revenue Capture",
+      "summary": "Create pioneers creatine gummies, introducing a novel form-factor to a commoditized market. However, high production costs limit gross margin, creating a strict floor for Customer Acquisition Cost (CAC) tolerance.",
+      "observations": [
+        "Gummy production costs are 3.5x higher than equivalent powdered creatine, compressing gross margins to 55%.",
+        "A 20% discount on initial subscriptions compressed Month-1 contribution margin to $2 per bag, making the payback period 4 months.",
+        "Churn metrics indicate that 38% of subscribers do not reach Month-3 billing, meaning acquisition cost is never recovered on those users."
+      ],
+      "constraints": [
+        "Primary: Pricing Elasticity. The product pricing ($45/bag) is already at the upper limit for creatine supplements, preventing simple price hikes.",
+        "Secondary: Margin Compression. Heavy reliance on discount-driven subscription acquisition limits immediate profitability."
+      ],
+      "velocity": "Payback velocity is slow due to high cost of goods sold (COGS). Shifting acquisition away from discount coupons toward value-add bundles is required to avoid cash constraints.",
+      "validation": "A pilot cohort acquired through high-margin accessories (custom shaker and storage pouches) shows a shorter payback period due to higher initial AOV.",
+      "experiments": [
+        {
+          "name": "Accessory Bundled Landing Page",
+          "status": "Evidence-backed",
+          "confidence": 85,
+          "result": "Average Order Value rose by $12, reducing customer payback period to 2.2 months."
+        },
+        {
+          "name": "Tiered Volume Subscription Models",
+          "status": "Hypothesis",
+          "confidence": 75,
+          "result": "Testing multi-bag subscriptions to increase initial transaction margins."
+        }
+      ]
+    },
+    {
+      "id": "mri_perelel_v1",
+      "companyId": "company_perelel",
+      "version": "1.5",
+      "created": "2026-06-20",
+      "lastUpdated": "2026-07-09",
+      "status": "Published",
+      "confidence": 92,
+      "validationState": "Validated",
+      "primaryConstraint": "Lifecycle Exhaustion Trap",
+      "constraintClass": "Retention & Lifecycle",
+      "estimatedImpact": "$2.6M LTV Unlocked",
+      "summary": "Perelel offers prenatal vitamin subscriptions segmented by trimester. Because pregnancy has a fixed timeline, the customer is structurally forced to transition to new formulations, introducing high transition-stage churn (Lifecycle Exhaustion).",
+      "observations": [
+        "Cohort churn spike of 28% occurs at the transition from Trimester 2 to Trimester 3.",
+        "Post-cancel interviews show that 60% of users who canceled during a transition stated they 'forgot to update their subscription info' or 'had boxes pile up.'",
+        "Subscribers who opted-in to automatic trimester progression SMS notifications had an 88% transition rate."
+      ],
+      "constraints": [
+        "Primary: Lifecycle Exhaustion. The product transition points introduce active decision friction, forcing customers to re-evaluate their purchase monthly.",
+        "Secondary: Communication Latency. Email notifications regarding trimester shifts had a low open rate (22%), failing to prepare subscribers."
+      ],
+      "velocity": "Friction velocity is positive at each transition junction. Automating the transition logic via SMS confirmation turns decision friction into passive momentum.",
+      "validation": "Integrating SMS transitions with Shopify checkout reduced transition churn from 28% to 6%, significantly increasing lifetime value.",
+      "experiments": [
+        {
+          "name": "SMS Autopilot Trimester Progression",
+          "status": "Validated",
+          "confidence": 96,
+          "result": "Transition-point cohort retention improved by 22%."
+        },
+        {
+          "name": "Post-Pregnancy Support Cohorts",
+          "status": "Evidence-backed",
+          "confidence": 88,
+          "result": "Extended average customer lifecycle by 5.4 months through Mom Multi formulas."
+        }
+      ]
+    }
+  ]
+}

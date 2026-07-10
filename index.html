@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KernMetric — Growth Intelligence OS</title>
+  <meta name="description" content="Diagnose before you deploy. We identify the structural constraints limiting ecommerce and subscription growth using systems engineering.">
+  <link rel="stylesheet" href="styles/main.css">
+  <script type="module" src="components/components.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Hero Section -->
+  <section class="section container fade-up-element" style="min-height: 80vh; display: flex; align-items: center; padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <div class="hero-grid">
+      <div style="padding-right: var(--space-md);">
+        <span class="badge badge-blue mb-md">KernMetric Platform v1.0</span>
+        <h1 style="font-size: clamp(60px, 5vw, 78px); line-height: 1.05; margin-bottom: var(--space-md); font-family: 'Source Serif 4', serif; font-weight: 500;">
+          Your business doesn't have a marketing problem.<br>
+          <span style="color: var(--primary);">It has a structural constraint.</span>
+        </h1>
+        <p class="lead mb-lg" style="font-size: 1.2rem; line-height: 1.6; max-width: 48ch; margin-bottom: var(--space-lg); color: var(--text-secondary);">
+          KernMetric diagnoses the invisible bottlenecks limiting growth, profitability, and enterprise value inside subscription and e-commerce businesses.
+        </p>
+        <div class="flex gap-md" style="align-items: center;">
+          <a href="pages/contact.html" class="btn btn-primary">Book a Growth MRI™</a>
+          <a href="pages/case-studies.html" class="btn btn-secondary">Explore Case Studies</a>
+        </div>
+      </div>
+      
+      <!-- Right Side: Live Animated Diagnostic Dossier -->
+      <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%;">
+        <div class="dossier-widget">
+          <div class="dossier-header">
+            <div class="dossier-title">GROWTH_DIAGNOSTIC_DOSSIER // CONFIDENTIAL</div>
+            <span class="badge" style="font-size: 0.65rem; border-color: rgba(37, 99, 235, 0.3); color: var(--primary);">SYS_EXEC_v1.0</span>
+          </div>
+          <div class="dossier-terminal" id="terminal-feed">
+            <!-- Live content is populated by javascript terminal typist below -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof (Monochrome Logos) -->
+  <section class="section container fade-up-element" style="padding-top: var(--space-xl); padding-bottom: var(--space-xl);">
+    <p class="monospace text-xs text-muted-color" style="text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-md); text-align: center;">
+      Active constraints diagnosed across leading e-commerce brands
+    </p>
+    <div class="grid grid-cols-4" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: var(--space-md); align-items: center;">
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">BEAM</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">THESIS</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">IQBAR</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">GAINFUL</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">EVERYDAY DOSE</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">PROMIX</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">NAKED NUTRITION</div>
+      <div class="card text-center monospace text-sm text-secondary font-medium" style="padding: var(--space-xs) 0; background-color: transparent;">PERELEL</div>
+    </div>
+  </section>
+
+  <!-- The Challenge / Systems Thinking -->
+  <section class="section container fade-up-element">
+    <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+      <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-weight: 600;">Systems vs Symptoms</span>
+      <h2 style="font-size: 2.25rem; font-weight: 500; border-bottom: none; margin-top: var(--space-xs); margin-bottom: var(--space-md);">
+        Most brands optimize symptoms.<br>We diagnose systems.
+      </h2>
+      <p class="lead" style="margin-bottom: var(--space-lg);">
+        Ads, conversion funnels, email sequences, pricing strategies, and landing pages are downstream outputs. The real constraint sitting higher inside the system goes completely unaddressed.
+      </p>
+    </div>
+    <div class="grid grid-cols-3 gap-lg my-lg">
+      <div class="card">
+        <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-xs);">01 / ACQUISITION FALLACY</div>
+        <h3 style="margin-top: 0;">Scaling Meta Ads</h3>
+        <p class="text-sm">Scaling ad accounts seems like the growth driver, but high customer acquisition costs (CAC) typically subsidize flat or negative contribution margins hidden in product cohorts.</p>
+      </div>
+      <div class="card">
+        <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-xs);">02 / RETENTION FRICTION</div>
+        <h3 style="margin-top: 0;">Email & Churn Portals</h3>
+        <p class="text-sm">Retention portals and discount sequences treat subscription cancellations as marketing anomalies, missing physical integration hurdles and routine friction constraints.</p>
+      </div>
+      <div class="card">
+        <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-xs);">03 / FINANCIAL COGNITION</div>
+        <h3 style="margin-top: 0;">Omnichannel Margin Subsidy</h3>
+        <p class="text-sm">High-velocity DTC stores aggressively fund inventory cash cycles, masking slotting fees, distribution penalties, and flat unit profitability in physical retail stores.</p>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: var(--space-lg);">
+      <a href="pages/methodology.html" class="btn btn-secondary">Read Our Systems Methodology →</a>
+    </div>
+  </section>
+
+  <!-- Growth MRI Overview -->
+  <section class="section container fade-up-element">
+    <div class="grid grid-cols-2 gap-lg items-center">
+      <div>
+        <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-weight: 600;">Proprietary Framework</span>
+        <h2 style="font-size: 2.25rem; font-weight: 500; border-bottom: none; margin-top: var(--space-xs);">The Growth MRI™</h2>
+        <p class="lead">
+          We map and stress-test the dependencies governing your Shopify store. By tracing data pipelines and customer usage habit routines, we identify the single constraint holding back enterprise value.
+        </p>
+        <a href="pages/growth-mri.html" class="btn btn-primary mt-lg">Learn How Growth MRI Works</a>
+      </div>
+      <div>
+        <div class="timeline-container" style="border-left-color: var(--primary);">
+          <div class="timeline-step active">
+            <div class="timeline-node" style="border-color: var(--primary); background-color: var(--primary);"></div>
+            <div class="timeline-content">
+              <span class="monospace text-xs text-primary-color">STEP 1</span>
+              <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">Observed Symptoms</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem;">Identify cohort decay, escalating ad costs, and unit economics constraints.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-content">
+              <span class="monospace text-xs text-muted-color">STEP 2</span>
+              <h4 style="margin: 0; font-size: 1.1rem; font-weight: 500;">Structural Diagnosis</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem;">Trace bottlenecks back to routine friction, personalization decay, or subsidy loops.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-content">
+              <span class="monospace text-xs text-muted-color">STEP 3</span>
+              <h4 style="margin: 0; font-size: 1.1rem; font-weight: 500;">Dependency Chains</h4>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem;">Map logical links from downstream tactics up to core structural governors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Structural Paradoxes Teaser -->
+  <section class="section container fade-up-element">
+    <div class="flex justify-between items-center mb-lg">
+      <div>
+        <div style="font-size: 0.9rem; color: var(--primary); margin-bottom: 6px; font-weight: 600; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: -0.01em;">The Structural Constraints Hidden Inside Modern Ecommerce</div>
+        <h2 style="font-size: 2.25rem; font-weight: 500; border-bottom: none; margin-top: 0; margin-bottom: 0;">Structural Paradoxes™</h2>
+      </div>
+      <a href="pages/paradoxes.html" class="btn btn-secondary">View Complete Library (7)</a>
+    </div>
+    <div class="grid grid-cols-3 gap-lg">
+      <div class="card card-elevated" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; padding: var(--space-md); border-top: 2px solid var(--primary);">
+        <div>
+          <h3 style="margin: 0 0 2px 0; font-size: 1.35rem; font-family: 'Source Serif 4', serif; font-weight: 500;">Routine Friction™</h3>
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-sm); text-transform: uppercase; font-size: 0.7rem;">Behavioral Constraint</div>
+          <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5; margin: 0 0 var(--space-md) 0;">Physical preparation complexity limits daily consumption, causing product backlogs and subscription cancels.</p>
+        </div>
+        <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); margin-top: auto;">
+          <div class="monospace text-muted-color" style="font-size: 0.65rem; text-transform: uppercase; margin-bottom: 2px;">Diagnosed in:</div>
+          <div class="monospace text-primary-color" style="font-size: 0.75rem; font-weight: 600;">Beam, Gainful</div>
+        </div>
+      </div>
+      <div class="card card-elevated" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; padding: var(--space-md); border-top: 2px solid var(--primary);">
+        <div>
+          <h3 style="margin: 0 0 2px 0; font-size: 1.35rem; font-family: 'Source Serif 4', serif; font-weight: 500;">Margin Subsidy Trap™</h3>
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-sm); text-transform: uppercase; font-size: 0.7rem;">Economic Constraint</div>
+          <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5; margin: 0 0 var(--space-md) 0;">DTC channels mask operating margin leaks at retail by burning capital through ad budgets.</p>
+        </div>
+        <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); margin-top: auto;">
+          <div class="monospace text-muted-color" style="font-size: 0.65rem; text-transform: uppercase; margin-bottom: 2px;">Diagnosed in:</div>
+          <div class="monospace text-primary-color" style="font-size: 0.75rem; font-weight: 600;">IQBAR, Promix</div>
+        </div>
+      </div>
+      <div class="card card-elevated" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; padding: var(--space-md); border-top: 2px solid var(--primary);">
+        <div>
+          <h3 style="margin: 0 0 2px 0; font-size: 1.35rem; font-family: 'Source Serif 4', serif; font-weight: 500;">Attribution Dilution Trap™</h3>
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-sm); text-transform: uppercase; font-size: 0.7rem;">Acquisition Constraint</div>
+          <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5; margin: 0 0 var(--space-md) 0;">Google and Meta pixels fail to credit Amazon conversion spillover, causing premature campaign scale-backs.</p>
+        </div>
+        <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); margin-top: auto;">
+          <div class="monospace text-muted-color" style="font-size: 0.65rem; text-transform: uppercase; margin-bottom: 2px;">Diagnosed in:</div>
+          <div class="monospace text-primary-color" style="font-size: 0.75rem; font-weight: 600;">Naked Nutrition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Published Research Section -->
+  <section class="section container fade-up-element">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-lg); display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-weight: 600;">Intellectual Property</span>
+        <h2 style="font-size: 2.25rem; font-weight: 500; border-bottom: none; margin-top: 4px; margin-bottom: 0;">Published Research</h2>
+      </div>
+      <a href="pages/research.html" class="btn btn-secondary btn-sm">Explore All Publications →</a>
+    </div>
+    
+    <div class="grid grid-cols-3 gap-lg">
+      <div>
+        <div class="monospace text-xs text-muted-color">FRAMEWORK • JULY 2026</div>
+        <h4 style="margin: 8px 0; font-size: 1.25rem; font-family: 'Source Serif 4', serif; line-height: 1.3;">
+          <a href="pages/research.html?id=research_constraint_theory" style="color: var(--text-primary);">Applying Goldratt's Theory of Constraints to Ecommerce Systems</a>
+        </h4>
+        <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5;">
+          Downstream channels like Meta/Google conversion paths are symptoms of upstream constraints. Tracing physical bottlenecks.
+        </p>
+      </div>
+      <div>
+        <div class="monospace text-xs text-muted-color">WHITEPAPER • JUNE 2026</div>
+        <h4 style="margin: 8px 0; font-size: 1.25rem; font-family: 'Source Serif 4', serif; line-height: 1.3;">
+          <a href="pages/research.html?id=research_subscription_economics" style="color: var(--text-primary);">The Illusion of LTV: Cohort Churn as a Physical Design Issue</a>
+        </h4>
+        <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5;">
+          Subscription cancellations are rarely pricing or messaging challenges. They represent routine integration failures.
+        </p>
+      </div>
+      <div>
+        <div class="monospace text-xs text-muted-color">REPORT • MAY 2026</div>
+        <h4 style="margin: 8px 0; font-size: 1.25rem; font-family: 'Source Serif 4', serif; line-height: 1.3;">
+          <a href="pages/research.html?id=research_attribution_modeling" style="color: var(--text-primary);">Attribution Dilution: Quantifying Multi-Channel Spillover</a>
+        </h4>
+        <p class="text-sm" style="color: var(--text-secondary); line-height: 1.5;">
+          Empirical measurements analyzing ad-driven checkout patterns shifting from Shopify directly to Amazon Prime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Teaser (Why KernMetric Exists) -->
+  <section class="section container fade-up-element" style="border-bottom: none;">
+    <div class="grid grid-cols-2 gap-lg items-center">
+      <div style="padding-right: var(--space-md);">
+        <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-weight: 600;">Our Philosophy</span>
+        <h2 style="font-size: 2.25rem; font-weight: 500; border-bottom: none; margin-top: var(--space-xs);">Why KernMetric Exists</h2>
+        <p class="lead">
+          E-commerce brands operate under complex, connected systems. Traditional agencies focus on buying advertising or building storefronts. We apply civil engineering and systems optimization principles to diagnose the core architecture.
+        </p>
+        <blockquote style="margin: var(--space-md) 0;">
+          "Businesses don't fail because they lack ideas. They fail because their systems are constrained."
+        </blockquote>
+        <a href="pages/about.html" class="btn btn-secondary mt-sm">Read the Narrative & Principles</a>
+      </div>
+      <div class="card" style="text-align: center; padding: var(--space-lg) var(--space-md);">
+        <img src="assets/founder.jpg" alt="Bimal Murali" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto var(--space-sm) auto; display: block; border: 1px solid var(--border-color);">
+        <h3 style="margin: var(--space-xs) 0 2px 0;">Bimal Murali</h3>
+        <p class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-sm); text-transform: uppercase;">Founder & Growth Architect</p>
+        <p class="text-sm" style="max-width: 320px; margin: 0 auto;">
+          Civil engineer turned e-commerce growth strategist. Specialized in structural cohort diagnostics and data relationships.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA / Contact Teaser -->
+  <section class="section container fade-up-element" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--space-xl); margin-bottom: var(--space-xxl); text-align: center;">
+    <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-weight: 600;">Systems Diagnostic</span>
+    <h2 style="font-size: 2.5rem; border-bottom: none; margin-top: var(--space-xs); margin-bottom: var(--space-sm);">
+      Let's diagnose what's limiting your growth.
+    </h2>
+    <p class="lead" style="max-width: 600px; margin: 0 auto var(--space-lg) auto;">
+      We run stress tests, cohort audits, and packaging reviews to locate structural bottlenecks before recommending any tactical spend.
+    </p>
+    <div class="flex gap-md" style="justify-content: center;">
+      <a href="pages/contact.html" class="btn btn-primary">Schedule a Diagnostic Call</a>
+      <a href="pages/case-studies.html" class="btn btn-secondary">Browse MRI Library</a>
+    </div>
+  </section>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Global Search Overlay Component -->
+  <kern-search></kern-search>
+
+  <!-- Hero Terminal Typist Script -->
+  <script type="module">
+    const terminalLogs = [
+      {
+        brand: "BEAM ORGANICS",
+        steps: [
+          "INIT_COHORT_DIAGNOSTIC: company_beam",
+          "SCANNING: 14,200 subscription profiles...",
+          "DETECTED: Cohort churn spike at Billing Cycle 1 (45%)",
+          "ANALYZING: Survey tags indicate taste/COGS = normal",
+          "IDENTIFIED: Upstream constraint 'Routine Friction' detected.",
+          "EVIDENCE: Scoops in bulk jars require manual prep steps.",
+          "ACTION_PROPOSAL: Modular single-serve bedside sachets.",
+          "ESTIMATED_IMPACT: $1.8M ARR unlocked. Churn delta -22%."
+        ]
+      },
+      {
+        brand: "THESIS NOOTROPICS",
+        steps: [
+          "INIT_SYSTEMS_DIAGNOSTIC: company_thesis",
+          "SCANNING: CUSTOMER feedback loops...",
+          "DETECTED: 52% cancel rate in Month 2.",
+          "ANALYZING: CS logs indicate tracking sheet exhaustion.",
+          "IDENTIFIED: Upstream constraint 'Executive Function Paradox' detected.",
+          "EVIDENCE: Nootropic clients are asked to fill daily logs.",
+          "ACTION_PROPOSAL: One-click Favorite locking checklist UI.",
+          "ESTIMATED_IMPACT: $1.4M Revenue Lift. Churn delta -18%."
+        ]
+      },
+      {
+        brand: "IQBAR OMNICHANNEL",
+        steps: [
+          "INIT_ECONOMIC_DIAGNOSTIC: company_iqbar",
+          "SCANNING: DTC vs Wholesale contribution margin...",
+          "DETECTED: DTC gross margin = 28%, Retail = 14%.",
+          "IDENTIFIED: Upstream constraint 'Margin Subsidy Trap' detected.",
+          "EVIDENCE: Ad-backed DTC revenue covering wholesale slotting fees.",
+          "ACTION_PROPOSAL: 8% price increase on DTC bundles.",
+          "ESTIMATED_IMPACT: +$420K Annual Gross Profit. Conversion delta 0%."
+        ]
+      }
+    ];
+
+    const feed = document.getElementById("terminal-feed");
+    let logIndex = 0;
+    let stepIndex = 0;
+
+    function renderTerminalLine(text, isError = false) {
+      const line = document.createElement("div");
+      line.style.marginBottom = "4px";
+      if (isError) line.style.color = "var(--primary)";
+      
+      const promptSymbol = document.createElement("span");
+      promptSymbol.style.color = "var(--text-muted)";
+      promptSymbol.style.marginRight = "6px";
+      promptSymbol.innerText = ">";
+      
+      const textSpan = document.createElement("span");
+      textSpan.innerText = text;
+      
+      line.appendChild(promptSymbol);
+      line.appendChild(textSpan);
+      feed.appendChild(line);
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    function runDiagnosticLoop() {
+      const currentLog = terminalLogs[logIndex];
+      
+      if (stepIndex === 0) {
+        feed.innerHTML = ""; // Clear for new loop
+        renderTerminalLine(`KM_INTEL_SYSTEM v1.0 // LOADING ENGINE...`, false);
+      }
+
+      if (stepIndex < currentLog.steps.length) {
+        const stepText = currentLog.steps[stepIndex];
+        const isAction = stepText.includes("ACTION") || stepText.includes("IMPACT");
+        renderTerminalLine(stepText, isAction);
+        stepIndex++;
+        setTimeout(runDiagnosticLoop, 1000);
+      } else {
+        stepIndex = 0;
+        logIndex = (logIndex + 1) % terminalLogs.length;
+        setTimeout(runDiagnosticLoop, 3000); // Sleep between loops
+      }
+    }
+
+    runDiagnosticLoop();
+  </script>
+
+</body>
+</html>

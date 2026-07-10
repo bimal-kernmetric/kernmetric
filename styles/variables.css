@@ -1,0 +1,51 @@
+/* Variables: Colors, Spacings, Transitions */
+:root {
+  /* HSL Color Tokens */
+  --primary-hue: 221;
+  --primary-sat: 83%;
+  --primary-light: 53%; /* #2563eb */
+  
+  --primary: hsl(var(--primary-hue), var(--primary-sat), var(--primary-light));
+  --primary-hover: hsl(var(--primary-hue), var(--primary-sat), 43%);
+  
+  /* Light Mode Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  
+  --text-primary: #111827; /* slate-900 */
+  --text-secondary: #4b5563; /* slate-600 */
+  --text-muted: #9ca3af; /* slate-400 */
+  
+  --border-color: #e5e7eb; /* slate-200 */
+  --grey-line: var(--border-color);
+  --border-hover: #cbd5e1; /* slate-300 */
+  
+  /* System Spacing Scale */
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-xxl: 6rem;
+  --max-width: 1440px;
+  --transition-smooth: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --border-radius: 4px; /* Crisp, premium look instead of rounded pills */
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-primary: #09090b; /* zinc-950 */
+  --bg-secondary: #18181b; /* zinc-900 */
+  --bg-tertiary: #27272a; /* zinc-800 */
+  
+  --text-primary: #f4f4f5; /* zinc-100 */
+  --text-secondary: #a1a1aa; /* zinc-400 */
+  --text-muted: #71717a; /* zinc-500 */
+  
+  --border-color: #27272a; /* zinc-800 */
+  --border-hover: #3f3f46; /* zinc-700 */
+  
+  --primary-light: 60%; /* Slightly lighter blue for contrast in dark mode */
+}

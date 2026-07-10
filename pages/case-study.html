@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth Intelligence Diagnostic — KernMetric</title>
+  <meta name="description" content="View detailed structural growth diagnostic report for Studied Brand.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/case-study.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Case Study Main Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
+    <div style="margin-bottom: var(--space-md);">
+      <a href="case-studies.html" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Case Studies
+      </a>
+    </div>
+
+    <!-- Editorial PDF-style Layout -->
+    <article class="pdf-layout" id="report-view-container">
+      <div style="padding: var(--space-lg); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+        Initializing Growth Diagnostic Engine...
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research & Intellectual Property — KernMetric</title>
+  <meta name="description" content="Explore published whitepapers, frameworks, case audits, and CPG habit engineering research by KernMetric.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/research.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Research Main Layout Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); min-height: 80vh;">
+    <!-- Index View Header -->
+    <div id="research-header-block" style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Intellectual Property Repository</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Research & Publications</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Frameworks, Whitepapers, Reports, and analytical briefs concerning CPG systems and pricing mechanics.</p>
+    </div>
+
+    <!-- Main Output Panel (Swaps between Article detail and grouped category feed index) -->
+    <div id="research-main-panel">
+      <div style="padding: var(--space-lg); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+        Fetching publication files...
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

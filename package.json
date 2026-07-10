@@ -1,0 +1,11 @@
+{
+  "name": "kernmetrics-platform",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Operating System for Growth Intelligence",
+  "main": "verify.js",
+  "scripts": {
+    "verify": "node verify.js",
+    "dev": "python -m http.server 8000"
+  }
+}

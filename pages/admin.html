@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — KernMetric Platform</title>
+  <meta name="description" content="Add diagnostics, update validation trials, catalog paradoxes, and index research papers.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <style>
+    .form-group {
+      margin-bottom: var(--space-xs);
+    }
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    .form-control {
+      width: 100%;
+      padding: var(--space-xxs) var(--space-xs);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      outline: none;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <kern-header></kern-header>
+
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Internal Administration Console</span>
+      <h1 style="margin-top: 8px; margin-bottom: 4px; font-size: 2.25rem;">Admin Control Center</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Register structural paradoxes, append MRI records, publish whitepapers, and map network edges.</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 1fr 1fr; align-items: start;">
+      
+      <!-- Panel 1: MRI Editor -->
+      <div class="card">
+        <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+          Register Growth MRI™
+        </h3>
+        <form onsubmit="event.preventDefault(); alert('MRI Added (Simulated)');">
+          <div class="form-group">
+            <label for="company-id">Target Company ID</label>
+            <input type="text" id="company-id" class="form-control" placeholder="e.g. company_spacex" required>
+          </div>
+          <div class="grid grid-cols-2 gap-sm" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
+            <div class="form-group">
+              <label for="mri-version">Version</label>
+              <input type="text" id="mri-version" class="form-control" placeholder="1.0" required>
+            </div>
+            <div class="form-group">
+              <label for="mri-conf">Confidence (%)</label>
+              <input type="number" id="mri-conf" class="form-control" placeholder="85" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mri-constraint">Primary Constraint</label>
+            <input type="text" id="mri-constraint" class="form-control" placeholder="e.g. Launch Fuel Paradox™" required>
+          </div>
+          <div class="form-group">
+            <label for="mri-summary">Executive Summary</label>
+            <textarea id="mri-summary" class="form-control" style="min-height: 80px;" placeholder="Dossier summary..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm w-full" style="margin-top: var(--space-xs);">Publish Diagnostic File</button>
+        </form>
+      </div>
+
+      <!-- Panel 2: Paradox & Relationship Mapper -->
+      <div class="flex flex-col gap-lg">
+        <!-- Paradox Register -->
+        <div class="card">
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            Catalog Paradox™
+          </h3>
+          <form onsubmit="event.preventDefault(); alert('Paradox Cataloged (Simulated)');">
+            <div class="form-group">
+              <label for="para-name">Paradox Name</label>
+              <input type="text" id="para-name" class="form-control" placeholder="e.g. Customer Choice Paralysis" required>
+            </div>
+            <div class="form-group">
+              <label for="para-tax">Taxonomy Domain</label>
+              <input type="text" id="para-tax" class="form-control" placeholder="e.g. Behavioral, Retention" required>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm w-full" style="margin-top: var(--space-xs);">Append to Taxonomy Catalog</button>
+          </form>
+        </div>
+
+        <!-- Relationship Edge Builder -->
+        <div class="card" style="background-color: var(--bg-secondary);">
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            Register Network Relationships
+          </h3>
+          <form onsubmit="event.preventDefault(); alert('Graph Edge Created (Simulated)');">
+            <div class="grid grid-cols-3 gap-sm" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: var(--space-xs);">
+              <div class="form-group">
+                <label for="rel-src">Source ID</label>
+                <input type="text" id="rel-src" class="form-control" placeholder="company_beam" required>
+              </div>
+              <div class="form-group">
+                <label for="rel-type">Relation</label>
+                <input type="text" id="rel-type" class="form-control" placeholder="diagnosed_with" required>
+              </div>
+              <div class="form-group">
+                <label for="rel-tgt">Target ID</label>
+                <input type="text" id="rel-tgt" class="form-control" placeholder="paradox_friction" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm w-full">Write Edge to relationships.json</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <kern-footer></kern-footer>
+  <kern-search></kern-search>
+
+</body>
+</html>

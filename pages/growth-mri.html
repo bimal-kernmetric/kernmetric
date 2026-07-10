@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth MRI™ Framework — KernMetric</title>
+  <meta name="description" content="Our proprietary 7-step diagnostic framework. Learn how we trace systems anomalies from observed symptoms to verified implementation roadmaps.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/mri.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Main Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
+    <div style="max-width: 800px; margin: 0 auto; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl);">
+      <span class="badge badge-blue">Proprietary Growth MRI™ Framework</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.75rem;">Diagnose Before You Deploy</h1>
+      <p class="lead" style="margin: 0; font-size: 1.2rem;">The 7-step framework we use to pinpoint systems constraints inside commerce models.</p>
+    </div>
+
+    <!-- Layout: Explainer Left & Interactive Timeline Right -->
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 1fr 1.3fr; align-items: start; margin-bottom: var(--space-xxl);">
+      <div>
+        <h3 style="margin-top: 0;">Uncovering Constraints</h3>
+        <p>
+          The Growth MRI™ is a structured audit that maps the operational and behavioral variables of a brand.
+        </p>
+        <p>
+          Rather than testing ad creatives or landing page buttons, we track product usage velocity, feedback loop delays, cohort retention metrics, and omnichannel margin allocation.
+        </p>
+        <p class="text-sm" style="color: var(--text-secondary); margin-top: var(--space-md);">
+          > Click any step on the interactive timeline to expand the diagnostic details, criteria, and outputs.
+        </p>
+        <div style="margin-top: var(--space-lg); padding: var(--space-sm); border: 1px dashed var(--border-color); border-radius: var(--border-radius);">
+          <span class="monospace text-xs text-primary-color" style="font-weight: 600;">MRI OUTCOMES</span>
+          <p class="text-xs" style="margin: 4px 0 0 0; color: var(--text-secondary);">
+            Every Growth MRI yields a concrete validation log, a confidence indicator, and an implementation roadmap containing packaging adjustments, pricing levers, or attribution frameworks.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive Timeline (Populated & Managed by scripts/mri.js) -->
+      <div>
+        <div class="timeline-container" id="mri-timeline" style="border-left-color: var(--border-color);">
+          <!-- Timeline steps dynamically drawn by scripts/mri.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Traversal Flow: Growth MRI -> Diagnostics -> Atlas -> Knowledge Graph -->
+    <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xl); margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">Growth Intelligence Engine</span>
+      <h3 style="margin-top: 4px; font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin-bottom: var(--space-sm);">Explore the Diagnostic Platform</h3>
+      <p class="text-sm" style="color: var(--text-secondary); max-width: 600px; margin-bottom: var(--space-md);">
+        Traverse the diagnostic datasets in logical sequence, shifting from the core MRI framework to empirical case files, visual system mapping, and our relational database graph.
+      </p>
+      
+      <div class="grid grid-cols-4 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--space-md);">
+        <div class="card card-elevated" style="cursor: pointer; border-color: var(--primary);" onclick="window.location.href='growth-mri.html'">
+          <div class="monospace text-xs text-primary-color" style="margin-bottom: 4px;">01 / PROCESS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Growth MRI™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Learn the 7-step systems diagnostic protocol.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='case-studies.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">02 / STUDIES</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Case Studies</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Browse dynamic case studies and cohort results.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='atlas.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">03 / VISUALIZATION</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Constraint Atlas™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Trace connections between brands and system limits.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='knowledge-graph.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">04 / TRAVERSALS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Knowledge Graph</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Browse database relationships node-by-node.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

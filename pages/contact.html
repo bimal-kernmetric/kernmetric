@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Diagnostic — KernMetric</title>
+  <meta name="description" content="Book a Growth MRI Diagnostic session with our Growth Intelligence Architects.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <style>
+    /* Custom slot layouts */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+    .calendar-slot {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-xs);
+      text-align: center;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background-color: var(--bg-primary);
+      transition: all var(--transition-smooth);
+    }
+    .calendar-slot:hover, .calendar-slot.selected {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    .form-group {
+      margin-bottom: var(--space-sm);
+    }
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .form-control {
+      width: 100%;
+      padding: var(--space-xs);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      outline: none;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color var(--transition-smooth);
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Main Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); max-width: 900px;">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl); text-align: center;">
+      <span class="badge badge-blue">Growth MRI Application</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Let's diagnose what's limiting your growth.</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Apply for a diagnostic call, audit your systems, and lock down a session.</p>
+    </div>
+
+    <!-- Layout: Questionnaire Left, Calendar Booking Right -->
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 1.1fr 1fr;">
+      
+      <!-- Diagnostic Application Form -->
+      <div class="card" id="form-panel">
+        <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+          01 / Structural Parameters
+        </h3>
+        
+        <form id="diagnostic-form" onsubmit="event.preventDefault(); submitDiagnosticForm();">
+          <div class="form-group">
+            <label for="company-name">Brand Name</label>
+            <input type="text" id="company-name" class="form-control" placeholder="e.g. Acme Organics" required>
+          </div>
+
+          <div class="grid grid-cols-2 gap-sm" style="grid-template-columns: 1fr 1fr; margin-bottom: var(--space-xs);">
+            <div class="form-group">
+              <label for="shopify-tier">Shopify Tier</label>
+              <select id="shopify-tier" class="form-control">
+                <option value="Shopify Standard">Shopify Standard</option>
+                <option value="Shopify Plus" selected>Shopify Plus</option>
+                <option value="Enterprise Custom">Enterprise Custom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="business-model">Business Model</label>
+              <select id="business-model" class="form-control">
+                <option value="DTC Subscription">DTC Subscription</option>
+                <option value="DTC & Retail Omnichannel">DTC & Retail Omnichannel</option>
+                <option value="Pure DTC Store">Pure DTC Store</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="c-revenue">Estimated Annual Revenue</label>
+            <select id="c-revenue" class="form-control">
+              <option value="$2M - $5M">$2M - $5M</option>
+              <option value="$5M - $15M">$5M - $15M</option>
+              <option value="$15M - $50M" selected>$15M - $50M</option>
+              <option value="$50M+">$50M+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="c-symptom">Primary Observed Symptom</label>
+            <select id="c-symptom" class="form-control">
+              <option value="Cohort decay / high Month-2 subscription churn">Cohort decay / high Month-2 subscription churn</option>
+              <option value="Omnichannel margin leakage / retail subsidies">Omnichannel margin leakage / retail subsidies</option>
+              <option value="Escalating Meta ad cost and attribution drops">Escalating Meta ad cost and attribution drops</option>
+              <option value="AOV compression and negative unit margins">AOV compression and negative unit margins</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="founder-email">Contact Email Address</label>
+            <input type="email" id="founder-email" class="form-control" placeholder="e.g. founder@brand.com" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full" style="margin-top: var(--space-xs);">Submit Application Parameters</button>
+        </form>
+      </div>
+
+      <!-- Calendar Slot Selection (Simulated Widget) -->
+      <div class="card flex flex-col justify-between" style="background-color: var(--bg-secondary);">
+        <div>
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            02 / Schedule Diagnostic
+          </h3>
+          <p class="text-xs" style="color: var(--text-secondary); line-height: 1.4; margin-bottom: var(--space-sm);">
+            Select an open slot from our diagnostic queue below. All times are hosted in Eastern Time (ET).
+          </p>
+
+          <div class="monospace text-xs text-muted-color" style="margin-top: var(--space-md);">MONDAY, JULY 13</div>
+          <div class="calendar-grid">
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 9:00 AM')">09:00 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 11:30 AM')">11:30 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 3:00 PM')">03:00 PM</div>
+          </div>
+
+          <div class="monospace text-xs text-muted-color" style="margin-top: var(--space-md);">WEDNESDAY, JULY 15</div>
+          <div class="calendar-grid">
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 10:00 AM')">10:00 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 1:00 PM')">01:00 PM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 4:30 PM')">04:30 PM</div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-lg); border-top: 1px dashed var(--border-color); padding-top: var(--space-sm); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary);">
+          <div>Selected: <span id="selected-slot-display" style="color: var(--primary); font-weight: 500;">None Selected</span></div>
+          <div style="margin-top: 8px;">Direct: <a href="mailto:bimal@kernmetric.com" style="color: var(--text-primary);">bimal@kernmetric.com</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+  <!-- Calendar Slot Script -->
+  <script>
+    let selectedSlot = null;
+
+    function selectSlot(element, slotText) {
+      // Remove selected class from all slots
+      document.querySelectorAll('.calendar-slot').forEach(slot => {
+        slot.classList.remove('selected');
+      });
+      
+      // Select current slot
+      element.classList.add('selected');
+      selectedSlot = slotText;
+      document.getElementById('selected-slot-display').innerText = slotText;
+    }
+
+    function submitDiagnosticForm() {
+      if (!selectedSlot) {
+        alert("Please select a diagnostic schedule slot in step 02.");
+        return;
+      }
+      
+      const company = document.getElementById('company-name').value;
+      const email = document.getElementById('founder-email').value;
+
+      const panel = document.getElementById('form-panel');
+      panel.innerHTML = `
+        <div style="text-align: center; padding: var(--space-lg) 0;">
+          <div style="width: 12px; height: 12px; background-color: var(--primary); border-radius: 50%; margin: 0 auto var(--space-sm) auto;"></div>
+          <h3 style="font-family: 'Source Serif 4', serif; margin-top: 0; border-bottom: none;">Application Transmitted</h3>
+          <p class="text-sm" style="color: var(--text-secondary); max-width: 280px; margin: 0 auto var(--space-md) auto;">
+            Thank you, ${email}. The diagnostic parameters for <strong>${company}</strong> have been loaded into our queue.
+          </p>
+          <div class="monospace text-xs" style="color: var(--text-muted);">Confirming Slot: ${selectedSlot} (ET)</div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

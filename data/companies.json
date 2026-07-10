@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2026-07-09",
+  "companies": [
+    {
+      "id": "company_beam",
+      "name": "Beam Organics",
+      "domain": "beamorganics.com",
+      "industry": "Health & Wellness",
+      "businessModel": "DTC & Subscription",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$25M - $50M",
+      "tags": ["CBD", "Sleep", "Subscription", "Retention", "LTV", "Shopify Plus"]
+    },
+    {
+      "id": "company_thesis",
+      "name": "Thesis",
+      "domain": "takethesis.com",
+      "industry": "Cognitive Health",
+      "businessModel": "DTC & Custom Subscription",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$10M - $25M",
+      "tags": ["Nootropics", "Customization", "Subscription", "Behavioral", "LTV", "Acquisition"]
+    },
+    {
+      "id": "company_iqbar",
+      "name": "IQBAR",
+      "domain": "eatiqbar.com",
+      "industry": "Food & Beverage",
+      "businessModel": "Omnichannel (DTC/Retail)",
+      "shopifyTier": "Shopify",
+      "estimatedRevenue": "$10M - $25M",
+      "tags": ["Nutrition Bars", "Retail", "Pricing", "Gross Margin", "AOV"]
+    },
+    {
+      "id": "company_gainful",
+      "name": "Gainful",
+      "domain": "gainful.com",
+      "industry": "Sports Nutrition",
+      "businessModel": "DTC & Custom Subscription",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$20M - $40M",
+      "tags": ["Sports Nutrition", "Customization", "Routine", "Subscription", "Retention", "Lifecycle"]
+    },
+    {
+      "id": "company_everyday_dose",
+      "name": "Everyday Dose",
+      "domain": "everydaydose.com",
+      "industry": "Health & Wellness",
+      "businessModel": "DTC & Subscription",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$15M - $30M",
+      "tags": ["Mushroom Coffee", "Rituals", "Subscription", "Retention", "LTV", "Lifecycle"]
+    },
+    {
+      "id": "company_promix",
+      "name": "Promix",
+      "domain": "promixnutrition.com",
+      "industry": "Sports Nutrition",
+      "businessModel": "DTC & Retail",
+      "shopifyTier": "Shopify",
+      "estimatedRevenue": "$5M - $15M",
+      "tags": ["Clean Nutrition", "Subscription", "AOV", "Pricing", "Operations"]
+    },
+    {
+      "id": "company_naked_nutrition",
+      "name": "Naked Nutrition",
+      "domain": "nakednutrition.com",
+      "industry": "Sports Nutrition",
+      "businessModel": "DTC & Amazon",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$25M - $50M",
+      "tags": ["Clean Nutrition", "Attribution", "Acquisition", "Pricing", "Customer Journey"]
+    },
+    {
+      "id": "company_create",
+      "name": "Create",
+      "domain": "trycreate.co",
+      "industry": "Health & Wellness",
+      "businessModel": "DTC & Subscription",
+      "shopifyTier": "Shopify",
+      "estimatedRevenue": "$2M - $5M",
+      "tags": ["Creatine Gummies", "Subscription", "Acquisition", "Lifecycle", "Retention"]
+    },
+    {
+      "id": "company_perelel",
+      "name": "Perelel",
+      "domain": "perelelhealth.com",
+      "industry": "Prenatal Health",
+      "businessModel": "DTC & Subscription",
+      "shopifyTier": "Shopify Plus",
+      "estimatedRevenue": "$15M - $30M",
+      "tags": ["Vitamins", "Subscription", "Cohort Dynamics", "Retention", "Lifecycle"]
+    }
+  ]
+}

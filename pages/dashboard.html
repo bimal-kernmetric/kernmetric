@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligence Dashboard — KernMetric</title>
+  <meta name="description" content="Access live cohort diagnostics, active structural paradoxes, validation parameters, and research telemetry.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/dashboard.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Dashboard Overview Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Growth Intelligence Telemetry</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Intelligence Dashboard</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Real-time metrics, diagnostics library updates, and active validation indicators.</p>
+    </div>
+
+    <!-- Live Telemetry KPI Grids -->
+    <div class="grid grid-cols-4 mb-lg" id="kpi-grids">
+      <div class="card kpi-card">
+        <div class="kpi-val" id="kpi-companies">--</div>
+        <div class="kpi-label">Companies Studied</div>
+      </div>
+      <div class="card kpi-card">
+        <div class="kpi-val" id="kpi-paradoxes">--</div>
+        <div class="kpi-label">Structural Paradoxes</div>
+      </div>
+      <div class="card kpi-card">
+        <div class="kpi-val" id="kpi-experiments">--</div>
+        <div class="kpi-label">Validation Experiments</div>
+      </div>
+      <div class="card kpi-card">
+        <div class="kpi-val" id="kpi-research">--</div>
+        <div class="kpi-label">Published Research</div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content Layout Grid (Main Feed & Side Activities) -->
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 2fr 1fr; align-items: start;">
+      
+      <!-- Main Content Feed: Latest Diagnostic MRIs -->
+      <div>
+        <h3 style="margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+          Latest Diagnostic MRIs
+        </h3>
+        <div class="flex flex-col gap-md" id="mri-feed-container">
+          <!-- Loaded dynamically via scripts/dashboard.js -->
+          <div style="padding: var(--space-lg); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+            Loading latest diagnostics...
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar: Platform Activity Log & Quick Atlas Links -->
+      <div class="flex flex-col gap-lg">
+        <!-- Chronological Research Activity Feed -->
+        <div class="card" style="background-color: var(--bg-secondary);">
+          <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            Research Activity Log
+          </h4>
+          <div class="activity-feed" id="activity-feed-container">
+            <!-- Loaded dynamically via scripts/dashboard.js -->
+            <div class="activity-item">
+              <div class="activity-marker">SYSTEM</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary);">Connecting data pipelines...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Access to Map -->
+        <div class="card">
+          <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; margin-bottom: var(--space-xs);">
+            Constraint Atlas™
+          </h4>
+          <p class="text-xs" style="color: var(--text-secondary); margin-bottom: var(--space-sm);">
+            Trace the exact network connections linking companies back to structural constraints and verified solutions.
+          </p>
+          <a href="atlas.html" class="btn btn-secondary btn-sm w-full">Open Atlas Network Map</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+  <!-- Search Modal Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

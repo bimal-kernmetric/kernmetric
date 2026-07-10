@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2026-07-09",
+  "research": [
+    {
+      "id": "research_constraint_theory",
+      "type": "Framework",
+      "title": "Growth Bottlenecks: Applying Goldratt's Theory of Constraints to Ecommerce Systems",
+      "author": "Bimal Murali",
+      "date": "July 2026",
+      "tags": ["Constraint Theory", "Systems Thinking", "Operations"],
+      "summary": "Downstream metrics like CPA, email click rates, and landing page conversions are symptoms of upstream system constraints. This framework shows how to identify the single governor of system velocity in a commerce brand.",
+      "content": "In complex systems, throughput is governed by a single constraint. In ecommerce, brands treat acquisition, landing pages, and email as isolated variables. They optimize symptoms. If your product's daily usage routine carries friction, LTV compresses. No amount of landing page optimization can fix a structural retention constraint. To scale a system, you must: 1. Identify the system constraint, 2. Exploit the constraint, 3. Subordinate everything else to the constraint, 4. Elevate the constraint, 5. Repeat. This article details how this engineering principle applies to Shopify brands."
+    },
+    {
+      "id": "research_subscription_economics",
+      "type": "Whitepaper",
+      "title": "The Illusion of LTV: Why Cohort Churn is a Physical Product Design Problem",
+      "author": "Bimal Murali",
+      "date": "June 2026",
+      "tags": ["Subscription Economics", "Retention", "LTV"],
+      "summary": "Subscription churn is rarely a pricing or marketing failure; it is a failure of physical integration. We examine the math of habit velocity and the physical triggers required to stabilize consumer cohorts.",
+      "content": "Digital marketers attempt to solve subscription churn with email flows, discounts, and retention portals. These are downstream levers. Churn is primarily a physical integration problem. If a consumer fails to build a habit loop within the first 7 days, the product accumulates on their counter. This 'product backlog' triggers voluntary cancellation at the next billing cycle. True LTV is unlocked by engineering the physical packaging, accessories, and immediate rewards to fit seamlessly into the user's daily morning or evening routines."
+    },
+    {
+      "id": "research_attribution_modeling",
+      "type": "Report",
+      "title": "Attribution Dilution: Quantifying the Meta-to-Amazon Spillover Effect",
+      "author": "Bimal Murali",
+      "date": "May 2026",
+      "tags": ["Attribution", "Acquisition", "Shopify vs Amazon"],
+      "summary": "Modern attribution software fails to track multi-channel spillover. We present empirical evidence showing that up to 35% of Shopify ad clicks convert anonymously via Amazon Prime.",
+      "content": "When direct-to-consumer brands scale Facebook and Google spend, they measure success via Shopify-integrated tracking pixels. This creates a blind spot. A significant portion of ad-viewing consumers prefer Amazon Prime for its free next-day shipping and stored credit cards. They close the Shopify tab and purchase on Amazon. Because Amazon does not share pixel data, the ad campaign appears unprofitable, leading brands to scale back spend. We present a statistical model to calculate multi-channel incrementality and adjust blended ROAS calculations."
+    },
+    {
+      "id": "research_habit_loops",
+      "type": "Article",
+      "title": "Ritual Engineering: Designing Frictionless Habit Cues in Consumer Packaged Goods",
+      "author": "Bimal Murali",
+      "date": "April 2026",
+      "tags": ["Behavioral Science", "Product Design", "Retention"],
+      "summary": "How CPG brands can engineer physical packaging to act as passive habit triggers, bypassing cognitive friction and increasing consumer adherence.",
+      "content": "Habit formation requires three components: a cue, a routine, and a reward. Most brands focus on the reward (product efficacy) but neglect the cue and routine. A supplement powder stored in a cupboard lacks a visual cue. A jar that requires opening, scooping, and mixing introduces routine friction. By redesigning packaging as single-serve sachets presented in a dedicated stand on the nightstand, brands create a persistent visual cue and reduce physical steps to near zero, locking in long-term consumption rituals."
+    },
+    {
+      "id": "research_pricing_elasticity",
+      "type": "Note",
+      "title": "Pricing Levers: Shifting contribution margins without degrading customer conversion",
+      "author": "Bimal Murali",
+      "date": "March 2026",
+      "tags": ["Pricing", "Unit Economics", "Margin"],
+      "summary": "Pricing corrections are often feared due to conversion elasticity assumptions. We analyze data showing that premium brands can increase DTC pricing with zero conversion decay.",
+      "content": "When gross margins compress, founders often attempt to cut supply chain costs or negotiate carrier rates. These adjustments yield minor margins (1-2%). A pricing increase is a more powerful lever. E-commerce conversion rates are relatively inelastic to minor price increases (5-10%) for premium, value-add brands. We analyze three case studies where a minor pricing correction immediately expanded contribution margins by 800bps while conversion rates remained statistically unchanged."
+    }
+  ]
+}
