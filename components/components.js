@@ -36,7 +36,7 @@ class KernHeader extends HTMLElement {
           </nav>
           
           <div class="header-actions">
-            <a href="${resolvePage('contact.html')}" class="header-cta">Book a Diagnostic →</a>
+            <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="header-cta">Book a Diagnostic →</a>
             <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
               <span class="hamburger-bar"></span>
               <span class="hamburger-bar"></span>
@@ -46,12 +46,14 @@ class KernHeader extends HTMLElement {
         </div>
         
         <div class="mobile-nav-dropdown">
+          <a href="${homeLink}" class="mobile-nav-link ${getActive('index')}">Home</a>
           <a href="${resolvePage('methodology.html')}" class="mobile-nav-link ${getActive('methodology')}">Methodology</a>
           <a href="${resolvePage('growth-mri.html')}" class="mobile-nav-link ${getActive('growth-mri')}">Growth MRI™</a>
           <a href="${resolvePage('case-studies.html')}" class="mobile-nav-link ${getActive('case-studies')}">Case Studies</a>
           <a href="${resolvePage('research.html')}" class="mobile-nav-link ${getActive('research')}">Research</a>
           <a href="${resolvePage('about.html')}" class="mobile-nav-link ${getActive('about')}">About</a>
-          <a href="${resolvePage('contact.html')}" class="mobile-nav-cta">Book a Diagnostic →</a>
+          <a href="${resolvePage('contact.html')}" class="mobile-nav-link ${getActive('contact')}">Contact</a>
+          <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-nav-cta">Book a Diagnostic →</a>
         </div>
       </header>
     `;
@@ -69,7 +71,7 @@ class KernHeader extends HTMLElement {
 
       // Automatically reset states when scaling up viewport
       window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1024) {
+        if (window.innerWidth >= 1100) {
           toggleBtn.setAttribute('aria-expanded', 'false');
           dropdown.classList.remove('open');
         }

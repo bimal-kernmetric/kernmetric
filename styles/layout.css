@@ -1,22 +1,44 @@
 /* Layout: Spacings, Containers, Grids */
 * {
+  min-width: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   background-color: var(--bg-primary);
   scroll-behavior: smooth;
 }
 
+/* Fluid Containers */
 .container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 48px;
-  padding-right: 48px;
+  width: min(92%, 1440px);
+  margin-inline: auto;
+}
+
+.container-narrow {
+  width: min(90%, 900px);
+  margin-inline: auto;
+}
+
+.container-wide {
+  width: min(94%, 1600px);
+  margin-inline: auto;
+}
+
+/* Fluid Media elements */
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .section {
@@ -36,27 +58,18 @@ html, body {
 }
 
 .grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
 }
 
 .grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }
 
 .grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-@media (max-width: 1024px) {
-  .grid-cols-4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
 }
 
 @media (max-width: 768px) {
-  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
-    grid-template-columns: 1fr;
-  }
   .section {
     padding-top: var(--space-xl);
     padding-bottom: var(--space-xl);
@@ -93,6 +106,13 @@ html, body {
 .mt-lg { margin-top: var(--space-lg); }
 
 /* Hero Grid Layout Rules */
+.hero {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-xl);
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 60% 40%;
@@ -101,9 +121,16 @@ html, body {
   width: 100%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-block: var(--space-xxl);
   }
 }
