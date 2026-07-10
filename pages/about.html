@@ -26,13 +26,32 @@
     <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 1fr 1.2fr; align-items: start; margin-bottom: var(--space-xxl);">
       <!-- Left side: Founder Profile and Principles card -->
       <div class="flex flex-col gap-lg">
-          <img src="../assets/founder.jpg" alt="Bimal Murali" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin: 0 auto var(--space-sm) auto; display: block; border: 1px solid var(--border-color);">
-          <h3 style="margin: 4px 0 2px 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem;">Bimal Murali</h3>
-          <p class="monospace text-xs text-primary-color" style="margin-bottom: var(--space-sm); text-transform: uppercase;">Founder & Growth Architect</p>
-          <p class="text-xs" style="color: var(--text-secondary); line-height: 1.5;">
-            Civil engineer turned e-commerce strategist. Specialized in mapping cohort flows, feedback loop delays, and system constraints.
+        <div class="card" style="padding: var(--space-md);">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: var(--space-xs); text-transform: uppercase;">Structural Analogy Model</div>
+          <svg viewBox="0 0 200 100" style="width: 100%; height: auto; display: block; margin: 0 auto var(--space-sm) auto;">
+            <!-- Horizontal load-bearing line -->
+            <line x1="10" y1="80" x2="190" y2="80" stroke="var(--primary)" stroke-width="3" />
+            <!-- Vertical load vectors -->
+            <line x1="50" y1="20" x2="50" y2="70" stroke="var(--text-secondary)" stroke-width="1.5" marker-end="url(#arrow)" />
+            <line x1="100" y1="20" x2="100" y2="70" stroke="var(--text-secondary)" stroke-width="1.5" marker-end="url(#arrow)" />
+            <line x1="150" y1="20" x2="150" y2="70" stroke="var(--text-secondary)" stroke-width="1.5" marker-end="url(#arrow)" />
+            <!-- Base pillars -->
+            <rect x="35" y="80" width="30" height="15" fill="var(--bg-secondary)" stroke="var(--border-color)" />
+            <rect x="85" y="80" width="30" height="15" fill="var(--bg-secondary)" stroke="var(--border-color)" />
+            <rect x="135" y="80" width="30" height="15" fill="var(--bg-secondary)" stroke="var(--border-color)" />
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                <path d="M 0 2 L 10 5 L 0 8 z" fill="var(--text-secondary)" />
+              </marker>
+            </defs>
+          </svg>
+          <h4 style="margin: 4px 0 2px 0; font-family: 'Source Serif 4', serif; font-size: 1.15rem;">Bimal Murali</h4>
+          <p class="monospace text-xs text-primary-color" style="margin-bottom: var(--space-xs); text-transform: uppercase; font-size: 0.65rem;">Principal Architect</p>
+          <p class="text-xs" style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+            Civil engineer turned growth strategist. Applying stress analysis, structural load distribution, and Goldratt's Theory of Constraints to commerce architectures.
           </p>
         </div>
+
 
         <div class="card" style="background-color: var(--bg-secondary);">
           <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-xs);">

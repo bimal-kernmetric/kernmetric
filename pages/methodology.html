@@ -47,6 +47,9 @@
 
   <!-- Title Section -->
   <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
     <div style="max-width: 800px; margin: 0 auto; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl);">
       <span class="badge badge-blue">KernMetric Operating Principles</span>
       <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.75rem;">Systems before Tactics</h1>
@@ -65,16 +68,42 @@
         </p>
         
         <h3 style="margin-top: var(--space-lg);">The Five-Step Diagnostic Lifecycle</h3>
-        <p>
+        <p style="margin-bottom: var(--space-sm);">
           We apply Goldratt’s Theory of Constraints to digital commerce, operating through a strict sequence:
         </p>
-        <ol style="padding-left: var(--space-md); color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem;">
-          <li><strong>Identify symptoms:</strong> Classify cohort churn, escalating acquisition costs, or margin drop-offs.</li>
-          <li><strong>Locate constraints:</strong> Trace data and physical usage back to structural friction or subsidy loops.</li>
-          <li><strong>Validate hypothesis:</strong> Conduct localized, low-cost trials (e.g. volume pricing adjustments, custom bedside cues).</li>
-          <li><strong>Perform experiments:</strong> Run formal A/B validation sequences tracking downstream retention impact.</li>
-          <li><strong>Scale throughput:</strong> Adjust base configurations, pricing models, and marketing triggers.</li>
-        </ol>
+        
+        <div style="display: flex; flex-direction: column; gap: var(--space-xxs); margin-bottom: var(--space-md);">
+          <div class="km-accordion">
+            <button class="km-accordion-header" style="font-size: 0.95rem; padding: 10px 14px;">01 / Identify Symptoms</button>
+            <div class="km-accordion-content">
+              <p class="text-xs" style="margin: 0; line-height: 1.5;">Classify cohort retention decays, ad channel acquisition cost surges, and downstream operating margin leaks.</p>
+            </div>
+          </div>
+          <div class="km-accordion">
+            <button class="km-accordion-header" style="font-size: 0.95rem; padding: 10px 14px;">02 / Locate Constraints</button>
+            <div class="km-accordion-content">
+              <p class="text-xs" style="margin: 0; line-height: 1.5;">Trace behavioral customer events and physical product logistics back to core structural constraints (Routine Friction™, personal decay, etc.).</p>
+            </div>
+          </div>
+          <div class="km-accordion">
+            <button class="km-accordion-header" style="font-size: 0.95rem; padding: 10px 14px;">03 / Validate Hypothesis</button>
+            <div class="km-accordion-content">
+              <p class="text-xs" style="margin: 0; line-height: 1.5;">Conduct localized, low-cost cohort trials (e.g. shipping custom tins to a 500-user sample) to verify behavior changes before scaling changes.</p>
+            </div>
+          </div>
+          <div class="km-accordion">
+            <button class="km-accordion-header" style="font-size: 0.95rem; padding: 10px 14px;">04 / Perform Experiments</button>
+            <div class="km-accordion-content">
+              <p class="text-xs" style="margin: 0; line-height: 1.5;">Run formal, statistically controlled A/B testing holdout sequences to confirm downstream LTV and margin adjustments.</p>
+            </div>
+          </div>
+          <div class="km-accordion">
+            <button class="km-accordion-header" style="font-size: 0.95rem; padding: 10px 14px;">05 / Scale Throughput</button>
+            <div class="km-accordion-content">
+              <p class="text-xs" style="margin: 0; line-height: 1.5;">Adjust platform base structures, subscription billing frequencies, and attribution filters to secure long-term value.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Systems Loop Diagram (Pure SVG) -->
@@ -157,6 +186,29 @@
 
   <!-- Search Modal Component -->
   <kern-search></kern-search>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const accordions = document.querySelectorAll('.km-accordion');
+      accordions.forEach(acc => {
+        const header = acc.querySelector('.km-accordion-header');
+        const content = acc.querySelector('.km-accordion-content');
+        header.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isOpen = acc.classList.contains('open');
+          accordions.forEach(a => {
+            a.classList.remove('open');
+            const c = a.querySelector('.km-accordion-content');
+            if (c) c.style.maxHeight = '0';
+          });
+          if (!isOpen) {
+            acc.classList.add('open');
+            content.style.maxHeight = '150px';
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>

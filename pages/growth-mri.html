@@ -16,39 +16,42 @@
   <kern-header></kern-header>
 
   <!-- Main Container -->
-  <main class="container section fade-up-element" style="padding-top: var(--space-xl);">
-    <div style="max-width: 800px; margin: 0 auto; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl);">
-      <span class="badge badge-blue">Proprietary Growth MRI™ Framework</span>
-      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.75rem;">Diagnose Before You Deploy</h1>
-      <p class="lead" style="margin: 0; font-size: 1.2rem;">The 7-step framework we use to pinpoint systems constraints inside commerce models.</p>
+  <main class="container-wide section fade-up-element" style="padding-top: var(--space-xl); min-height: 90vh;">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- Title Ribbon -->
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Proprietary Growth MRI™ Protocol</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Diagnostic Stepper</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Browse the 7-step systems diagnostic protocol used to identify active bottlenecks inside commerce systems.</p>
     </div>
 
-    <!-- Layout: Explainer Left & Interactive Timeline Right -->
-    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 1fr 1.3fr; align-items: start; margin-bottom: var(--space-xxl);">
-      <div>
-        <h3 style="margin-top: 0;">Uncovering Constraints</h3>
-        <p>
-          The Growth MRI™ is a structured audit that maps the operational and behavioral variables of a brand.
-        </p>
-        <p>
-          Rather than testing ad creatives or landing page buttons, we track product usage velocity, feedback loop delays, cohort retention metrics, and omnichannel margin allocation.
-        </p>
-        <p class="text-sm" style="color: var(--text-secondary); margin-top: var(--space-md);">
-          > Click any step on the interactive timeline to expand the diagnostic details, criteria, and outputs.
-        </p>
-        <div style="margin-top: var(--space-lg); padding: var(--space-sm); border: 1px dashed var(--border-color); border-radius: var(--border-radius);">
-          <span class="monospace text-xs text-primary-color" style="font-weight: 600;">MRI OUTCOMES</span>
-          <p class="text-xs" style="margin: 4px 0 0 0; color: var(--text-secondary);">
-            Every Growth MRI yields a concrete validation log, a confidence indicator, and an implementation roadmap containing packaging adjustments, pricing levers, or attribution frameworks.
-          </p>
+    <!-- Stepper Interface: Left Navigation Rail & Right Content Viewport -->
+    <!-- Stepper Interface: Desktop-Only Navigation Rail & Viewport -->
+    <div class="desktop-only">
+      <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 280px 1fr; align-items: start; margin-bottom: var(--space-xl);">
+        
+        <!-- Left Navigation Rail / Progress Tracker -->
+        <div style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: var(--space-sm); border-right: 1px solid var(--border-color); padding-right: var(--space-md);">
+          <span class="monospace text-xs text-muted-color" style="font-weight: 600; text-transform: uppercase;">Diagnostic Stages</span>
+          <div class="flex flex-col gap-xs" id="mri-step-list">
+            <!-- Built dynamically by scripts/mri.js -->
+          </div>
         </div>
-      </div>
 
-      <!-- Interactive Timeline (Populated & Managed by scripts/mri.js) -->
-      <div>
-        <div class="timeline-container" id="mri-timeline" style="border-left-color: var(--border-color);">
-          <!-- Timeline steps dynamically drawn by scripts/mri.js -->
+        <!-- Right Content Viewport -->
+        <div class="card" style="padding: var(--space-lg); border-top: 3px solid var(--primary);" id="mri-viewport">
+          <!-- Active Step Details rendered dynamically by scripts/mri.js -->
         </div>
+
+      </div>
+    </div>
+
+    <!-- Stepper Interface: Mobile-Only Linear Executive Accordion Flow -->
+    <div class="mobile-only" style="margin-bottom: var(--space-xl);">
+      <div class="flex flex-col gap-sm" id="mri-mobile-accordion-container">
+        <!-- Built dynamically by scripts/mri.js -->
       </div>
     </div>
 

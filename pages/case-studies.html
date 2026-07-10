@@ -17,53 +17,85 @@
 
   <!-- Diagnostics Library Layout -->
   <main class="container-wide section fade-up-element" style="padding-top: var(--space-xl); min-height: 80vh;">
+    
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- Editorial Title & Description -->
     <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
       <span class="badge badge-blue">Growth Intelligence Library</span>
       <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Case Studies</h1>
       <p style="margin: 0; color: var(--text-secondary);">Browse our library of Growth MRIs and cohort results across subscription and ecommerce brands.</p>
     </div>
 
-    <!-- Multi-column Layout: Sidebar Filters Left & Grid Results Right -->
-    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 260px 1fr; align-items: start;">
+    <!-- Search Bar at the Top of the platform -->
+    <div style="margin-bottom: var(--space-md); width: 100%;">
+      <input type="text" id="lib-search-input" placeholder="Search companies, constraints or industries..." style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--border-color); border-radius: var(--border-radius); outline: none; font-size: 1rem; font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.02); transition: border-color var(--transition-smooth);">
+    </div>
+
+    <!-- View Mode Toggle -->
+    <div class="view-toggle-container">
+      <span class="monospace text-xs text-muted-color" style="font-weight: 600; text-transform: uppercase;">View Mode</span>
+      <div class="view-toggle-buttons">
+        <button class="view-toggle-btn active" data-view="companies">Companies</button>
+        <button class="view-toggle-btn" data-view="paradoxes">Structural Paradoxes™</button>
+        <button class="view-toggle-btn" data-view="industries">Industries</button>
+      </div>
+    </div>
+
+    <!-- Two-column Layout: Sidebar Filters Left (300px) & Diagnostics Grid Right (Remaining 75%) -->
+    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 300px 1fr; align-items: start; margin-bottom: var(--space-xl);">
       
-      <!-- Left Sidebar Filters -->
-      <div class="flex flex-col gap-md" style="position: sticky; top: 80px;">
-        <!-- Text Search -->
-        <div class="card" style="padding: var(--space-sm);">
-          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Search Case Studies</h4>
-          <input type="text" id="lib-search-input" placeholder="Type brand or constraint..." style="width: 100%; padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); outline: none; font-size: 0.85rem; font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary);">
-        </div>
-
-        <!-- Taxonomy Filters -->
-        <div class="card" style="padding: var(--space-sm);">
-          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Filter by Domain</h4>
-          <div class="flex flex-col gap-sm" id="taxonomy-filter-list" style="max-height: 200px; overflow-y: auto;">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
-
-        <!-- Business Model Filters -->
-        <div class="card" style="padding: var(--space-sm);">
-          <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Shopify Tier</h4>
-          <div class="flex flex-col gap-sm">
-            <label class="flex items-center gap-sm text-sm cursor-pointer"><input type="checkbox" class="tier-filter" value="Shopify Plus"> Shopify Plus</label>
-            <label class="flex items-center gap-sm text-sm cursor-pointer"><input type="checkbox" class="tier-filter" value="Shopify"> Shopify Standard</label>
-          </div>
-        </div>
-
-        <!-- Reset Button -->
-        <button id="reset-filters-btn" class="btn btn-secondary btn-sm w-full">Clear Filters</button>
+      <!-- Left Sidebar Collapsible Research Filter Panel -->
+      <div class="filter-sidebar">
+        <button id="reset-filters-btn" class="btn btn-secondary btn-sm w-full" style="margin-bottom: var(--space-xs);">Clear Filters</button>
+        
+        <!-- Generated Dynamically by diagnostics.js -->
+        <div id="desktop-filters-container"></div>
       </div>
 
-      <!-- Right Grid Results -->
+      <!-- Right Results Grid area -->
       <div>
-        <div class="flex justify-between items-center" style="margin-bottom: var(--space-md); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
-          <div>Showing <span id="results-count" style="color: var(--text-primary); font-weight: 500;">0</span> diagnostic reports</div>
+        <!-- Results count & sorting header -->
+        <div class="results-header">
+          <div>
+            <h2 id="results-title" style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 1.5rem; font-weight: 500; border-bottom: none;">Diagnostics Library</h2>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">
+              <span id="total-count">0</span> Growth MRIs • Showing <span id="showing-count">0</span> results
+            </div>
+          </div>
+          <div class="sort-container">
+            <span class="monospace text-xs text-muted-color">SORT:</span>
+            <select id="sort-select" class="sort-select">
+              <option value="newest">Newest</option>
+              <option value="confidence">Highest Confidence</option>
+              <option value="updated">Recently Updated</option>
+              <option value="industry">Industry</option>
+            </select>
+          </div>
         </div>
         
         <div class="grid grid-cols-2 gap-md" id="library-results-grid">
           <!-- Loaded dynamically -->
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sticky Filter Button Trigger -->
+    <button id="mobile-filter-trigger-btn" class="btn btn-primary mobile-filter-trigger" style="min-height: 48px; border-radius: 24px; padding: 0 28px; font-weight: 600;">Filters</button>
+
+    <!-- Mobile Full-Screen Filter Modal Sheet -->
+    <div class="mobile-filter-modal" id="mobile-filter-modal">
+      <div class="mobile-filter-modal-header">
+        <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Filter Diagnostics</h3>
+        <button id="mobile-filter-close-btn" style="background: none; border: none; font-size: 1.75rem; cursor: pointer; color: var(--text-primary); font-weight: 300;">&times;</button>
+      </div>
+      <div class="mobile-filter-modal-content" id="mobile-filters-container">
+        <!-- Rendered dynamically on mobile screens -->
+      </div>
+      <div class="mobile-filter-modal-footer">
+        <button id="mobile-filter-clear-btn" class="btn btn-secondary" style="flex: 1; min-height: 48px;">Clear Filters</button>
+        <button id="mobile-filter-apply-btn" class="btn btn-primary" style="flex: 1; min-height: 48px;">Apply Filters</button>
       </div>
     </div>
 

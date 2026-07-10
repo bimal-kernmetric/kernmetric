@@ -1,52 +1,118 @@
 import { getParadoxes, getRelationships } from './api/paradoxes.js';
 import { getCompanies } from './api/companies.js';
 import { getResearch } from './api/research.js';
+import { getMRIs } from './api/mri.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const paradoxes = await getParadoxes();
   const companies = await getCompanies();
   const research = await getResearch();
   const relationships = await getRelationships();
+  const allMRIs = await getMRIs();
 
+  // 1. Mobile Adaptive Constraint Traversal Hierarchy View
   const mobileContainer = document.getElementById('mobile-atlas-list');
-  if (window.innerWidth < 768 && mobileContainer) {
+  if (window.innerWidth < 1025 && mobileContainer) {
     mobileContainer.innerHTML = '';
     paradoxes.forEach(paradox => {
+      // Find companies diagnosed with this paradox
       const relatedRels = relationships.filter(rel => rel.target === paradox.id && rel.relationship === 'diagnosed_with');
       const relatedCompIds = relatedRels.map(rel => rel.source);
       const relatedComps = companies.filter(c => relatedCompIds.includes(c.id));
       
+      // Find papers sharing taxonomy tags
+      const relatedPapers = research.filter(r => r.tags.some(tag => paradox.taxonomy.includes(tag)));
+      
       let compsHtml = relatedComps.map(company => {
         const mriId = `mri_${company.id.replace('company_', '')}_v1`;
+        const mri = allMRIs.find(m => m.id === mriId) || {};
+        
         return `
-          <div class="flex justify-between items-center" style="padding: var(--space-xs) 0; border-bottom: 1px solid var(--border-color); font-size: 0.85rem;">
-            <span>${company.name}</span>
-            <a href="case-study.html?id=${mriId}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 500; color: var(--primary);">View Report &rarr;</a>
+          <div style="background-color: var(--bg-secondary); padding: var(--space-sm); border-radius: var(--border-radius); margin-bottom: var(--space-xs); border: 1px solid var(--border-color); text-align: left;">
+            <div class="flex justify-between items-center" style="margin-bottom: 4px;">
+              <strong style="color: var(--text-primary); font-size: 0.9rem;">${company.name}</strong>
+              <span class="badge badge-blue" style="font-size: 0.6rem;">${company.industry}</span>
+            </div>
+            <p class="text-xs" style="margin: 4px 0 6px 0; color: var(--text-secondary); line-height: 1.4;">
+              ${mri.summary || 'Growth diagnostic audit completed.'}
+            </p>
+            <div class="flex justify-between items-center" style="border-top: 1px dashed var(--border-color); padding-top: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
+              <span>Impact: ${mri.estimatedImpact || 'N/A'}</span>
+              <a href="case-study.html?id=${mriId}" style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</a>
+            </div>
           </div>
         `;
       }).join('');
       
       if (!compsHtml) {
-        compsHtml = `<div style="font-size: 0.8rem; color: var(--text-muted); padding: var(--space-xs) 0;">No companies currently diagnosed.</div>`;
+        compsHtml = `<p class="text-xs text-muted-color" style="font-family: 'JetBrains Mono', monospace; margin: var(--space-xxs) 0;">No studied brands diagnosed yet.</p>`;
       }
 
-      const block = document.createElement('div');
-      block.className = 'card';
-      block.style.borderLeft = '2px solid var(--primary)';
-      block.style.marginBottom = 'var(--space-sm)';
-      block.innerHTML = `
-        <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'Source Serif 4', serif; font-size: 1.15rem; color: var(--primary);">${paradox.name}</h4>
-        <p class="text-xs" style="margin: 0 0 var(--space-sm) 0; color: var(--text-secondary);">${paradox.summary || 'System constraint governing performance cohorts.'}</p>
-        <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs);">
-          <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem; margin-bottom: 4px; text-transform: uppercase;">Diagnosed Brands</div>
-          ${compsHtml}
+      let papersHtml = relatedPapers.map(paper => `
+        <div class="flex justify-between items-center" style="padding: 4px 0; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; text-align: left;">
+          <span style="color: var(--text-secondary);">${paper.title.substring(0, 32)}...</span>
+          <a href="research.html?id=${paper.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--primary); font-weight: 500;">Read Paper &rarr;</a>
+        </div>
+      `).join('');
+      
+      if (!papersHtml) {
+        papersHtml = `<p class="text-xs text-muted-color" style="font-family: 'JetBrains Mono', monospace; margin: var(--space-xxs) 0;">No theoretical papers reference this paradox tag.</p>`;
+      }
+
+      const accEl = document.createElement('div');
+      accEl.className = 'km-accordion';
+      accEl.style.backgroundColor = 'var(--bg-primary)';
+      accEl.style.border = '1px solid var(--border-color)';
+      accEl.style.borderRadius = 'var(--border-radius)';
+      accEl.style.width = '100%';
+      
+      accEl.innerHTML = `
+        <button class="km-accordion-header" style="padding: var(--space-sm) var(--space-md); font-family: 'Source Serif 4', serif; font-size: 1.15rem; color: var(--text-primary);">
+          ${paradox.name}
+        </button>
+        <div class="km-accordion-content" style="padding: 0 var(--space-md);">
+          <div style="padding-top: var(--space-xs); padding-bottom: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div>
+              <h5 class="monospace text-xs text-primary-color" style="margin: 0 0 4px 0; font-size: 0.65rem; text-transform: uppercase;">What is this?</h5>
+              <p style="margin: 0; font-size: 0.825rem; line-height: 1.45; color: var(--text-secondary);">${paradox.description}</p>
+            </div>
+            
+            <div>
+              <h5 class="monospace text-xs text-primary-color" style="margin: 0 0 6px 0; font-size: 0.65rem; text-transform: uppercase;">Diagnosed Brands</h5>
+              ${compsHtml}
+            </div>
+
+            <div>
+              <h5 class="monospace text-xs text-primary-color" style="margin: 0 0 4px 0; font-size: 0.65rem; text-transform: uppercase;">Related Research</h5>
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                ${papersHtml}
+              </div>
+            </div>
+          </div>
         </div>
       `;
-      mobileContainer.appendChild(block);
+      
+      const header = accEl.querySelector('.km-accordion-header');
+      const content = accEl.querySelector('.km-accordion-content');
+      header.addEventListener('click', () => {
+        const isOpen = accEl.classList.contains('open');
+        mobileContainer.querySelectorAll('.km-accordion').forEach(a => {
+          a.classList.remove('open');
+          const c = a.querySelector('.km-accordion-content');
+          if (c) c.style.maxHeight = '0';
+        });
+        if (!isOpen) {
+          accEl.classList.add('open');
+          content.style.maxHeight = '1500px';
+        }
+      });
+      
+      mobileContainer.appendChild(accEl);
     });
     return;
   }
 
+  // 2. Desktop D3 Relational Network Graph Setup
   const nodesLayer = document.getElementById('graph-nodes-layer');
   const edgesLayer = document.getElementById('graph-edges-layer');
 
@@ -56,7 +122,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   nodesLayer.innerHTML = '';
   edgesLayer.innerHTML = '';
 
-  // Setup dynamic SVG canvas for lines
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('width', '100%');
   svg.setAttribute('height', '100%');
@@ -67,171 +132,101 @@ document.addEventListener('DOMContentLoaded', async () => {
   edgesLayer.appendChild(svg);
 
   const nodeElements = {};
-
-  // Column Positions (in percentages)
   const cols = {
     paradox: 10,
     company: 50,
     research: 90
   };
 
-  // 1. Draw Paradox Nodes (Left Column)
+  // Draw Paradox Nodes (Left Column)
   paradoxes.forEach((p, idx) => {
     const yPercent = ((idx + 1) / (paradoxes.length + 1)) * 100;
     createNode(p.id, p.name, cols.paradox, yPercent, 'paradox');
   });
 
-  // 2. Draw Company Nodes (Center Column)
+  // Draw Company Nodes (Center Column)
   companies.forEach((c, idx) => {
     const yPercent = ((idx + 1) / (companies.length + 1)) * 100;
     createNode(c.id, c.name, cols.company, yPercent, 'company');
   });
 
-  // 3. Draw Research Nodes (Right Column)
+  // Draw Research Nodes (Right Column)
   research.forEach((r, idx) => {
     const yPercent = ((idx + 1) / (research.length + 1)) * 100;
     createNode(r.id, r.title.substring(0, 20) + '...', cols.research, yPercent, 'research');
   });
 
-  // Helper to create node
   function createNode(id, text, xPercent, yPercent, type) {
     const el = document.createElement('div');
     el.className = 'graph-node';
     el.id = `node-${id}`;
-    el.innerText = text;
-    el.style.left = `calc(${xPercent}% - 50px)`;
-    el.style.top = `calc(${yPercent}% - 15px)`;
-    el.style.width = '120px';
-    el.style.textAlign = 'center';
-    el.style.whiteSpace = 'nowrap';
-    el.style.overflow = 'hidden';
-    el.style.textOverflow = 'ellipsis';
-    
-    // Set custom styling base on type
-    if (type === 'paradox') {
-      el.style.borderColor = 'var(--primary)';
-      el.style.color = 'var(--primary)';
-    } else if (type === 'company') {
-      el.style.backgroundColor = 'var(--bg-secondary)';
-      el.style.fontWeight = '500';
-    } else {
-      el.style.fontSize = '0.7rem';
-      el.style.color = 'var(--text-secondary)';
+    el.style.left = `${xPercent}%`;
+    el.style.top = `${yPercent}%`;
+    el.innerHTML = `
+      <div class="node-dot"></div>
+      <div class="node-label">${text}</div>
+    `;
+
+    if (type === 'company') {
+      const mriId = `mri_${id.replace('company_', '')}_v1`;
+      el.addEventListener('click', () => {
+        window.location.href = `case-study.html?id=${mriId}`;
+      });
+    } else if (type === 'paradox') {
+      el.addEventListener('click', () => {
+        window.location.href = `paradoxes.html?id=${id}`;
+      });
+    } else if (type === 'research') {
+      el.addEventListener('click', () => {
+        window.location.href = `research.html?id=${id}`;
+      });
     }
 
-    // Add double click / click router
-    el.addEventListener('click', () => {
-      if (type === 'company') {
-        window.location.href = `case-study.html?id=mri_${id.replace('company_', '')}_v1`;
-      } else if (type === 'paradox') {
-        window.location.href = `paradoxes.html?id=${id}`;
-      } else if (type === 'research') {
-        window.location.href = `research.html?id=${id}`;
-      }
-    });
-
     nodesLayer.appendChild(el);
-    nodeElements[id] = el;
-
-    // Hover highlight effects
-    el.addEventListener('mouseenter', () => highlightNodeConnections(id));
-    el.addEventListener('mouseleave', clearHighlight);
+    nodeElements[id] = { el, xPercent, yPercent, type };
   }
 
-  // Draw lines
-  setTimeout(drawGraphEdges, 100);
-  window.addEventListener('resize', drawGraphEdges);
+  // Draw Relationship Edges (Lines)
+  relationships.forEach(rel => {
+    const srcNode = nodeElements[rel.source];
+    const tgtNode = nodeElements[rel.target];
+    if (srcNode && tgtNode) {
+      drawEdge(srcNode, tgtNode);
+    }
+  });
 
-  function drawGraphEdges() {
-    svg.innerHTML = '';
-    
-    relationships.forEach(rel => {
-      const fromEl = nodeElements[rel.source];
-      const toEl = nodeElements[rel.target];
-      if (!fromEl || !toEl) return;
+  function drawEdge(nodeA, nodeB) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', `${nodeA.xPercent}%`);
+    line.setAttribute('y1', `${nodeA.yPercent}%`);
+    line.setAttribute('x2', `${nodeB.xPercent}%`);
+    line.setAttribute('y2', `${nodeB.yPercent}%`);
+    line.setAttribute('stroke', 'var(--border-color)');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke-dasharray', '4');
+    line.style.transition = 'all var(--transition-smooth)';
+    svg.appendChild(line);
 
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('id', `edge-${rel.source}-${rel.target}`);
-      line.setAttribute('stroke', 'var(--text-muted)');
+    // Hover Highlight Actions
+    const highlight = () => {
+      line.setAttribute('stroke', 'var(--primary)');
+      line.setAttribute('stroke-width', '2');
+      line.removeAttribute('stroke-dasharray');
+      nodeA.el.classList.add('highlighted');
+      nodeB.el.classList.add('highlighted');
+    };
+
+    const reset = () => {
+      line.setAttribute('stroke', 'var(--border-color)');
       line.setAttribute('stroke-width', '1');
       line.setAttribute('stroke-dasharray', '4');
-      line.setAttribute('opacity', '0.2');
-      line.style.transition = 'all var(--transition-smooth)';
-      
-      const x1 = fromEl.offsetLeft + fromEl.offsetWidth / 2;
-      const y1 = fromEl.offsetTop + fromEl.offsetHeight / 2;
-      const x2 = toEl.offsetLeft + toEl.offsetWidth / 2;
-      const y2 = toEl.offsetTop + toEl.offsetHeight / 2;
+      nodeA.el.classList.remove('highlighted');
+      nodeB.el.classList.remove('highlighted');
+    };
 
-      line.setAttribute('x1', x1);
-      line.setAttribute('y1', y1);
-      line.setAttribute('x2', x2);
-      line.setAttribute('y2', y2);
-
-      svg.appendChild(line);
-    });
-  }
-
-  function highlightNodeConnections(nodeId) {
-    // 1. Find all connected relations
-    const connectedRelations = relationships.filter(r => r.source === nodeId || r.target === nodeId);
-    const connectedNodeIds = new Set([nodeId]);
-    
-    connectedRelations.forEach(r => {
-      connectedNodeIds.add(r.source);
-      connectedNodeIds.add(r.target);
-    });
-
-    // Fade out all nodes except connected ones
-    Object.keys(nodeElements).forEach(id => {
-      const el = nodeElements[id];
-      if (connectedNodeIds.has(id)) {
-        el.style.opacity = '1';
-        el.style.transform = 'scale(1.05)';
-        if (id === nodeId) {
-          el.style.borderColor = 'var(--primary)';
-        }
-      } else {
-        el.style.opacity = '0.15';
-        el.style.transform = 'scale(0.95)';
-      }
-    });
-
-    // Highlight active edges
-    relationships.forEach(rel => {
-      const edge = document.getElementById(`edge-${rel.source}-${rel.target}`);
-      if (!edge) return;
-      
-      if (rel.source === nodeId || rel.target === nodeId) {
-        edge.setAttribute('stroke', 'var(--primary)');
-        edge.setAttribute('stroke-width', '2');
-        edge.setAttribute('stroke-dasharray', '0');
-        edge.setAttribute('opacity', '1');
-      } else {
-        edge.setAttribute('opacity', '0.02');
-      }
-    });
-  }
-
-  function clearHighlight() {
-    Object.keys(nodeElements).forEach(id => {
-      const el = nodeElements[id];
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      if (id.includes('paradox')) {
-        el.style.borderColor = 'var(--primary)';
-      } else {
-        el.style.borderColor = 'var(--border-color)';
-      }
-    });
-
-    relationships.forEach(rel => {
-      const edge = document.getElementById(`edge-${rel.source}-${rel.target}`);
-      if (!edge) return;
-      edge.setAttribute('stroke', 'var(--text-muted)');
-      edge.setAttribute('stroke-width', '1');
-      edge.setAttribute('stroke-dasharray', '4');
-      edge.setAttribute('opacity', '0.2');
-    });
+    nodeA.el.addEventListener('mouseenter', highlight);
+    nodeA.el.addEventListener('mouseleave', reset);
+    nodeB.el.addEventListener('mouseenter', highlight);
+    nodeB.el.addEventListener('mouseleave', reset);
   }
 });

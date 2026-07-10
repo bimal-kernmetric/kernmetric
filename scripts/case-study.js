@@ -1,5 +1,7 @@
-import { getMRIById } from './api/mri.js';
-import { getCompanyById } from './api/companies.js';
+import { getMRIById, getMRIs } from './api/mri.js';
+import { getCompanyById, getCompanies } from './api/companies.js';
+import { getParadoxes } from './api/paradoxes.js';
+import { getResearch } from './api/research.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('report-view-container');
@@ -28,38 +30,130 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div style="text-align: center; padding: var(--space-xl) 0;">
         <span class="badge mb-md">ERROR 404</span>
         <h2 style="border-bottom: none; margin: 0 0 var(--space-sm) 0;">Diagnostic Report Not Found</h2>
-        <p class="text-sm" style="color: var(--text-secondary); margin-bottom: var(--space-md);">The requested identifier "${mriId}" does not exist in the database.</p>
-        <a href="case-studies.html" class="btn btn-primary">Open Case Studies</a>
+        <p class="text-sm" style="color: var(--text-secondary); margin-bottom: var(--space-md);">The report "${mriId}" could not be resolved.</p>
+        <a href="case-studies.html" class="btn btn-primary">Back to Library</a>
       </div>
     `;
     return;
   }
 
   const company = await getCompanyById(mri.companyId);
-  const companyName = company ? company.name : 'Unknown Brand';
+  const companyName = company ? company.name : 'Unknown Company';
 
-  // Update Page Title
-  document.title = `${companyName} Growth MRI — KernMetric`;
+  // Fetch cross-linking data for related recommendations
+  const paradoxes = await getParadoxes();
+  const allMRIs = await getMRIs();
+  const allCompanies = await getCompanies();
+  const allResearch = await getResearch();
 
-  // 3. Render HTML
-  let observationsHtml = mri.observations.map(obs => `<li style="margin-bottom: 6px;">${obs}</li>`).join('');
-  let constraintsHtml = mri.constraints.map(con => `<p class="text-sm" style="margin-bottom: 8px;">${con}</p>`).join('');
+  const paradox = paradoxes.find(p => p.name === mri.primaryConstraint);
+  const otherMRIs = allMRIs.filter(m => m.primaryConstraint === mri.primaryConstraint && m.id !== mri.id);
+  const otherCompanies = allCompanies.filter(c => otherMRIs.map(m => m.companyId).includes(c.id));
   
-  let experimentsHtml = mri.experiments.map(exp => {
-    let statusClass = exp.status === 'Validated' ? 'badge-blue' : '';
-    return `
-      <div class="card" style="margin-bottom: var(--space-sm); background-color: var(--bg-secondary);">
-        <div class="flex justify-between items-center" style="margin-bottom: var(--space-xs);">
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${exp.name}</span>
-          <span class="badge ${statusClass}">${exp.status}</span>
-        </div>
-        <p class="text-xs" style="margin: 0 0 var(--space-xs) 0; color: var(--text-secondary); line-height: 1.4;">${exp.result}</p>
-        <div class="monospace text-xs" style="color: var(--text-muted); font-size: 0.65rem;">Confidence: ${exp.confidence}%</div>
+  // Match papers that share constraintClass tags
+  const relatedPapers = allResearch.filter(r => 
+    r.tags.some(tag => mri.constraintClass.includes(tag)) || 
+    r.tags.some(tag => mri.primaryConstraint.toLowerCase().includes(tag.toLowerCase()))
+  );
+
+  // Generate dynamic HTML segments
+  const observationsHtml = mri.observations.map(obs => `
+    <li style="margin-bottom: var(--space-xs);">${obs}</li>
+  `).join('');
+
+  const constraintsHtml = mri.constraints.map(c => `
+    <div style="margin-bottom: var(--space-sm);">
+      <h4 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; font-weight: 500;">${c.title}</h4>
+      <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: var(--text-secondary);">${c.description}</p>
+    </div>
+  `).join('');
+
+  const experimentsHtml = mri.validationExperiments.map((exp, idx) => `
+    <div class="km-experiment-card">
+      <div class="km-experiment-card-step">EXP_0${idx + 1} // ${exp.metricTracked.toUpperCase()}</div>
+      <h4 style="margin: 2px 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif; font-size: 1.05rem;">${exp.title}</h4>
+      <p class="text-xs" style="color: var(--text-secondary); line-height: 1.45; margin: 0 0 var(--space-xs) 0;">
+        <strong>Protocol:</strong> ${exp.protocol}
+      </p>
+      <span class="badge badge-blue" style="font-size: 0.65rem;">Result: ${exp.result}</span>
+    </div>
+  `).join('');
+
+  // Re-link related content blocks
+  const relatedRecommendationsHtml = `
+    <!-- Related Intelligence Traversals Section -->
+    <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xl); margin-top: var(--space-xl);">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">Related Intelligence Traversals</span>
+      <h3 style="margin-top: 4px; font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin-bottom: var(--space-md);">Endless Exploration</h3>
+      
+      <div class="grid grid-cols-3 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        
+        <!-- 1. The Paradox Constraint Card -->
+        ${paradox ? `
+          <div class="km-constraint-card" style="cursor: pointer;" onclick="window.location.href='case-studies.html?view=paradoxes'">
+            <div>
+              <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem;">PRIMARY CONSTRAINT</div>
+              <h3 style="margin: 4px 0 0 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem;">${paradox.name}</h3>
+            </div>
+            <p class="text-xs" style="color: var(--text-secondary); margin: var(--space-xs) 0;">
+              ${paradox.summary || paradox.description}
+            </p>
+            <div style="margin-top: auto; color: var(--primary); font-weight: 600; font-size: 0.8rem; border-top: 1px solid var(--border-color); padding-top: var(--space-xs);">
+              Explore Paradox &rarr;
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- 2. Other diagnosed brand cards -->
+        ${otherCompanies.map(comp => {
+          const compMRI = otherMRIs.find(m => m.companyId === comp.id);
+          return `
+            <div class="km-company-card" style="cursor: pointer;" onclick="window.location.href='case-study.html?id=${compMRI.id}'">
+              <div class="km-company-card-header">
+                <div>
+                  <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem;">DIAGNOSED BRAND</div>
+                  <h3 class="km-company-card-title">${comp.name}</h3>
+                </div>
+                <span class="badge badge-blue">Cohort Case</span>
+              </div>
+              <p class="text-xs" style="color: var(--text-secondary); margin: var(--space-xs) 0;">
+                Primary Constraint: <strong>${compMRI.primaryConstraint}</strong>
+              </p>
+              <div class="flex justify-between items-center" style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-top: auto;">
+                <span>Confidence: ${compMRI.confidence}%</span>
+                <span style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</span>
+              </div>
+            </div>
+          `;
+        }).join('')}
+
+        <!-- 3. Related Research citation cards -->
+        ${relatedPapers.slice(0, 2).map(paper => {
+          return `
+            <div class="km-research-card" style="cursor: pointer;" onclick="window.location.href='research.html?id=${paper.id}'">
+              <div>
+                <span class="badge text-xs" style="font-size: 0.65rem; text-transform: uppercase;">${paper.type}</span>
+                <h3 style="margin: var(--space-xs) 0 4px 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem;">${paper.title}</h3>
+              </div>
+              <p class="text-xs" style="color: var(--text-secondary); margin: var(--space-xs) 0;">
+                ${paper.summary}
+              </p>
+              <div class="flex justify-between items-center" style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-top: auto;">
+                <span>${paper.date}</span>
+                <span style="color: var(--primary); font-weight: 600;">Read Paper &rarr;</span>
+              </div>
+            </div>
+          `;
+        }).join('')}
+
       </div>
-    `;
-  }).join('');
+    </div>
+  `;
 
   container.innerHTML = `
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
     <!-- Desktop: Editorial PDF-style Layout -->
     <div class="pdf-layout">
       <!-- PDF Top Ribbon Header -->
@@ -247,6 +341,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="btn btn-primary w-full" style="min-height: 52px; display: inline-flex; align-items: center; justify-content: center;">Book a Growth MRI™</a>
       </div>
     </div>
+
+    <!-- Live related-content dynamic explorer links -->
+    ${relatedRecommendationsHtml}
   `;
 
   // Accordion Logic
