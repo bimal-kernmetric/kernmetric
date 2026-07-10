@@ -36,6 +36,7 @@ class KernHeader extends HTMLElement {
           </nav>
           
           <div class="header-actions">
+            <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-header-cta">Book MRI</a>
             <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="header-cta">Book a Diagnostic →</a>
             <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
               <span class="hamburger-bar"></span>
@@ -53,7 +54,7 @@ class KernHeader extends HTMLElement {
           <a href="${resolvePage('research.html')}" class="mobile-nav-link ${getActive('research')}">Research</a>
           <a href="${resolvePage('about.html')}" class="mobile-nav-link ${getActive('about')}">About</a>
           <a href="${resolvePage('contact.html')}" class="mobile-nav-link ${getActive('contact')}">Contact</a>
-          <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-nav-cta">Book a Diagnostic →</a>
+          <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-nav-cta">Book Growth MRI™</a>
         </div>
       </header>
     `;

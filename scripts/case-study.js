@@ -60,101 +60,215 @@ document.addEventListener('DOMContentLoaded', async () => {
   }).join('');
 
   container.innerHTML = `
-    <!-- PDF Top Ribbon Header -->
-    <div class="flex justify-between items-center" style="border-bottom: 2px solid var(--text-primary); padding-bottom: var(--space-xs); margin-bottom: var(--space-lg);">
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-primary);">KERNMETRIC // DIAGNOSTIC BRIEF</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">CONFIDENTIAL</span>
-    </div>
-
-    <!-- Title and Classification -->
-    <div>
-      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">
-        Growth MRI™ Report
-      </span>
-      <h1 style="font-size: 2.25rem; font-weight: 600; line-height: 1.2; margin-top: 4px; margin-bottom: var(--space-sm);">
-        ${mri.primaryConstraint}
-      </h1>
-    </div>
-
-    <!-- Document Meta Grid -->
-    <div class="pdf-meta-grid">
-      <div>
-        <div class="monospace text-xs text-muted-color">COMPANY</div>
-        <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${companyName}</div>
+    <!-- Desktop: Editorial PDF-style Layout -->
+    <div class="pdf-layout">
+      <!-- PDF Top Ribbon Header -->
+      <div class="flex justify-between items-center" style="border-bottom: 2px solid var(--text-primary); padding-bottom: var(--space-xs); margin-bottom: var(--space-lg);">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-primary);">KERNMETRIC // DIAGNOSTIC BRIEF</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">CONFIDENTIAL</span>
       </div>
+
+      <!-- Title and Classification -->
       <div>
-        <div class="monospace text-xs text-muted-color">INDUSTRY</div>
-        <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.industry : 'N/A'}</div>
+        <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">
+          Growth MRI™ Report
+        </span>
+        <h1 style="font-size: 2.25rem; font-weight: 600; line-height: 1.2; margin-top: 4px; margin-bottom: var(--space-sm);">
+          ${mri.primaryConstraint}
+        </h1>
       </div>
-      <div>
-        <div class="monospace text-xs text-muted-color">SHOPIFY TIER</div>
-        <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.shopifyTier : 'N/A'}</div>
+
+      <!-- Document Meta Grid -->
+      <div class="pdf-meta-grid">
+        <div>
+          <div class="monospace text-xs text-muted-color">COMPANY</div>
+          <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${companyName}</div>
+        </div>
+        <div>
+          <div class="monospace text-xs text-muted-color">INDUSTRY</div>
+          <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.industry : 'N/A'}</div>
+        </div>
+        <div>
+          <div class="monospace text-xs text-muted-color">SHOPIFY TIER</div>
+          <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.shopifyTier : 'N/A'}</div>
+        </div>
+        <div>
+          <div class="monospace text-xs text-muted-color">EST_REVENUE</div>
+          <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.estimatedRevenue : 'N/A'}</div>
+        </div>
       </div>
-      <div>
-        <div class="monospace text-xs text-muted-color">EST_REVENUE</div>
-        <div style="font-size: 0.85rem; font-weight: 500; color: var(--text-primary);">${company ? company.estimatedRevenue : 'N/A'}</div>
+
+      <!-- Executive Summary -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Executive Diagnosis</h3>
+        <p class="lead" style="font-size: 1.1rem; line-height: 1.6;">
+          ${mri.summary}
+        </p>
       </div>
-    </div>
 
-    <!-- Executive Summary -->
-    <div style="margin-bottom: var(--space-lg);">
-      <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Executive Diagnosis</h3>
-      <p class="lead" style="font-size: 1.1rem; line-height: 1.6;">
-        ${mri.summary}
-      </p>
-    </div>
-
-    <!-- Observations -->
-    <div style="margin-bottom: var(--space-lg);">
-      <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Observed Symptoms</h3>
-      <ul style="padding-left: var(--space-md); color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
-        ${observationsHtml}
-      </ul>
-    </div>
-
-    <!-- System Bottleneck Mapping -->
-    <div style="margin-bottom: var(--space-lg);">
-      <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Identified System Constraints</h3>
-      <div style="border-left: 2px solid var(--primary); padding-left: var(--space-md); margin-bottom: var(--space-md);">
-        ${constraintsHtml}
+      <!-- Observations -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Observed Symptoms</h3>
+        <ul style="padding-left: var(--space-md); color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+          ${observationsHtml}
+        </ul>
       </div>
-    </div>
 
-    <!-- Constraint Velocity -->
-    <div style="margin-bottom: var(--space-lg);">
-      <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Friction Velocity & Latency</h3>
-      <p style="font-size: 0.95rem;">
-        ${mri.velocity}
-      </p>
-    </div>
+      <!-- System Bottleneck Mapping -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Identified System Constraints</h3>
+        <div style="border-left: 2px solid var(--primary); padding-left: var(--space-md); margin-bottom: var(--space-md);">
+          ${constraintsHtml}
+        </div>
+      </div>
 
-    <!-- Validation State and Confidence Details -->
-    <div class="grid grid-cols-2 gap-lg" style="grid-template-columns: 1fr 1fr; margin-bottom: var(--space-xl); border-top: 1px solid var(--border-color); padding-top: var(--space-lg);">
-      <div>
-        <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Validation Status</h3>
-        <p style="font-size: 0.95rem; margin-bottom: var(--space-sm);">${mri.validation}</p>
-        <div style="display: flex; gap: var(--space-sm); align-items: center;">
-          <div>
-            <div class="monospace text-xs text-muted-color">CONFIDENCE</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 500; color: var(--primary);">${mri.confidence}%</div>
+      <!-- Friction Velocity & Latency -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Friction Velocity & Latency</h3>
+        <p style="font-size: 0.95rem;">
+          ${mri.velocity}
+        </p>
+      </div>
+
+      <!-- Validation State and Confidence Details -->
+      <div class="grid grid-cols-2 gap-lg" style="grid-template-columns: 1fr 1fr; margin-bottom: var(--space-xl); border-top: 1px solid var(--border-color); padding-top: var(--space-lg);">
+        <div>
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Validation Status</h3>
+          <p style="font-size: 0.95rem; margin-bottom: var(--space-sm);">${mri.validation}</p>
+          <div style="display: flex; gap: var(--space-sm); align-items: center;">
+            <div>
+              <div class="monospace text-xs text-muted-color">CONFIDENCE</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 500; color: var(--primary);">${mri.confidence}%</div>
+            </div>
+            <div>
+              <div class="monospace text-xs text-muted-color">STATE</div>
+              <span class="badge badge-blue" style="margin-top: 4px;">${mri.validationState}</span>
+            </div>
           </div>
-          <div>
-            <div class="monospace text-xs text-muted-color">STATE</div>
-            <span class="badge badge-blue" style="margin-top: 4px;">${mri.validationState}</span>
+        </div>
+        <div>
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Validation Experiments</h3>
+          ${experimentsHtml}
+        </div>
+      </div>
+
+      <!-- PDF Footer -->
+      <div class="flex justify-between items-center" style="border-top: 1px solid var(--border-color); padding-top: var(--space-sm); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted);">
+        <span>Doc Ref: KM_MRI_${mri.id.toUpperCase()}</span>
+        <span>v${mri.version} • Published ${mri.lastUpdated}</span>
+        <span>Page 1 of 1</span>
+      </div>
+    </div>
+
+    <!-- Mobile: Adaptive Executive Brief Accordion Interface -->
+    <div class="mobile-accordion-layout">
+      <div style="margin-bottom: var(--space-md); border-bottom: 2px solid var(--text-primary); padding-bottom: var(--space-xs);">
+        <span class="monospace text-xs text-primary-color" style="font-weight: 600; font-size: 0.65rem;">EXECUTIVE BRIEF // ${companyName.toUpperCase()}</span>
+        <h2 style="font-size: 1.5rem; border-bottom: none; margin-top: var(--space-xxs); margin-bottom: var(--space-xxs);">${mri.primaryConstraint}</h2>
+        <span class="badge badge-blue">${mri.validationState} (${mri.confidence}% Confidence)</span>
+      </div>
+
+      <div class="accordion-item open">
+        <button class="accordion-trigger">CEO Summary</button>
+        <div class="accordion-content" style="max-height: 1000px;">
+          <p class="lead" style="font-size: 1.05rem; line-height: 1.6; margin: 0; padding-top: var(--space-xs);">${mri.summary}</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Observed Symptoms</button>
+        <div class="accordion-content">
+          <ul style="padding-left: var(--space-md); color: var(--text-secondary); line-height: 1.6; margin: 0; padding-top: var(--space-xs);">
+            ${observationsHtml}
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Candidate Constraints</button>
+        <div class="accordion-content">
+          <div style="border-left: 2px solid var(--primary); padding-left: var(--space-md); padding-top: var(--space-xs);">
+            ${constraintsHtml}
           </div>
         </div>
       </div>
-      <div>
-        <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Validation Experiments</h3>
-        ${experimentsHtml}
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Dependency Chains</button>
+        <div class="accordion-content">
+          <p style="margin: 0; color: var(--text-secondary); line-height: 1.6; padding-top: var(--space-xs);">${mri.velocity}</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Evidence</button>
+        <div class="accordion-content">
+          <p style="margin: 0; color: var(--text-secondary); line-height: 1.6; padding-top: var(--space-xs);">${mri.validation}</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Validation</button>
+        <div class="accordion-content">
+          <div style="display: flex; gap: var(--space-sm); align-items: center; padding-top: var(--space-xs);">
+            <div>
+              <div class="monospace text-xs text-muted-color">CONFIDENCE INDEX</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 600; color: var(--primary);">${mri.confidence}%</div>
+            </div>
+            <div>
+              <div class="monospace text-xs text-muted-color">VALIDATION STATE</div>
+              <span class="badge badge-blue" style="margin-top: 4px;">${mri.validationState}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Experiments</button>
+        <div class="accordion-content">
+          <div style="display: flex; flex-direction: column; gap: var(--space-xs); padding-top: var(--space-xs);">
+            ${experimentsHtml}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger">Implementation</button>
+        <div class="accordion-content">
+          <div style="background-color: var(--bg-secondary); border: 1px dashed var(--border-color); padding: var(--space-sm); border-radius: var(--border-radius); margin-top: var(--space-xs);">
+            <div class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">Estimated Value Impact</div>
+            <div style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-top: 4px; margin-bottom: 4px;">${mri.estimatedImpact || '$1.8M ARR Unlocked'}</div>
+            <p class="text-xs" style="margin: 0; color: var(--text-secondary);">Implementation of sachet structures, custom bedside placement triggers, and direct CRM feedback locks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-lg); text-align: center; padding-top: var(--space-md); border-top: 1px solid var(--border-color);">
+        <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="btn btn-primary w-full" style="min-height: 52px; display: inline-flex; align-items: center; justify-content: center;">Book a Growth MRI™</a>
       </div>
     </div>
-
-    <!-- PDF Footer -->
-    <div class="flex justify-between items-center" style="border-top: 1px solid var(--border-color); padding-top: var(--space-sm); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted);">
-      <span>Doc Ref: KM_MRI_${mri.id.toUpperCase()}</span>
-      <span>v${mri.version} • Published ${mri.lastUpdated}</span>
-      <span>Page 1 of 1</span>
-    </div>
   `;
+
+  // Accordion Logic
+  const triggers = container.querySelectorAll('.accordion-trigger');
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const parent = trigger.parentElement;
+      const isOpen = parent.classList.contains('open');
+
+      // Close all accordion items
+      container.querySelectorAll('.accordion-item').forEach(item => {
+        item.classList.remove('open');
+        const content = item.querySelector('.accordion-content');
+        if (content) content.style.maxHeight = '0';
+      });
+
+      // Toggle current one
+      if (!isOpen) {
+        parent.classList.add('open');
+        const content = parent.querySelector('.accordion-content');
+        if (content) content.style.maxHeight = '1000px';
+      }
+    });
+  });
 });

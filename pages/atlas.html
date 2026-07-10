@@ -24,7 +24,7 @@
     </div>
 
     <!-- Layout: Description left, Interactive Graph right -->
-    <div class="grid grid-cols-2 gap-xl" style="grid-template-columns: 300px 1fr; align-items: start; margin-bottom: var(--space-xl);">
+    <div class="grid grid-cols-2 gap-xl desktop-only" style="grid-template-columns: 300px 1fr; align-items: start; margin-bottom: var(--space-xl);">
       <div class="flex flex-col gap-md">
         <div class="card" style="background-color: var(--bg-secondary);">
           <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs);">
@@ -63,6 +63,17 @@
       <div class="graph-viewport" id="graph-wrapper">
         <div class="graph-canvas" id="graph-edges-layer"></div>
         <div id="graph-nodes-layer" style="width:100%; height:100%; position:relative; z-index:2;"></div>
+      </div>
+    </div>
+
+    <!-- Mobile Adaptive Constraint Traversal Index -->
+    <div class="mobile-only" style="margin-bottom: var(--space-xl);">
+      <div style="margin-bottom: var(--space-md);">
+        <p class="monospace text-xs text-muted-color" style="text-transform: uppercase; margin-bottom: 2px;">Traversal Index // Mobile Hierarchy</p>
+        <p class="text-sm" style="color: var(--text-secondary); margin: 0;">Click on a diagnostic report below to traverse our systems constraints.</p>
+      </div>
+      <div class="flex flex-col gap-md" id="mobile-atlas-list">
+        <!-- Rendered dynamically by scripts/atlas.js on mobile screens -->
       </div>
     </div>
 

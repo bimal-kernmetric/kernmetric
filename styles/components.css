@@ -685,3 +685,149 @@ header .logo-img {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Adaptive Mobile Experience Redesign Utilities */
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block !important;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* Horizontal Swiping Carousels for Mobile */
+.mobile-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-card {
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+}
+
+/* Mobile Header Book MRI Button */
+.mobile-header-cta {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobile-header-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary);
+    color: #ffffff;
+    min-height: 36px;
+    margin-right: var(--space-sm);
+    transition: background-color var(--transition-smooth);
+    border: 1px solid var(--primary);
+  }
+  .mobile-header-cta:hover {
+    background-color: var(--primary-hover);
+    color: #ffffff;
+  }
+}
+
+/* Mobile Accordions for Growth MRI Reports */
+.mobile-accordion-layout {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .pdf-layout {
+    display: none !important;
+  }
+  .mobile-accordion-layout {
+    display: block !important;
+  }
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--space-xs);
+}
+
+.accordion-trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: var(--space-sm) 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.accordion-trigger::after {
+  content: '+';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-smooth);
+}
+
+.accordion-item.open .accordion-trigger::after {
+  content: '−';
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-smooth), padding var(--transition-smooth);
+}
+
+.accordion-item.open .accordion-content {
+  padding-bottom: var(--space-md);
+}
+
+/* Distraction-free Reading Mode for Mobile Research */
+@media (max-width: 767px) {
+  .reading-mode {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+  }
+  .reading-mode h1 {
+    font-size: 1.85rem;
+    margin-bottom: var(--space-md);
+  }
+  .reading-mode p {
+    margin-bottom: var(--space-md);
+  }
+}

@@ -102,11 +102,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           </p>
           <div class="flex justify-between items-center border-t" style="padding-top: var(--space-xs); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
             <div>
-              <span style="color: var(--text-muted);">Impact: </span>
-              <span style="color: var(--primary); font-weight: 500;">${mri.estimatedImpact}</span>
+              <span style="color: var(--text-muted);">Confidence: </span>
+              <span style="color: var(--primary); font-weight: 500;">${mri.confidence}%</span>
             </div>
-            <div style="font-size: 0.7rem; color: var(--text-muted);">
-              v${mri.version} • ${company.shopifyTier}
+            <div style="font-size: 0.7rem; color: var(--primary); font-weight: 500;">
+              Read MRI →
             </div>
           </div>
         `;

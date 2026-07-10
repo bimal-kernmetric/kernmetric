@@ -8,6 +8,45 @@ document.addEventListener('DOMContentLoaded', async () => {
   const research = await getResearch();
   const relationships = await getRelationships();
 
+  const mobileContainer = document.getElementById('mobile-atlas-list');
+  if (window.innerWidth < 768 && mobileContainer) {
+    mobileContainer.innerHTML = '';
+    paradoxes.forEach(paradox => {
+      const relatedRels = relationships.filter(rel => rel.target === paradox.id && rel.relationship === 'diagnosed_with');
+      const relatedCompIds = relatedRels.map(rel => rel.source);
+      const relatedComps = companies.filter(c => relatedCompIds.includes(c.id));
+      
+      let compsHtml = relatedComps.map(company => {
+        const mriId = `mri_${company.id.replace('company_', '')}_v1`;
+        return `
+          <div class="flex justify-between items-center" style="padding: var(--space-xs) 0; border-bottom: 1px solid var(--border-color); font-size: 0.85rem;">
+            <span>${company.name}</span>
+            <a href="case-study.html?id=${mriId}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 500; color: var(--primary);">View Report &rarr;</a>
+          </div>
+        `;
+      }).join('');
+      
+      if (!compsHtml) {
+        compsHtml = `<div style="font-size: 0.8rem; color: var(--text-muted); padding: var(--space-xs) 0;">No companies currently diagnosed.</div>`;
+      }
+
+      const block = document.createElement('div');
+      block.className = 'card';
+      block.style.borderLeft = '2px solid var(--primary)';
+      block.style.marginBottom = 'var(--space-sm)';
+      block.innerHTML = `
+        <h4 style="margin: 0 0 var(--space-xs) 0; font-family: 'Source Serif 4', serif; font-size: 1.15rem; color: var(--primary);">${paradox.name}</h4>
+        <p class="text-xs" style="margin: 0 0 var(--space-sm) 0; color: var(--text-secondary);">${paradox.summary || 'System constraint governing performance cohorts.'}</p>
+        <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs);">
+          <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem; margin-bottom: 4px; text-transform: uppercase;">Diagnosed Brands</div>
+          ${compsHtml}
+        </div>
+      `;
+      mobileContainer.appendChild(block);
+    });
+    return;
+  }
+
   const nodesLayer = document.getElementById('graph-nodes-layer');
   const edgesLayer = document.getElementById('graph-edges-layer');
 

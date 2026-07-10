@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </a>
       </div>
 
-      <article style="max-width: 700px; margin: 0 auto; padding-top: var(--space-md); padding-bottom: var(--space-xl);">
+      <article class="reading-mode" style="max-width: 700px; margin: 0 auto; padding-top: var(--space-md); padding-bottom: var(--space-xl);">
         <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
           <span class="badge badge-blue">${paper.type}</span>
           <h1 style="font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-top: 6px; margin-bottom: var(--space-xs);">${paper.title}</h1>
