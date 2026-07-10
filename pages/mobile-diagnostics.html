@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Diagnostics Library — KernMetric</title>
+  <meta name="description" content="Dedicated mobile executive interface for the Diagnostics Library.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script>
+    if (window.innerWidth >= 768) {
+      window.location.href = 'case-studies.html' + window.location.search;
+    }
+  </script>
+  <script type="module" src="../scripts/mobile-diagnostics.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Mobile Workspace Container -->
+  <main class="container-narrow section fade-up-element" style="padding-top: var(--space-xl); min-height: 90vh; padding-bottom: 80px;">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- Title Ribbon -->
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); margin-bottom: var(--space-md); text-align: left;">
+      <span class="badge badge-blue">Growth Intelligence OS // MOBILE</span>
+      <h1 style="margin-top: 4px; margin-bottom: 4px; font-size: 1.75rem; font-family: 'Source Serif 4', serif;">Diagnostics Library</h1>
+    </div>
+
+    <!-- Search-First Block -->
+    <div style="position: relative; width: 100%; margin-bottom: var(--space-sm);">
+      <input type="text" id="lib-search-input" class="search-input" placeholder="Search brands or constraints..." style="font-size: 0.95rem; padding: 12px 16px; padding-left: 40px; border-radius: var(--border-radius); border: 1px solid var(--border-color); width: 100%; min-height: 48px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="position: absolute; left: 14px; top: 15px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+
+    <!-- View Toggles list -->
+    <div class="flex gap-xs" style="margin-bottom: var(--space-md); width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <button class="view-toggle-btn active" id="view-companies-btn" style="flex: 1; min-height: 40px; white-space: nowrap; font-size: 0.8rem;">Companies</button>
+      <button class="view-toggle-btn" id="view-paradoxes-btn" style="flex: 1; min-height: 40px; white-space: nowrap; font-size: 0.8rem;">Paradoxes</button>
+      <button class="view-toggle-btn" id="view-industries-btn" style="flex: 1; min-height: 40px; white-space: nowrap; font-size: 0.8rem;">Industries</button>
+    </div>
+
+    <!-- Results counters -->
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-bottom: var(--space-sm); text-align: left;">
+      <span id="showing-count">0</span> matching diagnostics files resolved
+    </div>
+
+    <!-- Stretched Results Card Stack (1-column layout) -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-sm); width: 100%;" id="library-results-grid">
+      <!-- Generated dynamically by scripts/mobile-diagnostics.js -->
+    </div>
+
+  </main>
+
+  <!-- Sticky Bottom Filters button -->
+  <button id="mobile-filter-trigger-btn" class="btn btn-primary" style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 150; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25); min-height: 48px; border-radius: 24px; padding: 0 28px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+    Filter Database
+  </button>
+
+  <!-- Mobile Bottom-Sheet Filter Modal -->
+  <div class="mobile-filter-modal" id="mobile-filter-modal">
+    <div class="mobile-filter-modal-header">
+      <h3 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 1.4rem;">Filter Diagnostics</h3>
+      <button id="mobile-filter-close-btn" style="background: none; border: none; font-size: 1.75rem; cursor: pointer; color: var(--text-primary); font-weight: 300;">&times;</button>
+    </div>
+    <div class="mobile-filter-modal-content" id="mobile-filters-container">
+      <!-- Rendered dynamically by scripts/mobile-diagnostics.js -->
+    </div>
+    <div class="mobile-filter-modal-footer">
+      <button id="mobile-filter-clear-btn" class="btn btn-secondary" style="flex: 1; min-height: 48px;">Clear Filters</button>
+      <button id="mobile-filter-apply-btn" class="btn btn-primary" style="flex: 1; min-height: 48px;">Apply Filters</button>
+    </div>
+  </div>
+
+  <!-- Sticky Bottom One-Thumb booking CTA area -->
+  <div class="mobile-sticky-cta-container">
+    <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="btn btn-primary" style="width: 100%; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">Book a Growth MRI™</a>
+  </div>
+
+  <!-- Global Search Overlay Component -->
+  <kern-search></kern-search>
+
+</body>
+</html>

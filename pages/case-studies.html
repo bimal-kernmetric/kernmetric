@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="../styles/main.css">
   <script type="module" src="../components/components.js"></script>
   <script type="module" src="../scripts/main.js"></script>
+  <script>
+    if (window.innerWidth < 768) {
+      window.location.href = 'mobile-diagnostics.html' + window.location.search;
+    }
+  </script>
   <script type="module" src="../scripts/diagnostics.js"></script>
 </head>
 <body>
