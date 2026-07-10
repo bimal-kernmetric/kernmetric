@@ -215,6 +215,9 @@ header .logo-img {
   .nav-links {
     display: none !important;
   }
+  .header-cta {
+    display: none !important;
+  }
   .mobile-toggle {
     display: flex;
   }
