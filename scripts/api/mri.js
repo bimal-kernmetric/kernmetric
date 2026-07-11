@@ -8,7 +8,9 @@ function getDataUrl(filename) {
 
 export async function getMRIs() {
   try {
+    console.log("Loading MRI...");
     const res = await fetch(getDataUrl('mris.json'));
+    console.log("JSON Loaded");
     const data = await res.json();
     return data.mris || [];
   } catch (err) {

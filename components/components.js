@@ -29,11 +29,9 @@ class KernHeader extends HTMLElement {
           
           <nav class="nav-links">
             <a href="${homeLink}" class="nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
-            <a href="${resolvePage('case-studies.html?view=paradoxes')}" class="nav-link ${getActive('case-studies.html') && window.location.search.includes('view=paradoxes') ? 'active' : ''}">Diagnostics</a>
+            <a href="${resolvePage('case-studies.html')}" class="nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
             <a href="${resolvePage('research.html')}" class="nav-link ${getActive('research.html')}">Research</a>
             <a href="${resolvePage('methodology.html')}" class="nav-link ${getActive('methodology.html')}">Frameworks</a>
-            <a href="${resolvePage('case-studies.html?view=companies')}" class="nav-link ${getActive('case-studies.html') && (window.location.search.includes('view=companies') || !window.location.search.includes('view=')) ? 'active' : ''}">Companies</a>
-            <a href="#" class="nav-link search-trigger-link" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">[Search]</a>
           </nav>
           
           <div class="header-actions">
@@ -48,11 +46,9 @@ class KernHeader extends HTMLElement {
         
         <div class="mobile-nav-dropdown">
           <a href="${homeLink}" class="mobile-nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
-          <a href="${resolvePage('case-studies.html?view=paradoxes')}" class="mobile-nav-link">Diagnostics</a>
+          <a href="${resolvePage('case-studies.html')}" class="mobile-nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
           <a href="${resolvePage('research.html')}" class="mobile-nav-link ${getActive('research.html')}">Research</a>
           <a href="${resolvePage('methodology.html')}" class="mobile-nav-link ${getActive('methodology.html')}">Frameworks</a>
-          <a href="${resolvePage('case-studies.html?view=companies')}" class="mobile-nav-link">Companies</a>
-          <a href="#" class="mobile-nav-link mobile-search-trigger-link">[Search]</a>
           <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-nav-cta">Book Growth MRI™</a>
         </div>
       </header>
@@ -77,21 +73,6 @@ class KernHeader extends HTMLElement {
         }
       });
     }
-
-    // Bind Search Link
-    const searchLinks = this.querySelectorAll('.search-trigger-link, .mobile-search-trigger-link');
-    searchLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (dropdown) dropdown.classList.remove('open');
-        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
-        
-        const searchEl = document.querySelector('kern-search');
-        if (searchEl && typeof searchEl.open === 'function') {
-          searchEl.open();
-        }
-      });
-    });
   }
 }
 
@@ -137,109 +118,7 @@ class KernFooter extends HTMLElement {
   }
 }
 
-class KernSearch extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <div class="search-modal" id="search-overlay">
-        <div class="search-container">
-          <div class="search-input-wrapper">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="margin-right: var(--space-xs);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" class="search-input" id="search-query-field" placeholder="Search constraints, paradoxes, brands, or research..." autocomplete="off">
-            <button class="btn btn-secondary btn-sm" id="search-close-btn" style="padding: 2px 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;">ESC</button>
-          </div>
-          <div class="search-results" id="search-results-list">
-            <div style="padding: var(--space-md); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-              Type to begin searching... Try 'Friction', 'Sleep', or 'COGS'
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
 
-    this.modal = this.querySelector('#search-overlay');
-    this.input = this.querySelector('#search-query-field');
-    this.resultsContainer = this.querySelector('#search-results-list');
-    this.closeBtn = this.querySelector('#search-close-btn');
-
-    this.input.addEventListener('keyup', (e) => this.handleSearch(e.target.value));
-    this.closeBtn.addEventListener('click', () => this.close());
-    this.modal.addEventListener('click', (e) => {
-      if (e.target === this.modal) this.close();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.close();
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        this.open();
-      }
-    });
-  }
-
-  open() {
-    this.modal.style.display = 'flex';
-    this.input.focus();
-    document.body.style.overflow = 'hidden';
-  }
-
-  close() {
-    this.modal.style.display = 'none';
-    this.input.value = '';
-    this.resultsContainer.innerHTML = `
-      <div style="padding: var(--space-md); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-        Type to begin searching... Try 'Friction', 'Sleep', or 'COGS'
-      </div>
-    `;
-    document.body.style.overflow = '';
-  }
-
-  async handleSearch(val) {
-    if (!val.trim()) {
-      this.resultsContainer.innerHTML = `
-        <div style="padding: var(--space-md); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-          Type to begin searching... Try 'Friction', 'Sleep', or 'COGS'
-        </div>
-      `;
-      return;
-    }
-
-    const items = await searchEntities(val);
-    if (items.length === 0) {
-      this.resultsContainer.innerHTML = `
-        <div style="padding: var(--space-md); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-          No matching entities found for "${val}"
-        </div>
-      `;
-      return;
-    }
-
-    this.resultsContainer.innerHTML = '';
-    items.forEach(item => {
-      const itemEl = document.createElement('div');
-      itemEl.className = 'search-item';
-      
-      const tagsHtml = item.tags.map(t => `<span class="badge text-xs" style="margin-right: 4px; margin-top: 4px;">${t}</span>`).join('');
-      
-      itemEl.innerHTML = `
-        <div class="flex justify-between items-center">
-          <span style="font-family: 'Source Serif 4', serif; font-size: 1.1rem; font-weight: 500; color: var(--text-primary);">${item.title}</span>
-          <span class="badge badge-blue" style="font-size: 0.65rem;">${item.type}</span>
-        </div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin: 2px 0;">${item.subtitle}</div>
-        <p style="font-size: 0.825rem; margin: 4px 0 8px 0; line-height: 1.4; color: var(--text-secondary);">${item.description}</p>
-        <div class="flex flex-wrap">${tagsHtml}</div>
-      `;
-      
-      itemEl.addEventListener('click', () => {
-        const targetUrl = isSubpage ? item.url : `pages/${item.url}`;
-        window.location.href = targetUrl;
-        this.close();
-      });
-      
-      this.resultsContainer.appendChild(itemEl);
-    });
-  }
-}
 
 class KernBreadcrumbs extends HTMLElement {
   async connectedCallback() {
@@ -254,7 +133,7 @@ class KernBreadcrumbs extends HTMLElement {
     if (window.location.pathname.includes('case-study.html')) {
       pathHtml += `
         <span style="margin: 0 8px; color: var(--text-muted); font-size: 0.8rem;">&rsaquo;</span>
-        <a href="${isSubpage ? 'case-studies.html?view=companies' : 'pages/case-studies.html?view=companies'}">Companies</a>
+        <a href="${isSubpage ? 'knowledge-graph.html' : 'pages/knowledge-graph.html'}">Diagnostics</a>
       `;
       
       if (id) {
@@ -282,14 +161,13 @@ class KernBreadcrumbs extends HTMLElement {
           console.error("Breadcrumbs fetch error", e);
         }
       }
-    } else if (window.location.pathname.includes('case-studies.html')) {
-      const view = params.get('view') || 'companies';
-      const label = view === 'companies' ? 'Companies' : (view === 'paradoxes' ? 'Structural Paradoxes™' : 'Industries');
+    } else if (window.location.pathname.includes('case-studies.html') || window.location.pathname.includes('knowledge-graph.html') || window.location.pathname.includes('mobile-diagnostics.html')) {
       pathHtml += `
         <span style="margin: 0 8px; color: var(--text-muted); font-size: 0.8rem;">&rsaquo;</span>
-        <span style="font-weight: 500; color: var(--text-primary);">${label}</span>
+        <span style="font-weight: 500; color: var(--text-primary);">Diagnostics</span>
       `;
-    } else if (window.location.pathname.includes('research.html')) {
+    }
+    else if (window.location.pathname.includes('research.html')) {
       pathHtml += `
         <span style="margin: 0 8px; color: var(--text-muted); font-size: 0.8rem;">&rsaquo;</span>
         <a href="${isSubpage ? 'research.html' : 'pages/research.html'}">Research</a>
@@ -348,5 +226,4 @@ class KernBreadcrumbs extends HTMLElement {
 
 customElements.define('kern-header', KernHeader);
 customElements.define('kern-footer', KernFooter);
-customElements.define('kern-search', KernSearch);
 customElements.define('kern-breadcrumbs', KernBreadcrumbs);

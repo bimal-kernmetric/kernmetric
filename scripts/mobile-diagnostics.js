@@ -9,307 +9,246 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Mobile elements
   const resultsGrid = document.getElementById('library-results-grid');
-  const showingCountEl = document.getElementById('showing-count');
   const searchInput = document.getElementById('lib-search-input');
-  
-  const viewCompaniesBtn = document.getElementById('view-companies-btn');
-  const viewParadoxesBtn = document.getElementById('view-paradoxes-btn');
-  const viewIndustriesBtn = document.getElementById('view-industries-btn');
+  const sortSelect = document.getElementById('sort-select');
+  const viewToggleButtons = document.querySelectorAll('.view-toggle-btn');
+  const loadMoreBtn = document.getElementById('load-more-btn');
 
-  const mobileModal = document.getElementById('mobile-filter-modal');
-  const mobileFilterBtn = document.getElementById('mobile-filter-trigger-btn');
-  const mobileCloseBtn = document.getElementById('mobile-filter-close-btn');
-  const mobileClearBtn = document.getElementById('mobile-filter-clear-btn');
-  const mobileApplyBtn = document.getElementById('mobile-filter-apply-btn');
-  const mobileFiltersContainer = document.getElementById('mobile-filters-container');
-
-  if (!resultsGrid || !mobileModal || !mobileFilterBtn || !mobileCloseBtn || !mobileClearBtn || !mobileApplyBtn || !mobileFiltersContainer) return;
+  if (!resultsGrid) return;
 
   // State
   let currentView = 'companies'; // 'companies', 'paradoxes', 'industries'
   let searchQuery = '';
-  
-  let activeFilters = {
-    industry: [],
-    businessModel: [],
-    constraint: [],
-    validation: [],
-    confidence: [],
-    growthArea: []
-  };
+  let currentSort = 'newest';
+  let visibleLimit = 4; // baseline limit for pagination
 
-  // Temp buffer state for bottom-sheet filters
-  let tempFilters = {
-    industry: [],
-    businessModel: [],
-    constraint: [],
-    validation: [],
-    confidence: [],
-    growthArea: []
-  };
+  // Initial render
+  renderLibrary();
 
-  // Setup view toggle clicks
-  viewCompaniesBtn.addEventListener('click', () => swapView('companies'));
-  viewParadoxesBtn.addEventListener('click', () => swapView('paradoxes'));
-  viewIndustriesBtn.addEventListener('click', () => swapView('industries'));
-
-  function swapView(view) {
-    currentView = view;
-    [viewCompaniesBtn, viewParadoxesBtn, viewIndustriesBtn].forEach(b => b.classList.remove('active'));
-    if (view === 'companies') viewCompaniesBtn.classList.add('active');
-    if (view === 'paradoxes') viewParadoxesBtn.classList.add('active');
-    if (view === 'industries') viewIndustriesBtn.classList.add('active');
-    renderLibrary();
-  }
-
-  // Bind search query input
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value.toLowerCase();
-    renderLibrary();
-  });
-
-  // Bind modal drawer trigger triggers
-  mobileFilterBtn.addEventListener('click', () => {
-    // Sync active filters to temp filter state
-    tempFilters = JSON.parse(JSON.stringify(activeFilters));
-    updateCheckboxes();
-    mobileModal.classList.add('open');
-  });
-
-  mobileCloseBtn.addEventListener('click', () => {
-    mobileModal.classList.remove('open');
-  });
-
-  mobileApplyBtn.addEventListener('click', () => {
-    // Copy temp filters to active filters and render
-    activeFilters = JSON.parse(JSON.stringify(tempFilters));
-    renderLibrary();
-    mobileModal.classList.remove('open');
-  });
-
-  mobileClearBtn.addEventListener('click', () => {
-    Object.keys(tempFilters).forEach(key => tempFilters[key] = []);
-    document.querySelectorAll('#mobile-filters-container .filter-checkbox').forEach(cb => cb.checked = false);
-    activeFilters = JSON.parse(JSON.stringify(tempFilters));
-    renderLibrary();
-    mobileModal.classList.remove('open');
-  });
-
-  // Checkboxes sync helper
-  function updateCheckboxes() {
-    mobileFiltersContainer.querySelectorAll('.filter-checkbox').forEach(cb => {
-      const key = cb.getAttribute('data-filter-key');
-      const val = cb.value;
-      cb.checked = tempFilters[key].includes(val);
+  // 1. Search Query Bind
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      visibleLimit = 4;
+      renderLibrary();
     });
   }
 
-  // Build filter groups dynamically
-  function renderFilters() {
-    mobileFiltersContainer.innerHTML = '';
-
-    function createFilterGroup(title, key, options) {
-      const group = document.createElement('div');
-      group.className = 'filter-group';
-
-      const header = document.createElement('button');
-      header.className = 'filter-group-header';
-      header.innerText = title;
-
-      const content = document.createElement('div');
-      content.className = 'filter-group-content';
-
-      options.forEach(opt => {
-        const label = document.createElement('label');
-        label.className = 'flex items-center gap-sm text-sm cursor-pointer';
-        label.style.padding = '8px 0'; // large touch targets
-
-        const val = opt.value || opt;
-        const display = opt.label || opt;
-
-        label.innerHTML = `
-          <input type="checkbox" class="filter-checkbox" data-filter-key="${key}" value="${val}" style="width: 20px; height: 20px; margin-right: 8px;">
-          <span>${display}</span>
-        `;
-        content.appendChild(label);
-      });
-
-      // Checkbox click bindings
-      content.querySelectorAll('.filter-checkbox').forEach(cb => {
-        cb.addEventListener('change', () => {
-          if (cb.checked) {
-            tempFilters[key].push(cb.value);
-          } else {
-            tempFilters[key] = tempFilters[key].filter(v => v !== cb.value);
-          }
-        });
-      });
-
-      header.addEventListener('click', (e) => {
-        e.preventDefault();
-        group.classList.toggle('collapsed');
-      });
-
-      group.appendChild(header);
-      group.appendChild(content);
-      mobileFiltersContainer.appendChild(group);
-    }
-
-    const industriesList = [...new Set(companies.map(c => c.industry))].filter(Boolean).sort();
-    const modelsList = [...new Set(companies.map(c => c.businessModel))].filter(Boolean).sort();
-    const constraintsList = [...new Set(mris.map(m => m.primaryConstraint))].filter(Boolean).sort();
-    const validationStates = [...new Set(mris.map(m => m.validationState))].filter(Boolean).sort();
-    const confidenceScores = ["80%+", "90%+"];
-    const growthAreas = [...new Set(companies.flatMap(c => c.tags))].filter(Boolean).sort();
-
-    createFilterGroup("Industry", "industry", industriesList);
-    createFilterGroup("Business Model", "businessModel", modelsList);
-    createFilterGroup("Primary Constraint", "constraint", constraintsList);
-    createFilterGroup("Validation Status", "validation", validationStates);
-    createFilterGroup("Confidence Range", "confidence", confidenceScores);
-    createFilterGroup("Growth Area Tag", "growthArea", growthAreas);
+  // 2. Sorting Bind
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      currentSort = e.target.value;
+      renderLibrary();
+    });
   }
 
-  // Core library rendering engine
+  // 3. View Mode Toggles
+  viewToggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetView = btn.getAttribute('data-view');
+      currentView = targetView;
+      updateToggleState(currentView);
+      visibleLimit = 4;
+      renderLibrary();
+    });
+  });
+
+  function updateToggleState(activeView) {
+    viewToggleButtons.forEach(b => {
+      b.classList.remove('active');
+      b.style.color = 'var(--text-muted)';
+      b.style.fontWeight = '400';
+      if (b.getAttribute('data-view') === activeView) {
+        b.classList.add('active');
+        b.style.color = 'var(--primary)';
+        b.style.fontWeight = '600';
+      }
+    });
+  }
+
+  // 4. Pagination Load More
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      visibleLimit += 4;
+      renderLibrary();
+    });
+  }
+
+  // Core render implementation
   function renderLibrary() {
     resultsGrid.innerHTML = '';
-    let filteredCount = 0;
+    let dataset = [];
 
     if (currentView === 'companies') {
-      companies.forEach(company => {
+      dataset = companies.map(company => {
         const mri = mris.find(m => m.companyId === company.id) || {};
-        
-        // Apply filters
-        const matchesIndustry = activeFilters.industry.length === 0 || activeFilters.industry.includes(company.industry);
-        const matchesModel = activeFilters.businessModel.length === 0 || activeFilters.businessModel.includes(company.businessModel);
-        const matchesConstraint = activeFilters.constraint.length === 0 || activeFilters.constraint.includes(mri.primaryConstraint);
-        const matchesValidation = activeFilters.validation.length === 0 || activeFilters.validation.includes(mri.validationState);
-        
-        let matchesConfidence = true;
-        if (activeFilters.confidence.length > 0) {
-          const val = mri.confidence || 0;
-          matchesConfidence = activeFilters.confidence.some(confOpt => {
-            if (confOpt === '90%+') return val >= 90;
-            if (confOpt === '80%+') return val >= 80;
-            return true;
-          });
-        }
-
-        const matchesGrowthArea = activeFilters.growthArea.length === 0 || company.tags.some(tag => activeFilters.growthArea.includes(tag));
-        const matchesSearch = company.name.toLowerCase().includes(searchQuery) || company.industry.toLowerCase().includes(searchQuery) || (mri.primaryConstraint && mri.primaryConstraint.toLowerCase().includes(searchQuery));
-
-        if (matchesIndustry && matchesModel && matchesConstraint && matchesValidation && matchesConfidence && matchesGrowthArea && matchesSearch) {
-          filteredCount++;
-          
-          const card = document.createElement('div');
-          card.className = 'km-company-card';
-          card.style.width = '100%';
-          card.style.cursor = 'pointer';
-          card.style.padding = 'var(--space-md)';
-          card.style.display = 'flex';
-          card.style.flexDirection = 'column';
-          card.style.gap = 'var(--space-xs)';
-          card.style.textAlign = 'left';
-
-          card.innerHTML = `
-            <div class="km-company-card-header" style="margin-bottom: 2px;">
-              <div>
-                <strong style="font-size: 1.1rem; color: var(--text-primary);">${company.name}</strong>
-                <span class="monospace text-xs text-muted-color" style="display: block; font-size: 0.65rem; margin-top: 2px;">${company.industry} • ${company.businessModel}</span>
-              </div>
-              <span class="badge ${mri.validationState === 'Validated' ? 'badge-blue' : ''}" style="font-size: 0.65rem;">${mri.validationState || 'Pending'}</span>
-            </div>
-            
-            <div style="font-size: 0.85rem; line-height: 1.45;">
-              <span class="monospace text-xs text-primary-color" style="display: block; font-size: 0.6rem; text-transform: uppercase;">PRIMARY CONSTRAINT</span>
-              <strong style="color: var(--text-primary);">${mri.primaryConstraint || 'Unmapped'}</strong>
-              <p style="margin: 4px 0 0 0; color: var(--text-secondary);">${mri.summary || 'Audit in progress.'}</p>
-            </div>
-
-            <div class="flex justify-between items-center" style="border-top: 1px dashed var(--border-color); padding-top: var(--space-xs); margin-top: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
-              <span>Rev: ${company.estimatedRevenue} • Conf: ${mri.confidence || 0}%</span>
-              <a href="case-study.html?id=${mri.id}" style="color: var(--primary); font-weight: 600;">Read Growth MRI &rarr;</a>
-            </div>
-          `;
-
-          card.addEventListener('click', (e) => {
-            if (!e.target.closest('a')) {
-              window.location.href = `case-study.html?id=${mri.id}`;
-            }
-          });
-          resultsGrid.appendChild(card);
-        }
+        return {
+          type: 'company',
+          id: company.id,
+          name: company.name,
+          industry: company.industry,
+          businessModel: company.businessModel,
+          estimatedRevenue: company.estimatedRevenue,
+          mri: mri,
+          mriId: mri.id || `mri_${company.id.replace('company_', '')}_v1`
+        };
       });
+
+      // Filter
+      dataset = dataset.filter(item => 
+        item.name.toLowerCase().includes(searchQuery) ||
+        item.industry.toLowerCase().includes(searchQuery) ||
+        (item.mri.primaryConstraint && item.mri.primaryConstraint.toLowerCase().includes(searchQuery))
+      );
+
+      // Sort
+      if (currentSort === 'newest') {
+        dataset.sort((a, b) => new Date(b.mri.lastUpdated || '2026-01-01') - new Date(a.mri.lastUpdated || '2026-01-01'));
+      } else if (currentSort === 'confidence') {
+        dataset.sort((a, b) => (b.mri.confidence || 0) - (a.mri.confidence || 0));
+      } else if (currentSort === 'updated') {
+        dataset.sort((a, b) => new Date(b.mri.lastUpdated || '2026-01-01') - new Date(a.mri.lastUpdated || '2026-01-01'));
+      } else if (currentSort === 'industry') {
+        dataset.sort((a, b) => a.industry.localeCompare(b.industry));
+      }
+
     } else if (currentView === 'paradoxes') {
-      paradoxes.forEach(paradox => {
-        const matchesSearch = paradox.name.toLowerCase().includes(searchQuery) || paradox.description.toLowerCase().includes(searchQuery);
-        if (matchesSearch) {
-          filteredCount++;
-          const card = document.createElement('div');
-          card.className = 'km-constraint-card';
-          card.style.width = '100%';
-          card.style.cursor = 'pointer';
-          card.style.padding = 'var(--space-md)';
-          card.style.textAlign = 'left';
+      dataset = paradoxes.map(p => ({
+        type: 'paradox',
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        taxonomy: p.taxonomy
+      }));
 
-          card.innerHTML = `
-            <div>
-              <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem; text-transform: uppercase;">STRUCTURAL LIMIT</div>
-              <h3 style="margin: 4px 0 0 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem; color: var(--text-primary);">${paradox.name}</h3>
-            </div>
-            <p class="text-xs" style="color: var(--text-secondary); margin: var(--space-xs) 0;">
-              ${paradox.description}
-            </p>
-            <div style="border-top: 1px dashed var(--border-color); padding-top: var(--space-xs); margin-top: auto; color: var(--primary); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">
-              Explore Paradox Details &rarr;
-            </div>
-          `;
-          card.addEventListener('click', () => {
-            window.location.href = `paradoxes.html?id=${paradox.id}`;
-          });
-          resultsGrid.appendChild(card);
-        }
-      });
+      dataset = dataset.filter(item => 
+        item.name.toLowerCase().includes(searchQuery) ||
+        item.description.toLowerCase().includes(searchQuery)
+      );
+
+      dataset.sort((a, b) => a.name.localeCompare(b.name));
+
     } else if (currentView === 'industries') {
       const industries = [...new Set(companies.map(c => c.industry))].filter(Boolean).sort();
-      industries.forEach(indName => {
-        const matchesSearch = indName.toLowerCase().includes(searchQuery);
-        if (matchesSearch) {
-          filteredCount++;
-          const indComps = companies.filter(c => c.industry === indName);
-          const card = document.createElement('div');
-          card.className = 'km-framework-card';
-          card.style.width = '100%';
-          card.style.cursor = 'pointer';
-          card.style.padding = 'var(--space-md)';
-          card.style.textAlign = 'left';
-
-          card.innerHTML = `
-            <div>
-              <div class="monospace text-xs text-primary-color" style="font-weight: 600; font-size: 0.65rem;">INDUSTRY SPHERE</div>
-              <h3 style="margin: 4px 0 0 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem; color: var(--text-primary);">${indName}</h3>
-            </div>
-            <p class="text-xs" style="color: var(--text-secondary); margin: var(--space-xs) 0;">
-              Diagnosed Brands in cohort: <strong>${indComps.map(c => c.name).join(', ')}</strong>
-            </p>
-            <div style="border-top: 1px dashed var(--border-color); padding-top: var(--space-xs); margin-top: auto; color: var(--primary); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">
-              Browse Industry Cohort &rarr;
-            </div>
-          `;
-          card.addEventListener('click', () => {
-            // Apply industry filter and switch to companies view
-            activeFilters.industry = [indName];
-            swapView('companies');
-          });
-          resultsGrid.appendChild(card);
-        }
+      dataset = industries.map(ind => {
+        const indComps = companies.filter(c => c.industry === ind);
+        return {
+          type: 'industry',
+          name: ind,
+          companies: indComps
+        };
       });
+
+      dataset = dataset.filter(item => 
+        item.name.toLowerCase().includes(searchQuery)
+      );
     }
 
-    showingCountEl.innerText = filteredCount;
-  }
+    // Render Slices
+    const visibleItems = dataset.slice(0, visibleLimit);
 
-  // Initialize filters and list
-  renderFilters();
-  renderLibrary();
+    if (loadMoreBtn) {
+      if (dataset.length > visibleLimit) {
+        loadMoreBtn.style.display = 'inline-block';
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
+    }
+
+    if (visibleItems.length === 0) {
+      resultsGrid.innerHTML = `
+        <div style="text-align: center; color: var(--text-muted); padding: var(--space-xl) 0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+          No matching diagnostic files found.
+        </div>
+      `;
+      return;
+    }
+
+    visibleItems.forEach(item => {
+      const el = document.createElement('div');
+      
+      if (item.type === 'company') {
+        el.className = 'mobile-editorial-card';
+        el.innerHTML = `
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm);">
+              <span class="monospace text-xs text-muted-color" style="text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.05em;">${item.industry.toUpperCase()}</span>
+              <span class="badge ${item.mri.validationState === 'Validated' ? 'badge-blue' : ''}" style="font-size: 0.65rem;">${item.mri.validationState || 'Pending'}</span>
+            </div>
+            
+            <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem; font-weight: 500; margin: 0 0 6px 0; color: var(--text-primary); border-bottom: none; padding-bottom: 0;">${item.name}</h3>
+            
+            <div style="margin-bottom: var(--space-md);">
+              <span class="monospace text-xs text-primary-color" style="display: block; font-size: 0.60rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">PRIMARY CONSTRAINT</span>
+              <strong style="font-family: 'Source Serif 4', serif; font-size: 1.1rem; color: var(--text-primary); font-weight: 500; display: block; line-height: 1.2;">${item.mri.primaryConstraint || 'Unmapped'}</strong>
+              <p style="margin: var(--space-xxs) 0 0 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">${item.mri.summary || 'Diagnostic audit files loading.'}</p>
+            </div>
+          </div>
+
+          <div style="margin-top: auto; border-top: 1px solid var(--border-color); padding-top: var(--space-sm); display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); width: 100%;">
+            <div>
+              <span style="display: block; font-size: 0.6rem; color: var(--text-muted);">REVENUE</span>
+              <span style="font-weight: 600; color: var(--text-primary);">${item.estimatedRevenue}</span>
+            </div>
+            <div>
+              <span style="display: block; font-size: 0.6rem; color: var(--text-muted);">CONFIDENCE</span>
+              <span style="font-weight: 600; color: var(--text-primary);">${item.mri.confidence || 0}%</span>
+            </div>
+            <a href="case-study.html?id=${item.mriId}" style="color: var(--primary); font-weight: 600; font-size: 0.8rem;">Read MRI &rarr;</a>
+          </div>
+        `;
+        
+        el.addEventListener('click', (e) => {
+          if (!e.target.closest('a')) {
+            window.location.href = `case-study.html?id=${item.mriId}`;
+          }
+        });
+
+      } else if (item.type === 'paradox') {
+        el.className = 'mobile-editorial-card';
+        el.innerHTML = `
+          <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.05em; display: block; margin-bottom: var(--space-xs);">STRUCTURAL LIMITATION</span>
+              <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem; font-weight: 500; margin: 0 0 var(--space-xs) 0; color: var(--text-primary); border-bottom: none; padding-bottom: 0;">${item.name}</h3>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">${item.description}</p>
+            </div>
+            <div style="margin-top: var(--space-md); border-top: 1px solid var(--border-color); padding-top: var(--space-sm); color: var(--primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;">
+              Explore Paradox &rarr;
+            </div>
+          </div>
+        `;
+        el.addEventListener('click', () => {
+          window.location.href = `paradoxes.html?id=${item.id}`;
+        });
+
+      } else if (item.type === 'industry') {
+        el.className = 'mobile-editorial-card';
+        el.innerHTML = `
+          <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <span class="monospace text-xs text-primary-color" style="text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.05em; display: block; margin-bottom: var(--space-xs);">INDUSTRY COHORT</span>
+              <h3 style="font-family: 'Source Serif 4', serif; font-size: 1.4rem; font-weight: 500; margin: 0 0 var(--space-xs) 0; color: var(--text-primary); border-bottom: none; padding-bottom: 0;">${item.name}</h3>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+                Studied Brands: <strong>${item.companies.map(c => c.name).join(', ')}</strong>
+              </p>
+            </div>
+            <div style="margin-top: var(--space-md); border-top: 1px solid var(--border-color); padding-top: var(--space-sm); color: var(--primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;">
+              Browse Cohort &rarr;
+            </div>
+          </div>
+        `;
+        el.addEventListener('click', () => {
+          searchInput.value = item.name;
+          searchQuery = item.name.toLowerCase();
+          currentView = 'companies';
+          updateToggleState('companies');
+          visibleLimit = 4;
+          renderLibrary();
+        });
+      }
+
+      resultsGrid.appendChild(el);
+    });
+  }
 });
