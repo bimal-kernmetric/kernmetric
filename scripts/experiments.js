@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { getMRIs } from './api/mri.js';
 import { getCompanies } from './api/companies.js';
 
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         <div class="flex justify-between items-center" style="border-top: 1px solid var(--border-color); padding-top: var(--space-xs); margin-top: var(--space-xs); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
           <span>Cohort: <strong>${exp.companyName}</strong></span>
-          <a href="case-study.html?id=${exp.mriId}" style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</a>
+          <a href="${ROUTES.caseStudy}?id=${exp.mriId}" style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</a>
         </div>
       `;
       grid.appendChild(card);

@@ -1,3 +1,4 @@
+import { ROUTES } from '../../components/components.js';
 import { getCompanies } from '../api/companies.js';
 import { getParadoxes } from '../api/paradoxes.js';
 import { getResearch } from '../api/research.js';
@@ -34,7 +35,7 @@ export async function searchEntities(query) {
         title: company.name,
         subtitle: `${company.industry} • ${company.businessModel} • ${company.shopifyTier}`,
         description: mri ? mri.summary : 'Company record and growth parameters.',
-        url: mri ? `case-study.html?id=${mri.id}` : '#',
+        url: mri ? `${ROUTES.caseStudy}?id=${mri.id}` : '#',
         tags: company.tags,
         metadata: {
           revenue: company.estimatedRevenue,
@@ -59,7 +60,7 @@ export async function searchEntities(query) {
         title: paradox.name,
         subtitle: `Structural Paradox • ${paradox.taxonomy.join(', ')}`,
         description: paradox.description,
-        url: `paradoxes.html?id=${paradox.id}`,
+        url: `${ROUTES.paradoxes}?id=${paradox.id}`,
         tags: paradox.taxonomy,
         metadata: {
           example: paradox.example
@@ -83,7 +84,7 @@ export async function searchEntities(query) {
         title: paper.title,
         subtitle: `${paper.type} • Published ${paper.date} • by ${paper.author}`,
         description: paper.summary,
-        url: `research.html?id=${paper.id}`,
+        url: `${ROUTES.research}?id=${paper.id}`,
         tags: paper.tags,
         metadata: {
           type: paper.type,

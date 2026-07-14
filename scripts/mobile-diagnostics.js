@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { getCompanies } from './api/companies.js';
 import { getMRIs } from './api/mri.js';
 import { getParadoxes } from './api/paradoxes.js';
@@ -194,13 +195,13 @@ document.addEventListener('DOMContentLoaded', async () => {
               <span style="display: block; font-size: 0.6rem; color: var(--text-muted);">CONFIDENCE</span>
               <span style="font-weight: 600; color: var(--text-primary);">${item.mri.confidence || 0}%</span>
             </div>
-            <a href="case-study.html?id=${item.mriId}" style="color: var(--primary); font-weight: 600; font-size: 0.8rem;">Read MRI &rarr;</a>
+            <a href="${ROUTES.caseStudy}?id=${item.mriId}" style="color: var(--primary); font-weight: 600; font-size: 0.8rem;">Read MRI &rarr;</a>
           </div>
         `;
         
         el.addEventListener('click', (e) => {
           if (!e.target.closest('a')) {
-            window.location.href = `case-study.html?id=${item.mriId}`;
+            window.location.href = `${ROUTES.caseStudy}?id=${item.mriId}`;
           }
         });
 
@@ -219,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         `;
         el.addEventListener('click', () => {
-          window.location.href = `paradoxes.html?id=${item.id}`;
+          window.location.href = `${ROUTES.paradoxes}?id=${item.id}`;
         });
 
       } else if (item.type === 'industry') {

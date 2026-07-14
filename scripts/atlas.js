@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { getParadoxes, getRelationships } from './api/paradoxes.js';
 import { getCompanies } from './api/companies.js';
 import { getResearch } from './api/research.js';
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </p>
             <div class="flex justify-between items-center" style="border-top: 1px dashed var(--border-color); padding-top: 4px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
               <span>Impact: ${mri.estimatedImpact || 'N/A'}</span>
-              <a href="case-study.html?id=${mriId}" style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</a>
+              <a href="${ROUTES.caseStudy}?id=${mriId}" style="color: var(--primary); font-weight: 600;">Read MRI &rarr;</a>
             </div>
           </div>
         `;
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       let papersHtml = relatedPapers.map(paper => `
         <div class="flex justify-between items-center" style="padding: 4px 0; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; text-align: left;">
           <span style="color: var(--text-secondary);">${paper.title.substring(0, 32)}...</span>
-          <a href="research.html?id=${paper.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--primary); font-weight: 500;">Read Paper &rarr;</a>
+          <a href="${ROUTES.research}?id=${paper.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--primary); font-weight: 500;">Read Paper &rarr;</a>
         </div>
       `).join('');
       
@@ -170,15 +171,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (type === 'company') {
       const mriId = `mri_${id.replace('company_', '')}_v1`;
       el.addEventListener('click', () => {
-        window.location.href = `case-study.html?id=${mriId}`;
+        window.location.href = `${ROUTES.caseStudy}?id=${mriId}`;
       });
     } else if (type === 'paradox') {
       el.addEventListener('click', () => {
-        window.location.href = `paradoxes.html?id=${id}`;
+        window.location.href = `${ROUTES.paradoxes}?id=${id}`;
       });
     } else if (type === 'research') {
       el.addEventListener('click', () => {
-        window.location.href = `research.html?id=${id}`;
+        window.location.href = `${ROUTES.research}?id=${id}`;
       });
     }
 

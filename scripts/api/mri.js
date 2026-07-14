@@ -1,8 +1,4 @@
 function getDataUrl(filename) {
-  const path = window.location.pathname;
-  if (path.includes('/pages/')) {
-    return `../data/${filename}`;
-  }
   return `data/${filename}`;
 }
 

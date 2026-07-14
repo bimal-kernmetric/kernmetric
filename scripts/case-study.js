@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { getMRIById, getMRIs } from './api/mri.js';
 import { getCompanyById, getCompanies } from './api/companies.js';
 import { getParadoxes } from './api/paradoxes.js';
@@ -69,7 +70,7 @@ function displayError(container, reason) {
       <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); padding: var(--space-md); border-radius: var(--border-radius); text-align: left; margin-bottom: var(--space-md); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); white-space: pre-wrap; word-break: break-word; line-height: 1.4;"><strong>Reason:</strong>\n• ${reason}</div>
       
       <div class="flex gap-md" style="justify-content: center; width: 100%;">
-        <a href="case-studies.html" class="btn btn-secondary" style="flex: 1; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem;">&larr; Back to Diagnostics</a>
+        <a href="${ROUTES.caseStudies}" class="btn btn-secondary" style="flex: 1; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem;">&larr; Back to Diagnostics</a>
         <button onclick="window.location.reload();" class="btn btn-primary" style="flex: 1; min-height: 48px; font-size: 0.85rem;">Reload Report</button>
       </div>
     </div>
@@ -126,7 +127,7 @@ function renderMRI(mri, company, paradoxes, allMRIs, allCompanies, allResearch, 
       <div class="grid grid-cols-3 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
         
         ${paradox ? `
-          <div class="km-constraint-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='knowledge-graph.html?id=${paradox.id}'">
+          <div class="km-constraint-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='${ROUTES.knowledgeGraph}?id=${paradox.id}'">
             <div>
               <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem;">PRIMARY CONSTRAINT</div>
               <h3 style="margin: 4px 0 0 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem;">${paradox.name}</h3>
@@ -144,7 +145,7 @@ function renderMRI(mri, company, paradoxes, allMRIs, allCompanies, allResearch, 
           const compMRI = otherMRIs.find(m => m.companyId === comp.id);
           if (!compMRI) return '';
           return `
-            <div class="km-company-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='case-study.html?id=${compMRI.id}'">
+            <div class="km-company-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='${ROUTES.caseStudy}?id=${compMRI.id}'">
               <div class="km-company-card-header">
                 <div>
                   <div class="monospace text-xs text-muted-color" style="font-size: 0.65rem;">DIAGNOSED BRAND</div>
@@ -165,7 +166,7 @@ function renderMRI(mri, company, paradoxes, allMRIs, allCompanies, allResearch, 
 
         ${relatedPapers.slice(0, 2).map(paper => {
           return `
-            <div class="km-research-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='research.html?id=${paper.id}'">
+            <div class="km-research-card" style="cursor: pointer; padding: var(--space-md); text-align: left;" onclick="window.location.href='${ROUTES.research}?id=${paper.id}'">
               <div>
                 <span class="badge text-xs" style="font-size: 0.65rem; text-transform: uppercase;">${paper.type}</span>
                 <h3 style="margin: var(--space-xs) 0 4px 0; font-family: 'Source Serif 4', serif; font-size: 1.25rem;">${paper.title}</h3>

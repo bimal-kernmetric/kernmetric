@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { CONFIG } from '../config/config.js';
 import { getCompanies } from './api/companies.js';
 import { getMRIs } from './api/mri.js';
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
       
       card.addEventListener('click', () => {
-        window.location.href = `case-study.html?id=${mri.id}`;
+        window.location.href = `${ROUTES.caseStudy}?id=${mri.id}`;
       });
       
       feedContainer.appendChild(card);

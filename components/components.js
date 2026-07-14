@@ -1,14 +1,25 @@
 import { searchEntities } from '../scripts/domain/search.js';
 import { CONFIG } from '../config/config.js';
 
-// Resolve links dynamically based on path context
-const isSubpage = window.location.pathname.includes('/pages/');
-const homeLink = isSubpage ? '../index.html' : 'index.html';
-const resolvePage = (fileName) => {
-  return isSubpage ? fileName : `pages/${fileName}`;
-};
-const resolveAsset = (assetName) => {
-  return isSubpage ? `../${assetName}` : assetName;
+export const ROUTES = {
+  home: 'index.html',
+  methodology: 'methodology.html',
+  growthMRI: 'growth-mri.html',
+  caseStudies: 'case-studies.html',
+  research: 'research.html',
+  about: 'about.html',
+  contact: 'contact.html',
+  paradoxes: 'paradoxes.html',
+  atlas: 'atlas.html',
+  knowledgeGraph: 'knowledge-graph.html',
+  admin: 'admin.html',
+  dashboard: 'dashboard.html',
+  login: 'login.html',
+  client: 'client.html',
+  designSystem: 'design-system.html',
+  mobileDiagnostics: 'mobile-diagnostics.html',
+  caseStudy: 'case-study.html',
+  experiments: 'experiments.html'
 };
 
 class KernHeader extends HTMLElement {
@@ -23,15 +34,15 @@ class KernHeader extends HTMLElement {
     this.innerHTML = `
       <header>
         <div class="header-container">
-          <a href="${homeLink}" class="logo-link">
-            <img src="${resolveAsset('assets/logo.svg')}" alt="KernMetric" class="logo-img">
+          <a href="${ROUTES.home}" class="logo-link">
+            <img src="assets/logo.svg" alt="KernMetric" class="logo-img">
           </a>
           
           <nav class="nav-links">
-            <a href="${homeLink}" class="nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
-            <a href="${resolvePage('case-studies.html')}" class="nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
-            <a href="${resolvePage('research.html')}" class="nav-link ${getActive('research.html')}">Research</a>
-            <a href="${resolvePage('methodology.html')}" class="nav-link ${getActive('methodology.html')}">Frameworks</a>
+            <a href="${ROUTES.home}" class="nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
+            <a href="${ROUTES.caseStudies}" class="nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
+            <a href="${ROUTES.research}" class="nav-link ${getActive('research.html')}">Research</a>
+            <a href="${ROUTES.methodology}" class="nav-link ${getActive('methodology.html')}">Frameworks</a>
           </nav>
           
           <div class="header-actions">
@@ -45,10 +56,10 @@ class KernHeader extends HTMLElement {
         </div>
         
         <div class="mobile-nav-dropdown">
-          <a href="${homeLink}" class="mobile-nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
-          <a href="${resolvePage('case-studies.html')}" class="mobile-nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
-          <a href="${resolvePage('research.html')}" class="mobile-nav-link ${getActive('research.html')}">Research</a>
-          <a href="${resolvePage('methodology.html')}" class="mobile-nav-link ${getActive('methodology.html')}">Frameworks</a>
+          <a href="${ROUTES.home}" class="mobile-nav-link ${activePath.endsWith('index.html') || activePath.endsWith('/') ? 'active' : ''}">Platform</a>
+          <a href="${ROUTES.caseStudies}" class="mobile-nav-link ${getActive('case-studies.html') ? 'active' : ''}">Diagnostics</a>
+          <a href="${ROUTES.research}" class="mobile-nav-link ${getActive('research.html')}">Research</a>
+          <a href="${ROUTES.methodology}" class="mobile-nav-link ${getActive('methodology.html')}">Frameworks</a>
           <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="mobile-nav-cta">Book Growth MRI™</a>
         </div>
       </header>
@@ -82,19 +93,19 @@ class KernFooter extends HTMLElement {
       <footer class="section border-t" style="padding-top: var(--space-xl); padding-bottom: var(--space-xl); background-color: var(--bg-secondary);">
         <div class="container flex flex-col md-row justify-between items-center gap-lg">
           <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
-            <a href="${homeLink}" class="logo" style="display: flex; align-items: center;">
-              <img src="${resolveAsset('assets/logo.svg')}" alt="KernMetric" style="height: 42px; width: auto; display: block;" class="logo-img">
+            <a href="${ROUTES.home}" class="logo" style="display: flex; align-items: center;">
+              <img src="assets/logo.svg" alt="KernMetric" style="height: 42px; width: auto; display: block;" class="logo-img">
             </a>
             <p class="text-xs" style="margin: 0; color: var(--text-muted);">
               ${CONFIG.tagline} • Platform version ${CONFIG.version}
             </p>
           </div>
           <div class="flex gap-md" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; align-items: center;">
-            <a href="${resolvePage('experiments.html')}" style="color: var(--text-secondary);">Experiments</a>
-            <a href="${resolvePage('about.html')}" style="color: var(--text-secondary);">Founder</a>
+            <a href="${ROUTES.experiments}" style="color: var(--text-secondary);">Experiments</a>
+            <a href="${ROUTES.about}" style="color: var(--text-secondary);">Founder</a>
             <a href="https://linkedin.com" target="_blank" style="color: var(--text-secondary);">LinkedIn</a>
-            <a href="${resolvePage('contact.html')}" style="color: var(--text-secondary);">Privacy</a>
-            <a href="${resolvePage('contact.html')}" style="color: var(--text-secondary);">Terms</a>
+            <a href="${ROUTES.contact}" style="color: var(--text-secondary);">Privacy</a>
+            <a href="${ROUTES.contact}" style="color: var(--text-secondary);">Terms</a>
             <button class="theme-toggle" aria-label="Toggle theme" id="footer-theme-toggle" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0 4px; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
               Theme
             </button>
@@ -118,29 +129,24 @@ class KernFooter extends HTMLElement {
   }
 }
 
-
-
 class KernBreadcrumbs extends HTMLElement {
   async connectedCallback() {
-    const isSubpage = window.location.pathname.includes('/pages/');
-    const homeLink = isSubpage ? '../index.html' : 'index.html';
-    
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id') || '';
     
-    let pathHtml = `<a href="${homeLink}">Platform</a>`;
+    let pathHtml = `<a href="${ROUTES.home}">Platform</a>`;
     
     if (window.location.pathname.includes('case-study.html')) {
       pathHtml += `
         <span style="margin: 0 8px; color: var(--text-muted); font-size: 0.8rem;">&rsaquo;</span>
-        <a href="${isSubpage ? 'knowledge-graph.html' : 'pages/knowledge-graph.html'}">Diagnostics</a>
+        <a href="${ROUTES.caseStudies}">Diagnostics</a>
       `;
       
       if (id) {
         try {
-          const mriResponse = await fetch(isSubpage ? '../data/mris.json' : 'data/mris.json');
+          const mriResponse = await fetch('data/mris.json');
           const mrisData = await mriResponse.json();
-          const companiesResponse = await fetch(isSubpage ? '../data/companies.json' : 'data/companies.json');
+          const companiesResponse = await fetch('data/companies.json');
           const companiesData = await companiesResponse.json();
           
           const mri = mrisData.mris.find(m => m.id === id);
@@ -170,12 +176,12 @@ class KernBreadcrumbs extends HTMLElement {
     else if (window.location.pathname.includes('research.html')) {
       pathHtml += `
         <span style="margin: 0 8px; color: var(--text-muted); font-size: 0.8rem;">&rsaquo;</span>
-        <a href="${isSubpage ? 'research.html' : 'pages/research.html'}">Research</a>
+        <a href="${ROUTES.research}">Research</a>
       `;
       
       if (id) {
         try {
-          const resResponse = await fetch(isSubpage ? '../data/research.json' : 'data/research.json');
+          const resResponse = await fetch('data/research.json');
           const resData = await resResponse.json();
           const paper = resData.research.find(r => r.id === id);
           if (paper) {

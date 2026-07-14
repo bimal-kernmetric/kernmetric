@@ -1,3 +1,4 @@
+import { ROUTES } from '../components/components.js';
 import { getParadoxes, getRelationships } from './api/paradoxes.js';
 import { getCompanies } from './api/companies.js';
 import { getResearch } from './api/research.js';
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let seenHtml = '<p class="text-xs" style="color: var(--text-muted); font-family: \'JetBrains Mono\', monospace;">No studied brands diagnosed yet.</p>';
     if (seenCompanies.length > 0) {
       seenHtml = seenCompanies.map(c => `
-        <div style="padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); margin-bottom: var(--space-xs); cursor: pointer;" onclick="window.location.href='case-study.html?id=mri_${c.id.replace('company_', '')}_v1'">
+        <div style="padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); margin-bottom: var(--space-xs); cursor: pointer;" onclick="window.location.href='${ROUTES.caseStudy}?id=mri_${c.id.replace('company_', '')}_v1'">
           <div style="font-weight: 500; font-size: 0.85rem; color: var(--text-primary);">${c.name}</div>
           <div class="monospace text-xs" style="color: var(--text-muted); font-size: 0.65rem;">${c.industry} • ${c.shopifyTier} • Read Brief &rarr;</div>
         </div>
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let papersHtml = '<p class="text-xs" style="color: var(--text-muted); font-family: \'JetBrains Mono\', monospace;">No theoretical papers reference this paradox tag.</p>';
     if (relatedPapers.length > 0) {
       papersHtml = relatedPapers.map(paper => `
-        <div style="padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); margin-bottom: var(--space-xs); cursor: pointer;" onclick="window.location.href='research.html?id=${paper.id}'">
+        <div style="padding: var(--space-xs); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); margin-bottom: var(--space-xs); cursor: pointer;" onclick="window.location.href='${ROUTES.research}?id=${paper.id}'">
           <div style="font-weight: 500; font-size: 0.85rem; color: var(--text-primary);">${paper.title}</div>
           <div class="monospace text-xs" style="color: var(--text-muted); font-size: 0.65rem;">${paper.author} • Read Publication &rarr;</div>
         </div>
