@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Diagnostic — KernMetric</title>
+  <meta name="description" content="Book a Growth MRI Diagnostic session with our Growth Intelligence Architects.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <style>
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+    .calendar-slot {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-xs);
+      text-align: center;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background-color: var(--bg-primary);
+      transition: all var(--transition-smooth);
+    }
+    .calendar-slot:hover, .calendar-slot.selected {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: rgba(37, 99, 235, 0.05);
+    }
+    .form-group {
+      margin-bottom: var(--space-sm);
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .form-control {
+      width: 100%;
+      padding: var(--space-xs);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      outline: none;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color var(--transition-smooth);
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Main Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); max-width: 680px; min-height: 80vh;">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- Title Header -->
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl); text-align: center;">
+      <span class="badge badge-blue">Growth MRI Application Portal</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.25rem; font-family: 'Source Serif 4', serif;">Diagnostic Application</h1>
+      <p style="margin: 0; color: var(--text-secondary);">Trace your systems anomalies and lock down a validation session.</p>
+    </div>
+
+    <!-- Stepper Indicator Rail -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg); padding: 0 var(--space-md);">
+      <div id="step-indicator-1" class="monospace text-xs" style="font-weight: 600; color: var(--primary);">01 / PARAMETERS</div>
+      <div style="height: 1px; flex: 1; background-color: var(--border-color); margin: 0 var(--space-sm);"></div>
+      <div id="step-indicator-2" class="monospace text-xs" style="font-weight: 600; color: var(--text-muted);">02 / SYMPTOMS & EMAIL</div>
+      <div style="height: 1px; flex: 1; background-color: var(--border-color); margin: 0 var(--space-sm);"></div>
+      <div id="step-indicator-3" class="monospace text-xs" style="font-weight: 600; color: var(--text-muted);">03 / SCHEDULER</div>
+    </div>
+
+    <!-- Wizard Card -->
+    <div class="card" id="wizard-card" style="padding: var(--space-lg); border-top: 3px solid var(--primary);">
+      <form id="wizard-form" onsubmit="event.preventDefault();">
+        
+        <!-- Step 1 View -->
+        <div id="wizard-step-1" class="wizard-step">
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; margin-bottom: var(--space-md); text-align: left;">Step 1: Structural Parameters</h3>
+          <div class="form-group">
+            <label for="company-name">Brand Name</label>
+            <input type="text" id="company-name" class="form-control" placeholder="e.g. Acme Organics" required style="min-height: 48px;">
+          </div>
+          <div class="form-group">
+            <label for="shopify-tier">Shopify Tier</label>
+            <select id="shopify-tier" class="form-control" style="min-height: 48px;">
+              <option value="Shopify Standard">Shopify Standard</option>
+              <option value="Shopify Plus" selected>Shopify Plus</option>
+              <option value="Enterprise Custom">Enterprise Custom</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="business-model">Business Model</label>
+            <select id="business-model" class="form-control" style="min-height: 48px;">
+              <option value="DTC Subscription">DTC Subscription</option>
+              <option value="DTC & Retail Omnichannel">DTC & Retail Omnichannel</option>
+              <option value="Pure DTC Store">Pure DTC Store</option>
+            </select>
+          </div>
+          <div style="margin-top: var(--space-lg);">
+            <button type="button" class="btn btn-primary" id="btn-next-1" style="min-height: 48px; width: 100%;">Continue &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 2 View -->
+        <div id="wizard-step-2" class="wizard-step" style="display: none;">
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; margin-bottom: var(--space-md); text-align: left;">Step 2: Symptoms & Contact Details</h3>
+          <div class="form-group">
+            <label for="c-revenue">Estimated Annual Revenue</label>
+            <select id="c-revenue" class="form-control" style="min-height: 48px;">
+              <option value="$2M - $5M">$2M - $5M</option>
+              <option value="$5M - $15M">$5M - $15M</option>
+              <option value="$15M - $50M" selected>$15M - $50M</option>
+              <option value="$50M+">$50M+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c-symptom">Primary Observed Symptom</label>
+            <select id="c-symptom" class="form-control" style="min-height: 48px;">
+              <option value="Cohort decay / high Month-2 subscription churn">Cohort decay / high Month-2 subscription churn</option>
+              <option value="Omnichannel margin leakage / retail subsidies">Omnichannel margin leakage / retail subsidies</option>
+              <option value="Escalating Meta ad cost and attribution drops">Escalating Meta ad cost and attribution drops</option>
+              <option value="AOV compression and negative unit margins">AOV compression and negative unit margins</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="founder-email">Contact Email Address</label>
+            <input type="email" id="founder-email" class="form-control" placeholder="e.g. founder@brand.com" required style="min-height: 48px;">
+          </div>
+          <div class="flex gap-md" style="margin-top: var(--space-lg); width: 100%;">
+            <button type="button" class="btn btn-secondary" id="btn-prev-2" style="min-height: 48px; flex: 1;">&larr; Back</button>
+            <button type="button" class="btn btn-primary" id="btn-next-2" style="min-height: 48px; flex: 1;">Continue &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 3 View -->
+        <div id="wizard-step-3" class="wizard-step" style="display: none;">
+          <h3 style="margin-top: 0; font-family: 'Source Serif 4', serif; margin-bottom: var(--space-xs); text-align: left;">Step 3: Schedule Diagnostic Session</h3>
+          <p class="text-xs" style="color: var(--text-secondary); margin-bottom: var(--space-md); text-align: left;">Select an open slot from our queue. All sessions are hosted in Eastern Time (ET).</p>
+          
+          <div class="monospace text-xs text-muted-color" style="margin-top: var(--space-sm); font-weight: 600; text-align: left;">MONDAY, JULY 13</div>
+          <div class="calendar-grid" style="margin-bottom: var(--space-sm);">
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 9:00 AM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">09:00 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 11:30 AM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">11:30 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Mon 3:00 PM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">03:00 PM</div>
+          </div>
+
+          <div class="monospace text-xs text-muted-color" style="margin-top: var(--space-sm); font-weight: 600; text-align: left;">WEDNESDAY, JULY 15</div>
+          <div class="calendar-grid" style="margin-bottom: var(--space-md);">
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 10:00 AM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">10:00 AM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 1:00 PM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">01:00 PM</div>
+            <div class="calendar-slot" onclick="selectSlot(this, 'Wed 4:30 PM')" style="min-height: 48px; display: flex; align-items: center; justify-content: center;">04:30 PM</div>
+          </div>
+
+          <div style="background-color: var(--bg-secondary); border: 1px dashed var(--border-color); padding: var(--space-xs) var(--space-sm); border-radius: var(--border-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: var(--space-md); text-align: left;">
+            Selected Slot: <span id="selected-slot-display" style="color: var(--primary); font-weight: 600;">None Selected</span>
+          </div>
+
+          <div class="flex gap-md" style="width: 100%;">
+            <button type="button" class="btn btn-secondary" id="btn-prev-3" style="min-height: 48px; flex: 1;">&larr; Back</button>
+            <button type="button" class="btn btn-primary" id="btn-submit-booking" style="min-height: 48px; flex: 1;" onclick="submitBooking();">Book Session</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+
+
+  <!-- Wizard Script -->
+  <script>
+    let selectedSlot = null;
+    const step1 = document.getElementById('wizard-step-1');
+    const step2 = document.getElementById('wizard-step-2');
+    const step3 = document.getElementById('wizard-step-3');
+
+    const ind1 = document.getElementById('step-indicator-1');
+    const ind2 = document.getElementById('step-indicator-2');
+    const ind3 = document.getElementById('step-indicator-3');
+
+    // Step 1 -> Step 2
+    document.getElementById('btn-next-1').addEventListener('click', () => {
+      const company = document.getElementById('company-name').value;
+      if (!company.trim()) {
+        alert("Please enter a Brand Name.");
+        return;
+      }
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+      ind1.style.color = 'var(--text-muted)';
+      ind2.style.color = 'var(--primary)';
+    });
+
+    // Step 2 -> Step 3
+    document.getElementById('btn-next-2').addEventListener('click', () => {
+      const email = document.getElementById('founder-email').value;
+      if (!email.trim() || !email.includes('@')) {
+        alert("Please enter a valid Email Address.");
+        return;
+      }
+      step2.style.display = 'none';
+      step3.style.display = 'block';
+      ind2.style.color = 'var(--text-muted)';
+      ind3.style.color = 'var(--primary)';
+    });
+
+    // Step 2 <- Step 3
+    document.getElementById('btn-prev-3').addEventListener('click', () => {
+      step3.style.display = 'none';
+      step2.style.display = 'block';
+      ind3.style.color = 'var(--text-muted)';
+      ind2.style.color = 'var(--primary)';
+    });
+
+    // Step 1 <- Step 2
+    document.getElementById('btn-prev-2').addEventListener('click', () => {
+      step2.style.display = 'none';
+      step1.style.display = 'block';
+      ind2.style.color = 'var(--text-muted)';
+      ind1.style.color = 'var(--primary)';
+    });
+
+    function selectSlot(element, slotText) {
+      document.querySelectorAll('.calendar-slot').forEach(slot => {
+        slot.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selectedSlot = slotText;
+      document.getElementById('selected-slot-display').innerText = slotText;
+    }
+
+    function submitBooking() {
+      if (!selectedSlot) {
+        alert("Please select a diagnostic schedule slot.");
+        return;
+      }
+      
+      const company = document.getElementById('company-name').value;
+      const email = document.getElementById('founder-email').value;
+      const card = document.getElementById('wizard-card');
+
+      card.innerHTML = `
+        <div style="text-align: center; padding: var(--space-lg) 0;">
+          <div style="width: 12px; height: 12px; background-color: var(--primary); border-radius: 50%; margin: 0 auto var(--space-sm) auto;"></div>
+          <h3 style="font-family: 'Source Serif 4', serif; margin-top: 0; border-bottom: none;">Application Transmitted</h3>
+          <p class="text-sm" style="color: var(--text-secondary); max-width: 320px; margin: 0 auto var(--space-md) auto; line-height: 1.5;">
+            Thank you. The diagnostic parameters for <strong>${company}</strong> have been loaded into our queue. A confirmation email has been dispatched to <strong>${email}</strong>.
+          </p>
+          <div class="monospace text-xs" style="color: var(--text-muted);">Scheduled Session: ${selectedSlot} (ET)</div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

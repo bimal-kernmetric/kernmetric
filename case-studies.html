@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Published Growth MRIs — KernMetric</title>
+  <meta name="description" content="Browse our library of Growth MRIs, mapping structural constraints across subscription and ecommerce brands.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script>
+    if (window.innerWidth < 768) {
+      window.location.href = 'mobile-diagnostics.html' + window.location.search;
+    }
+  </script>
+  <script type="module" src="../scripts/diagnostics.js"></script>
+  <style>
+    /* Editorial card grid specifications */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+    @media (max-width: 1024px) {
+      .editorial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .editorial-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-lg);
+      background-color: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      min-height: 380px;
+      transition: border-color var(--transition-smooth);
+      box-shadow: none !important;
+      background-image: none !important;
+    }
+    .editorial-card:hover {
+      border-color: var(--primary);
+    }
+    /* Horizontal toolbar row */
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+    @media (max-width: 768px) {
+      .toolbar-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Diagnostics Library Layout -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); min-height: 90vh;">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- SECTION 1: Editorial Header -->
+    <div style="margin-bottom: var(--space-xl); max-width: 720px; text-align: left;">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">GROWTH INTELLIGENCE LIBRARY</span>
+      <h1 style="margin: 0 0 var(--space-xs) 0; font-size: 2.75rem; font-family: 'Source Serif 4', serif; font-weight: 500; border-bottom: none; line-height: 1.15;">Published Growth MRIs</h1>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 1.1rem; line-height: 1.5;">
+        Evidence-backed structural diagnostics documenting the hidden constraints limiting growth inside modern ecommerce businesses.
+      </p>
+    </div>
+
+    <!-- SECTION 2: Horizontal Toolbar -->
+    <div class="toolbar-row">
+      <!-- Search Input -->
+      <div style="position: relative; flex: 1; min-width: 260px;">
+        <input type="text" id="lib-search-input" placeholder="Search MRIs..." style="width: 100%; padding: var(--space-xs) var(--space-sm); padding-left: 36px; border: 1px solid var(--border-color); border-radius: var(--border-radius); outline: none; font-size: 0.95rem; font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); transition: border-color var(--transition-smooth);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="position: absolute; left: 12px; top: 13px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+
+      <!-- Sorting Select -->
+      <div style="display: flex; align-items: center; gap: var(--space-xxs);">
+        <select id="sort-select" style="padding: var(--space-xs) var(--space-sm); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; cursor: pointer; min-width: 130px;">
+          <option value="newest">Newest &#9662;</option>
+          <option value="confidence">Highest Confidence</option>
+          <option value="updated">Recently Updated</option>
+          <option value="industry">Industry</option>
+        </select>
+      </div>
+
+      <!-- View Toggle Buttons -->
+      <div style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+        <button class="view-toggle-btn active" data-view="companies" style="background: none; border: none; padding: 0; color: var(--primary); cursor: pointer; font-weight: 600;">Companies</button>
+        <span style="color: var(--border-color);">|</span>
+        <button class="view-toggle-btn" data-view="paradoxes" style="background: none; border: none; padding: 0; color: var(--text-muted); cursor: pointer;">Constraints</button>
+        <span style="color: var(--border-color);">|</span>
+        <button class="view-toggle-btn" data-view="industries" style="background: none; border: none; padding: 0; color: var(--text-muted); cursor: pointer;">Industries</button>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Card Grid -->
+    <div class="editorial-grid" id="library-results-grid">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- SECTION 4: Pagination / Load More -->
+    <div style="text-align: center; margin-top: var(--space-lg); margin-bottom: var(--space-xxl);">
+      <button id="load-more-btn" class="btn btn-secondary" style="min-height: 48px; min-width: 220px;">Load More Diagnostics</button>
+    </div>
+
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Published Growth MRIs — Mobile Library</title>
+  <meta name="description" content="Dedicated mobile executive interface for the Diagnostics Library.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script>
+    if (window.innerWidth >= 768) {
+      window.location.href = 'case-studies.html' + window.location.search;
+    }
+  </script>
+  <script type="module" src="../scripts/mobile-diagnostics.js"></script>
+  <style>
+    .mobile-editorial-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-lg);
+      background-color: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 320px;
+      margin-bottom: var(--space-sm);
+      text-align: left;
+      box-shadow: none !important;
+      background-image: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Mobile Workspace Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); min-height: 90vh; padding-bottom: 80px;">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <!-- SECTION 1: Editorial Header -->
+    <div style="margin-bottom: var(--space-lg); text-align: left;">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;">GROWTH INTELLIGENCE LIBRARY</span>
+      <h1 style="margin: 0 0 var(--space-xs) 0; font-size: 2.25rem; font-family: 'Source Serif 4', serif; font-weight: 500; border-bottom: none; line-height: 1.15;">Published Growth MRIs</h1>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.5;">
+        Evidence-backed structural diagnostics documenting the hidden constraints limiting growth inside ecommerce systems.
+      </p>
+    </div>
+
+    <!-- SECTION 2: Vertical Toolbar Stack -->
+    <div class="flex flex-col gap-sm" style="margin-bottom: var(--space-lg); width: 100%;">
+      <!-- Search Input -->
+      <div style="position: relative; width: 100%;">
+        <input type="text" id="lib-search-input" placeholder="Search MRIs..." style="width: 100%; padding: var(--space-xs) var(--space-sm); padding-left: 36px; border: 1px solid var(--border-color); border-radius: var(--border-radius); outline: none; font-size: 0.95rem; font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); min-height: 48px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="position: absolute; left: 12px; top: 16px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+
+      <!-- Sorting Select -->
+      <div>
+        <select id="sort-select" style="width: 100%; padding: var(--space-xs) var(--space-sm); border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; cursor: pointer; min-height: 48px;">
+          <option value="newest">Newest &#9662;</option>
+          <option value="confidence">Highest Confidence</option>
+          <option value="updated">Recently Updated</option>
+          <option value="industry">Industry</option>
+        </select>
+      </div>
+
+      <!-- View Toggle Buttons -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius); background-color: var(--bg-secondary); min-height: 48px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; width: 100%;">
+        <button class="view-toggle-btn active" data-view="companies" style="background: none; border: none; padding: 0; color: var(--primary); cursor: pointer; font-weight: 600;">Companies</button>
+        <span style="color: var(--border-color);">|</span>
+        <button class="view-toggle-btn" data-view="paradoxes" style="background: none; border: none; padding: 0; color: var(--text-muted); cursor: pointer;">Constraints</button>
+        <span style="color: var(--border-color);">|</span>
+        <button class="view-toggle-btn" data-view="industries" style="background: none; border: none; padding: 0; color: var(--text-muted); cursor: pointer;">Industries</button>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Card List -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-xs); width: 100%;" id="library-results-grid">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- SECTION 4: Pagination / Load More -->
+    <div style="text-align: center; margin-top: var(--space-md); margin-bottom: var(--space-lg);">
+      <button id="load-more-btn" class="btn btn-secondary" style="min-height: 48px; width: 100%;">Load More Diagnostics</button>
+    </div>
+
+  </main>
+
+  <!-- Sticky Bottom One-Thumb booking CTA area -->
+  <div class="mobile-sticky-cta-container">
+    <a href="https://cal.com/bimal-kernmetrics" target="_blank" class="btn btn-primary" style="width: 100%; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">Book a Growth MRI™</a>
+  </div>
+
+
+
+</body>
+</html>

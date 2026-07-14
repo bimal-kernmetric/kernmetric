@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constraint Atlas™ Network Map — KernMetric</title>
+  <meta name="description" content="Explore the interactive visual network mapping structural constraints to estudiado e-commerce brands and published research.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/atlas.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Main Container -->
+  <main class="container-wide section fade-up-element" style="padding-top: var(--space-xl);">
+    <!-- Dynamic Navigation Breadcrumbs Component -->
+    <kern-breadcrumbs></kern-breadcrumbs>
+
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+      <span class="badge badge-blue">Signature Asset</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Constraint Atlas™</h1>
+      <p style="margin: 0; color: var(--text-secondary);">An interactive mapping of e-commerce constraints, studied brands, and academic research dependencies.</p>
+    </div>
+
+    <!-- Layout: Description left, Interactive Graph right -->
+    <div class="grid grid-cols-2 gap-xl desktop-only" style="grid-template-columns: 300px 1fr; align-items: start; margin-bottom: var(--space-xl);">
+      <div class="flex flex-col gap-md">
+        <div class="card" style="background-color: var(--bg-secondary);">
+          <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs);">
+            How to Traverse
+          </h4>
+          <p class="text-xs" style="line-height: 1.5; color: var(--text-secondary);">
+            Our thinking is connected. Hover over a <strong>Structural Paradox</strong> (left column) to highlight which <strong>Companies</strong> (center column) are affected, and the supporting <strong>Research</strong> (right column).
+          </p>
+          <p class="text-xs" style="line-height: 1.5; color: var(--text-secondary);">
+            Clicking a company node redirects you directly to their Growth MRI report details.
+          </p>
+        </div>
+
+        <div class="card">
+          <h4 style="margin-top: 0; font-family: 'Source Serif 4', serif; font-size: 1.1rem; margin-bottom: var(--space-xs);">
+            Network Key
+          </h4>
+          <div class="flex flex-col gap-sm" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;">
+            <div class="flex items-center gap-sm">
+              <div style="width: 10px; height: 10px; background-color: var(--primary); border-radius: 2px;"></div>
+              <span>Constraints / Paradoxes</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <div style="width: 10px; height: 10px; background-color: var(--text-primary); border-radius: 2px;"></div>
+              <span>Studied Companies</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <div style="width: 10px; height: 10px; border: 1px solid var(--text-muted); background-color: var(--bg-primary); border-radius: 2px;"></div>
+              <span>Intellectual Property</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Graph Viewport -->
+      <div class="graph-viewport" id="graph-wrapper">
+        <div class="graph-canvas" id="graph-edges-layer"></div>
+        <div id="graph-nodes-layer" style="width:100%; height:100%; position:relative; z-index:2;"></div>
+      </div>
+    </div>
+
+    <!-- Mobile Adaptive Constraint Traversal Index -->
+    <div class="mobile-only" style="margin-bottom: var(--space-xl);">
+      <div style="margin-bottom: var(--space-md);">
+        <p class="monospace text-xs text-muted-color" style="text-transform: uppercase; margin-bottom: 2px;">Traversal Index // Mobile Hierarchy</p>
+        <p class="text-sm" style="color: var(--text-secondary); margin: 0;">Click on a diagnostic report below to traverse our systems constraints.</p>
+      </div>
+      <div class="flex flex-col gap-md" id="mobile-atlas-list">
+        <!-- Rendered dynamically by scripts/atlas.js on mobile screens -->
+      </div>
+    </div>
+
+    <!-- Secondary Traversal Flow: Growth MRI -> Diagnostics -> Atlas -> Knowledge Graph -->
+    <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-xl); margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">
+      <span class="monospace text-xs text-primary-color" style="font-weight: 600; text-transform: uppercase;">Growth Intelligence Engine</span>
+      <h3 style="margin-top: 4px; font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin-bottom: var(--space-sm);">Explore the Diagnostic Platform</h3>
+      <p class="text-sm" style="color: var(--text-secondary); max-width: 600px; margin-bottom: var(--space-md);">
+        Traverse the diagnostic datasets in logical sequence, shifting from the core MRI framework to empirical case files, visual system mapping, and our relational database graph.
+      </p>
+      
+      <div class="grid grid-cols-4 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--space-md);">
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='growth-mri.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">01 / PROCESS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Growth MRI™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Learn the 7-step systems diagnostic protocol.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='case-studies.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">02 / STUDIES</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Diagnostics</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Browse diagnostics relationships node-by-node.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer; border-color: var(--primary);" onclick="window.location.href='atlas.html'">
+          <div class="monospace text-xs text-primary-color" style="margin-bottom: 4px;">03 / VISUALIZATION</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Constraint Atlas™</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Trace connections between brands and system limits.</p>
+        </div>
+        <div class="card card-elevated" style="cursor: pointer;" onclick="window.location.href='research.html'">
+          <div class="monospace text-xs text-muted-color" style="margin-bottom: 4px;">04 / PUBLICATIONS</div>
+          <h4 style="margin: 0 0 var(--space-xxs) 0; font-family: 'Source Serif 4', serif;">Published Research</h4>
+          <p class="text-xs" style="color: var(--text-muted); margin: 0;">Explore whitepapers, briefs and reports.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+
+
+</body>
+</html>

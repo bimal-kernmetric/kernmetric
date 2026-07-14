@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structural Paradoxes™ Library — KernMetric</title>
+  <meta name="description" content="Auditing CPG business anomalies. Explore our premium taxonomy of structural growth paradoxes.">
+  <link rel="stylesheet" href="../styles/main.css">
+  <script type="module" src="../components/components.js"></script>
+  <script type="module" src="../scripts/main.js"></script>
+  <script type="module" src="../scripts/paradoxes.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header Component -->
+  <kern-header></kern-header>
+
+  <!-- Paradoxes Workspace Container -->
+  <main class="container section fade-up-element" style="padding-top: var(--space-xl); min-height: 80vh;">
+    <div style="border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-sm); margin-bottom: var(--space-xl);">
+      <span class="badge badge-blue">KernMetric Intellectual Property</span>
+      <h1 style="margin-top: var(--space-xs); margin-bottom: 4px; font-size: 2.5rem;">Structural Paradoxes™</h1>
+      <p style="margin: 0; color: var(--text-secondary);">An interactive directory of e-commerce anomalies where optimization metrics contradict cohort health.</p>
+    </div>
+
+    <!-- Paradox Cards Grid Container -->
+    <div class="grid grid-cols-3 gap-lg" id="paradoxes-grid">
+      <!-- Populated dynamically via scripts/paradoxes.js -->
+      <div style="padding: var(--space-lg); text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+        Ingesting paradox data...
+      </div>
+    </div>
+  </main>
+
+  <!-- Sliding Details Drawer Overlay -->
+  <div class="detail-drawer" id="detail-drawer">
+    <div class="detail-drawer-header">
+      <span class="badge badge-blue" style="font-size: 0.65rem;">Structural Paradox Detail</span>
+      <button class="drawer-close" id="drawer-close-btn" aria-label="Close panel">×</button>
+    </div>
+    <div id="drawer-content-body">
+      <!-- Populated dynamically via scripts/paradoxes.js -->
+    </div>
+  </div>
+
+  <!-- Footer Component -->
+  <kern-footer></kern-footer>
+
+
+
+</body>
+</html>
