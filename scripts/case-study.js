@@ -79,6 +79,49 @@ function displayError(container, reason) {
 
 function renderMRI(mri, company, paradoxes, allMRIs, allCompanies, allResearch, container) {
   const companyName = company ? company.name : 'Unknown Company';
+  
+  // Dynamic editorial banner image insertion
+  const bannerDiv = document.createElement('div');
+  bannerDiv.className = 'editorial-banner-header';
+  bannerDiv.style.border = '1px solid var(--border-color)';
+  bannerDiv.style.borderRadius = 'var(--border-radius)';
+  bannerDiv.style.overflow = 'hidden';
+  bannerDiv.style.marginBottom = 'var(--space-xl)';
+  bannerDiv.style.backgroundColor = '#FFFFFF';
+  bannerDiv.style.display = 'flex';
+  bannerDiv.style.alignItems = 'center';
+  bannerDiv.style.justifyContent = 'center';
+  bannerDiv.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <pattern id="diagInnerGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" stroke-width="0.75" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="#FFFFFF" />
+    <rect width="100%" height="100%" fill="url(#diagInnerGrid)" />
+    <g transform="translate(100, 0)">
+      <g transform="translate(0, 110)">
+        <rect x="0" y="0" width="10" height="52" fill="#2563EB" rx="1.5" />
+        <path d="M 10 26 L 34 2" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+        <path d="M 10 26 L 34 50" stroke="#2563EB" stroke-width="10" stroke-linecap="round" />
+        <path d="M 38 50 L 52 24 L 66 50" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+        <rect x="66" y="2" width="10" height="50" fill="#2563EB" rx="1.5" />
+      </g>
+      <text x="96" y="152" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="44" font-weight="700" fill="#111111">KernMetric</text>
+      <text x="0" y="240" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#2563EB" letter-spacing="0.08em">GROWTH DIAGNOSTIC REPORT</text>
+      <text x="0" y="310" font-family="'Source Serif 4', Georgia, serif" font-size="48" font-weight="600" fill="#111111">${companyName.toUpperCase()}</text>
+      <text x="0" y="365" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="20" font-weight="500" fill="#6B7280">${mri.primaryConstraint}</text>
+      <text x="0" y="415" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="14" font-weight="400" fill="#9CA3AF">Diagnostic telemetry report mapping structural constraints.</text>
+    </g>
+    <g transform="translate(680, 80)">
+      <rect width="400" height="400" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4" opacity="0.4" />
+      <line x1="50" y1="200" x2="350" y2="200" stroke="#CBD5E1" stroke-width="2" opacity="0.5" />
+      <g transform="translate(80, 200)"><circle cx="0" cy="0" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" /></g>
+      <g transform="translate(200, 200)"><circle cx="0" cy="0" r="14" fill="#FFFFFF" stroke="#2563EB" stroke-width="3" /><circle cx="0" cy="0" r="6" fill="#2563EB" /></g>
+      <g transform="translate(320, 200)"><circle cx="0" cy="0" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" /></g>
+    </g>
+  </svg>`;
+  container.insertBefore(bannerDiv, container.firstChild);
   const paradox = paradoxes.find(p => p.name === mri.primaryConstraint || mri.primaryConstraint.includes(p.name));
   const otherMRIs = allMRIs.filter(m => m.primaryConstraint === mri.primaryConstraint && m.id !== mri.id);
   const otherCompanies = allCompanies.filter(c => otherMRIs.map(m => m.companyId).includes(c.id));

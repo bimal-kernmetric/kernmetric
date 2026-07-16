@@ -1,7 +1,7 @@
 export const CONFIG = {
   siteName: "KernMetric",
   tagline: "Diagnose before you deploy.",
-  version: "1.0.0",
+  version: "2026.07.16",
   founder: {
     name: "Bimal Murali",
     title: "Founder & Growth Architect",

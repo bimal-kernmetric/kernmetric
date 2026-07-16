@@ -1,6 +1,8 @@
 import { searchEntities } from '../scripts/domain/search.js';
 import { CONFIG } from '../config/config.js';
 
+window.KERNMETRIC_BUILD = "2026.07.16";
+
 export const ROUTES = {
   home: 'index.html',
   methodology: 'methodology.html',
