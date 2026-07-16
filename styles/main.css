@@ -1,59 +1,70 @@
-/* Mobile-first Executive App vs Desktop Research OS utility rules */
-@media (max-width: 1024px) {
-  .desktop-only {
-    display: none !important;
-  }
-  .mobile-only {
-    display: block !important;
-  }
-  .mobile-flex {
-    display: flex !important;
-  }
-  /* Sticky bottom CTA for one-thumb interaction */
-  .mobile-sticky-cta-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
-    padding: var(--space-sm) var(--space-md);
-    z-index: 1000;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
-  }
-}
-
-@media (min-width: 1025px) {
-  .mobile-only {
-    display: none !important;
-  }
-  .desktop-only {
-    display: block !important;
-  }
-}
 /* Main Style Sheet Entry Point */
-@import url('variables.css');
-@import url('typography.css');
-@import url('layout.css');
-@import url('components.css');
-@import url('animations.css');
-@import url('utilities.css');
 
-/* Custom scrollbar to keep it sleek */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@import url("variables.css");
+@import url("typography.css");
+@import url("layout.css");
+@import url("components.css");
+@import url("animations.css");
+@import url("utilities.css");
+
+/* Mobile-first Executive App vs Desktop Research OS utility rules */
+
+@media (max-width:1024px){
+
+    .desktop-only{
+        display:none!important;
+    }
+
+    .mobile-only{
+        display:block!important;
+    }
+
+    .mobile-flex{
+        display:flex!important;
+    }
+
+    .mobile-sticky-cta-container{
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100%;
+        background-color:var(--bg-primary);
+        border-top:1px solid var(--border-color);
+        padding:var(--space-sm) var(--space-md);
+        z-index:1000;
+        box-shadow:0 -4px 12px rgba(0,0,0,.05);
+    }
+
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+@media (min-width:1025px){
+
+    .mobile-only{
+        display:none!important;
+    }
+
+    .desktop-only{
+        display:block!important;
+    }
+
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: var(--border-radius);
+/* Custom scrollbar */
+
+::-webkit-scrollbar{
+    width:8px;
+    height:8px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+::-webkit-scrollbar-track{
+    background:var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--border-color);
+    border-radius:var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:var(--border-hover);
 }
