@@ -96,7 +96,7 @@ class KernFooter extends HTMLElement {
           <!-- Brand Column -->
           <div style="display: flex; flex-direction: column; gap: var(--space-xs); grid-column: span 1; min-width: 200px;">
             <a href="${ROUTES.home}" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-              <img src="assets/logo.svg" alt="KernMetrics" style="height: 38px; width: auto; display: block;" class="logo-img">
+              <img src="assets/logo_1.png" alt="KernMetrics" style="height: 38px; width: auto; display: block;" class="logo-img">
             </a>
             <p style="margin: var(--space-xs) 0 0 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
               Growth Intelligence for E-commerce Brands
