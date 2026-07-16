@@ -35,7 +35,7 @@ class KernHeader extends HTMLElement {
       <header>
         <div class="header-container">
           <a href="${ROUTES.home}" class="logo-link">
-            <img src="assets/logo.svg" alt="KernMetrics" class="logo-img">
+            <img src="assets/logo_1.png" alt="KernMetrics" class="logo-img">
           </a>
           
           <nav class="nav-links">
