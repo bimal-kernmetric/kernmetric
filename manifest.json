@@ -1,6 +1,6 @@
 {
-  "name": "KernMetric",
-  "short_name": "KernMetric",
+  "name": "KernMetrics",
+  "short_name": "KernMetrics",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0a0a0c",

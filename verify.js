@@ -1,11 +1,11 @@
-// Verification script for KernMetric Platform v1 Knowledge Graph
+// Verification script for KernMetrics Platform v1 Knowledge Graph
 import fs from 'fs';
 import path from 'path';
 
 const DATA_DIR = './data';
 
 function runValidation() {
-  console.log('--- STARTING KERNMETRIC KNOWLEDGE GRAPH INTEGRITY CHECK ---');
+  console.log('--- STARTING KERNMETRICS KNOWLEDGE GRAPH INTEGRITY CHECK ---');
   
   try {
     // 1. Read and parse all files

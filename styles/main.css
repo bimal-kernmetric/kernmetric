@@ -1,30 +1,3 @@
-/* Main Style Sheet Entry Point */
-@import url('variables.css');
-@import url('typography.css');
-@import url('layout.css');
-@import url('components.css');
-@import url('animations.css');
-@import url('utilities.css');
-
-/* Custom scrollbar to keep it sleek */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: var(--border-radius);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
-}
-
 /* Mobile-first Executive App vs Desktop Research OS utility rules */
 @media (max-width: 1024px) {
   .desktop-only {
@@ -57,4 +30,30 @@
   .desktop-only {
     display: block !important;
   }
+}
+/* Main Style Sheet Entry Point */
+@import url('variables.css');
+@import url('typography.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('animations.css');
+@import url('utilities.css');
+
+/* Custom scrollbar to keep it sleek */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
 }

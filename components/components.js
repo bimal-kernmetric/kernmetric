@@ -1,8 +1,6 @@
 import { searchEntities } from '../scripts/domain/search.js';
 import { CONFIG } from '../config/config.js';
 
-window.KERNMETRIC_BUILD = "2026.07.16";
-
 export const ROUTES = {
   home: 'index.html',
   methodology: 'methodology.html',
@@ -37,7 +35,7 @@ class KernHeader extends HTMLElement {
       <header>
         <div class="header-container">
           <a href="${ROUTES.home}" class="logo-link">
-            <img src="assets/logo.svg" alt="KernMetric" class="logo-img">
+            <img src="assets/logo.svg" alt="KernMetrics" class="logo-img">
           </a>
           
           <nav class="nav-links">
@@ -92,29 +90,49 @@ class KernHeader extends HTMLElement {
 class KernFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <footer class="section border-t" style="padding-top: var(--space-xl); padding-bottom: var(--space-xl); background-color: var(--bg-secondary);">
-        <div class="container flex flex-col md-row justify-between items-center gap-lg">
-          <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
-            <a href="${ROUTES.home}" class="logo" style="display: flex; align-items: center;">
-              <img src="assets/logo.svg" alt="KernMetric" style="height: 42px; width: auto; display: block;" class="logo-img">
+      <footer class="section border-t" style="padding-top: var(--space-xl); padding-bottom: var(--space-xl); background-color: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+        <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-xl); align-items: start;">
+          
+          <!-- Brand Column -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-xs); grid-column: span 1; min-width: 200px;">
+            <a href="${ROUTES.home}" class="logo" style="display: flex; align-items: center; text-decoration: none;">
+              <img src="assets/logo.svg" alt="KernMetrics" style="height: 38px; width: auto; display: block;" class="logo-img">
             </a>
-            <p class="text-xs" style="margin: 0; color: var(--text-muted);">
-              ${CONFIG.tagline} • Platform version ${CONFIG.version}
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+              Growth Intelligence for E-commerce Brands
             </p>
-          </div>
-          <div class="flex gap-md" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; align-items: center;">
-            <a href="${ROUTES.experiments}" style="color: var(--text-secondary);">Experiments</a>
-            <a href="${ROUTES.about}" style="color: var(--text-secondary);">Founder</a>
-            <a href="https://linkedin.com" target="_blank" style="color: var(--text-secondary);">LinkedIn</a>
-            <a href="${ROUTES.contact}" style="color: var(--text-secondary);">Privacy</a>
-            <a href="${ROUTES.contact}" style="color: var(--text-secondary);">Terms</a>
-            <button class="theme-toggle" aria-label="Toggle theme" id="footer-theme-toggle" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0 4px; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
-              Theme
+            <p class="text-xs" style="margin: var(--space-sm) 0 0 0; color: var(--text-muted); font-size: 0.75rem;">
+              © KernMetrics. All rights reserved.
+            </p>
+            <button class="theme-toggle" aria-label="Toggle theme" id="footer-theme-toggle" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0; display: inline-flex; align-items: center; font-size: 0.75rem; margin-top: 8px; text-decoration: underline;">
+              Toggle Dark/Light Mode
             </button>
           </div>
-          <p class="text-xs" style="margin: 0; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
-            © 2026 ${CONFIG.siteName} LLC. All rights reserved.
-          </p>
+
+          <!-- Platform Column -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <h4 style="margin: 0 0 var(--space-xs) 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary); font-family: system-ui, -apple-system, sans-serif;">Platform</h4>
+            <a href="${ROUTES.home}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Overview</a>
+            <a href="${ROUTES.methodology}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">How it works</a>
+            <a href="${ROUTES.home}#pricing" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Pricing</a>
+          </div>
+
+          <!-- Research Column -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <h4 style="margin: 0 0 var(--space-xs) 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary); font-family: system-ui, -apple-system, sans-serif;">Research</h4>
+            <a href="${ROUTES.growthMRI}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Growth MRI™</a>
+            <a href="${ROUTES.caseStudies}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Case Studies</a>
+            <a href="${ROUTES.research}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Research Journal</a>
+          </div>
+
+          <!-- Company Column -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <h4 style="margin: 0 0 var(--space-xs) 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary); font-family: system-ui, -apple-system, sans-serif;">Company</h4>
+            <a href="${ROUTES.about}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">About</a>
+            <a href="${ROUTES.about}#careers" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Careers</a>
+            <a href="${ROUTES.contact}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease;">Contact</a>
+          </div>
+
         </div>
       </footer>
     `;

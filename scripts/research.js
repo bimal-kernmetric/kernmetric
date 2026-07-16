@@ -1,4 +1,3 @@
-import { ROUTES } from '../components/components.js';
 import { getResearch, getResearchById } from './api/research.js';
 import { getCompanies } from './api/companies.js';
 import { getMRIs } from './api/mri.js';
@@ -35,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <kern-breadcrumbs></kern-breadcrumbs>
 
       <div style="margin-bottom: var(--space-md);">
-        <a href=ROUTES.research style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px;">
+        <a href="research.html" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           Back to Research Feed
         </a>
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const mri = mris.find(m => m.companyId === comp.id);
             if (!mri) return '';
             return `
-              <div class="km-company-card" style="cursor: pointer; min-height: auto; flex-direction: row; align-items: center; justify-content: space-between; padding: var(--space-sm) var(--space-md);" onclick="window.location.href='${ROUTES.caseStudy}?id=${mri.id}'">
+              <div class="km-company-card" style="cursor: pointer; min-height: auto; flex-direction: row; align-items: center; justify-content: space-between; padding: var(--space-sm) var(--space-md);" onclick="window.location.href='case-study.html?id=${mri.id}'">
                 <div>
                   <h4 style="margin: 0; font-family: 'Source Serif 4', serif; font-size: 1.15rem;">${comp.name}</h4>
                   <div class="monospace text-xs text-muted-color" style="margin-top: 2px; font-size: 0.65rem;">Primary Constraint: ${mri.primaryConstraint}</div>
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         
         <div style="margin-top: var(--space-md); text-align: center;">
-          <a href="${ROUTES.atlas}" class="btn btn-secondary w-full" style="min-height: 48px; display: inline-flex; align-items: center; justify-content: center;">Traverse Constraint Atlas&trade;</a>
+          <a href="atlas.html" class="btn btn-secondary w-full" style="min-height: 48px; display: inline-flex; align-items: center; justify-content: center;">Traverse Constraint Atlas&trade;</a>
         </div>
       </div>
     `;
