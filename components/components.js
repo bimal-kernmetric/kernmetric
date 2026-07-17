@@ -261,26 +261,69 @@ customElements.define('kern-breadcrumbs', KernBreadcrumbs);
   if (window.__kernmetric_analytics_loaded__) return;
   window.__kernmetric_analytics_loaded__ = true;
 
-  // 1. Inject GA4 script
+  // Global variables setup to prevent early tracking failures
   const gaId = 'G-TN1W683L7S';
-  const gaScript = document.createElement('script');
-  gaScript.async = true;
-  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-  document.head.prepend(gaScript);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function() { dataLayer.push(arguments); };
-  gtag('js', new Date());
-  gtag('config', gaId);
-  gtag('set', 'user_properties', { visitor_type: 'prospect' });
-
-  // 2. Inject Microsoft Clarity script
   const clarityId = 'xmezqhiwmm';
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window,document,"clarity","script",clarityId);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() { dataLayer.push(arguments); };
+
+  let initialized = false;
+
+  function initializeAnalytics() {
+    if (initialized) return;
+    initialized = true;
+
+    // Clean up event listeners immediately
+    removeListeners();
+
+    // 1. Inject Google Analytics (gtag.js)
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+    document.head.appendChild(gaScript);
+
+    // Initial gtag configuration
+    gtag('js', new Date());
+    gtag('config', gaId);
+    gtag('set', 'user_properties', { visitor_type: 'prospect' });
+
+    // 2. Inject Microsoft Clarity
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script",clarityId);
+  }
+
+  // Set up passive event listeners on first user interaction as fallback
+  const eventTypes = ['scroll', 'click', 'pointerdown', 'touchstart', 'keydown', 'mousemove'];
+  
+  function addListeners() {
+    eventTypes.forEach(type => {
+      window.addEventListener(type, initializeAnalytics, { passive: true });
+    });
+  }
+
+  function removeListeners() {
+    eventTypes.forEach(type => {
+      window.removeEventListener(type, initializeAnalytics, { passive: true });
+    });
+  }
+
+  // 1. Prefer requestIdleCallback with a 2-second timeout
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(() => {
+      setTimeout(initializeAnalytics, 2000);
+    });
+  } else {
+    // 2. Fallback to onload + setTimeout
+    window.addEventListener('load', () => {
+      setTimeout(initializeAnalytics, 3000);
+    });
+  }
+
+  // 3. Fallback to first user interaction
+  addListeners();
 
   // Helper trackEvent function
   function trackEvent(name, params = {}) {
