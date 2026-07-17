@@ -1062,6 +1062,7 @@ header .logo-img {
   line-height: 1.6;
   min-height: 380px;
   flex: 1;
+}
 
 .dossier-cursor {
   display: inline-block;
